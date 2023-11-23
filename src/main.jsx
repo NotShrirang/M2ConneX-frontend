@@ -11,6 +11,7 @@ import {
   RouterProvider,
   Outlet
 } from "react-router-dom";
+import Page_Not_Found from './pages/404';
 import Header from './components/header.jsx';
 
 const Layout = () => {
@@ -55,8 +56,12 @@ const router = createBrowserRouter([
           }
         ]
       }
-    ],
+    ]
   },
+  {
+    path: '/*',
+    element: <Page_Not_Found />
+  }
 ]);
 
 
