@@ -2,7 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-
+import Events_Layout from './pages/events_layout';
+import Events_Upcoming from './pages/events_upcoming';
+import Events_Past from './pages/events_past';
+import Events_Gallery from './pages/events_gallery';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -24,10 +27,33 @@ const Layout = () => {
 const router = createBrowserRouter([
   {
     element: <Layout />,
-    children:[
+    children: [
       {
         path: "/",
         element: <App />,
+      },
+      {
+        path: '/events',
+        element: <Events_Layout />,
+        children: [
+          {
+            path: '',
+            loader: () => redirect('/events/upcoming')
+          },
+          {
+            path: 'upcoming',
+            element: <Events_Upcoming />
+          },
+          {
+            path: 'past',
+            element: <Events_Past />
+
+          }, {
+            path: 'gallery',
+            element: <Events_Gallery />
+
+          }
+        ]
       }
     ],
   },
