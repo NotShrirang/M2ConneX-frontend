@@ -5,25 +5,25 @@ import homeIcon from '../assets/home.svg';
 const Header = () => {
     return (
         <>
-            <div className='w-full h-[15rem] flex'>
+            <div className='w-full h-full flex '>
 
-                <div id='collegeLogo' className='w-[40%]'>
-                    <div className="" id="mainSiteLink">
-                        <a href="https://www.mmcoe.edu.in/">MMCOE</a>
+                <div id='collegeLogo' className=''>
+                    <div className="lg:block hidden" id="mainSiteLink">
+                        <a href="https://www.mmcoe.edu.in/">Main Site</a>
                     </div>
-                    <div className="flex " id="Logo">
-                        <div>
+                    <div className="flex" id="Logo">
+                        <div className='w-32 p-3'>
                             <img src="https://www.mmcoe.edu.in/images/logo.png" alt="MMCOE Logo" />
                         </div>
-                        <div className='w-full text-justify px-4'>
+                        <div className='text-justify px-4 lg:block hidden'>
                             <h1 className='text-3xl font-bold'>Marathwada Mitra Mandal's College of Engineering</h1>
                             <p className='my-2'>(Approved by AICTE New Delhi, Recognized by DTE Maharashtra and affiliated to Savitribai Phule Pune University) Accredited by NBA ( Mechanical and Electrical Departments) </p>
                             <p className='text-primary'>Accredited with 'A++' Grade by NAAC</p>
                         </div>
                     </div>
                 </div>
-                <div id='navItems' className='bg-[#1E1E1E] flex flex-col justify-between text-white w-[60%] px-4'>
-                    <div className='flex justify-between my-4'>
+                <div id='navItems' className='bg-[#1E1E1E] flex flex-col md:justify-between text-white lg:w-[60%] px-4 w-full'>
+                    <div className='flex justify-between my-4 w-full'>
                         <div className='flex'>
                             <img src={NBA} alt="" />
                             <img src={aPlusPlus} alt="" />
@@ -43,11 +43,12 @@ const Header = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
-                         <h2 className='text-5xl '>Alumni Network</h2>
-                    </div>
+                    <h2 className='md:text-5xl text-3xl pt-4'>Alumni Network</h2>
+                    <div className='class-items flex flex-row-reverse pt-4'>
 
-                    <div className='flex gap-x-2 items-center my-4 hover:text'>
+                    <label htmlFor="navToggle" className='md:hidden block'>Expand_button</label>
+                    <input type="checkbox" id="navToggle" className='hidden peer' />
+                    <div id="item-list" className='md:flex-row w-full md:flex md:gap-x-2 md:items-center md:my-4 peer-checked:flex hidden flex-col'>
                         <a href="/">Events</a>
                         <a href="/">Feed</a>
                         <a href="/">Batches</a>
@@ -57,6 +58,7 @@ const Header = () => {
                         <a href="/">Events</a>
                         <a href="/">Donations</a>
                         <a href="/">Feedback</a>
+                    </div>
                     </div>
                 </div>
             </div>
