@@ -1,37 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
-import Events_Layout from './pages/events_layout';
 import Events_Upcoming from './pages/events_upcoming';
 import Events_Past from './pages/events_past';
 import Events_Gallery from './pages/events_gallery';
+import Events_Layout from './layouts/events.jsx';
 import {
   createBrowserRouter,
   RouterProvider,
-  Outlet
 } from "react-router-dom";
 import Page_Not_Found from './pages/404';
-import Header from './components/header.jsx';
+import Index from './pages/index.jsx';
+import App_Layout from './layouts/app.jsx';
 
-const Layout = () => {
-  return (
-    <>
-      <Header />
-      <Outlet />
-      {/* <Footer /> */}
-    </>
-  );
-};
 
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: <App_Layout />,
     children: [
       {
         path: "/",
-        element: <App />,
+        element: <Index />,
       },
       {
         path: '/events',
