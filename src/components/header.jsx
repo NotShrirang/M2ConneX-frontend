@@ -30,7 +30,7 @@ const Header = () => {
                         </div>
                         <div className='flex items-center gap-x-3'>
                             <div>
-                            <img src={homeIcon} width="30px" alt="" />
+                                <img src={homeIcon} width="30px" alt="" />
                             </div>
                             <div className='flex gap-x-1'>
                                 <a href="/">Sign Up</a>
@@ -39,26 +39,26 @@ const Header = () => {
                             </div>
                             <div id='searchBtn' className='bg-primary bg-opacity-50 flex items-center gap-x-1 border-2 border-white px-2 py-[0.2rem] rounded-[4rem]'>
                                 <button>Search</button>
-                                <i class="fa-solid fa-magnifying-glass fa-xs" style={{color: "#ffffff", marginTop:"4px"}}></i>
+                                <i className="fa-solid fa-magnifying-glass fa-xs" style={{ color: "#ffffff", marginTop: "4px" }}></i>
                             </div>
                         </div>
                     </div>
                     <h2 className='md:text-5xl text-3xl pt-4'>Alumni Network</h2>
                     <div className='class-items flex flex-row-reverse pt-4'>
 
-                    <label htmlFor="navToggle" className='md:hidden block'>Expand_button</label>
-                    <input type="checkbox" id="navToggle" className='hidden peer' />
-                    <div id="item-list" className='md:flex-row w-full md:flex md:gap-x-2 md:items-center md:my-4 peer-checked:flex hidden flex-col'>
-                        <a href="/">Events</a>
-                        <a href="/">Feed</a>
-                        <a href="/">Batches</a>
-                        <a href="/">Oppurtunities</a>
-                        <a href="/">Directory</a>
-                        <a href="/">Connections</a>
-                        <a href="/">Events</a>
-                        <a href="/">Donations</a>
-                        <a href="/">Feedback</a>
-                    </div>
+                        <label htmlFor="navToggle" className='md:hidden block'>Expand_button</label>
+                        <input type="checkbox" id="navToggle" className='hidden peer' />
+                        <div id="item-list" className='md:flex-row w-full md:flex md:gap-x-2 md:items-center md:my-4 peer-checked:flex hidden flex-col'>
+                            <a href="/">Events</a>
+                            <a href="/">Feed</a>
+                            <a href="/">Batches</a>
+                            <a href="/">Oppurtunities</a>
+                            <a href="/">Directory</a>
+                            <a href="/">Connections</a>
+                            <a href="/">Events</a>
+                            <a href="/">Donations</a>
+                            <a href="/">Feedback</a>
+                        </div>
                     </div>
                 </div>
             </div>
