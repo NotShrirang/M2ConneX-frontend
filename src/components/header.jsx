@@ -16,9 +16,9 @@ const Header = () => {
                             <img src="https://www.mmcoe.edu.in/images/logo.png" alt="MMCOE Logo" />
                         </div>
                         <div className='w-full text-justify px-4'>
-                            <h1 className='text-3xl font-bold'>Marathwada Mitra Mandal’s College of Engineering</h1>
+                            <h1 className='text-3xl font-bold'>Marathwada Mitra Mandal's College of Engineering</h1>
                             <p className='my-2'>(Approved by AICTE New Delhi, Recognized by DTE Maharashtra and affiliated to Savitribai Phule Pune University) Accredited by NBA ( Mechanical and Electrical Departments) </p>
-                            <p className='text-primary'>Accredited with ‘A++’ Grade by NAAC</p>
+                            <p className='text-primary'>Accredited with 'A++' Grade by NAAC</p>
                         </div>
                     </div>
                 </div>
