@@ -10,7 +10,7 @@ const Header = () => {
                 <div id='collegeLogo' className='shadow-xl'>
                     <div className="bg-white border m-2 py-1 px-2 w-[6rem] rounded-[2rem] hover:text-white hover:bg-opacity-70 hover:bg-black lg:block hidden " id="mainSiteLink">
                         <a href="https://www.mmcoe.edu.in/">Main Site</a>
-                        <i class="fa-solid fa-arrow-up fa-xs" style={{color: "#000000", transform: "rotate(45deg)"}}></i>
+                        <i className="fa-solid fa-arrow-up fa-xs" style={{color: "#000000", transform: "rotate(45deg)"}}></i>
                     </div>
                     <div className="flex" id="Logo">
                         <div className='w-32 p-3'>
