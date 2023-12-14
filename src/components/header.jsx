@@ -56,7 +56,6 @@ const Header = () => {
                             <a href="/" className=' hover:text-primary transition-all duration-300'>Oppurtunities</a>
                             <a href="/" className=' hover:text-primary transition-all duration-300'>Directory</a>
                             <a href="/" className=' hover:text-primary transition-all duration-300'>Connections</a>
-                            <a href="/" className=' hover:text-primary transition-all duration-300'>Events</a>
                             <a href="/" className=' hover:text-primary transition-all duration-300'>Donations</a>
                             <a href="/" className=' hover:text-primary transition-all duration-300'>Feedback</a>
                         </div>
