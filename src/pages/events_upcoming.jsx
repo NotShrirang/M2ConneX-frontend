@@ -1,10 +1,13 @@
 import Events_Navbar from "../components/events/events_navbar";
-
+import Event from "../components/events/event";
 export default function Events_Upcoming() {
     return (
         <>
             <Events_Navbar current={1} />
-            <div className="w-[75rem] min-h-fit mt-10 mx-auto bg-primary"></div>
+            <Event upcoming={true} />
+            <Event upcoming={true} />
+            <Event upcoming={true} />
+
         </>
     );
 } 
