@@ -50,15 +50,15 @@ const Header = () => {
                         <label htmlFor="navToggle" className='md:hidden block'>Expand_button</label>
                         <input type="checkbox" id="navToggle" className='hidden peer' />
                         <div id="item-list" className='md:flex-row w-full md:flex md:gap-x-2 md:items-center md:my-4 peer-checked:flex hidden flex-col'>
-                            <a href="/">Events</a>
-                            <a href="/">Feed</a>
-                            <a href="/">Batches</a>
-                            <a href="/">Oppurtunities</a>
-                            <a href="/">Directory</a>
-                            <a href="/">Connections</a>
-                            <a href="/">Events</a>
-                            <a href="/">Donations</a>
-                            <a href="/">Feedback</a>
+                            <a href="/" className=' hover:text-primary transition-all duration-300'>Events</a>
+                            <a href="/" className=' hover:text-primary transition-all duration-300'>Feed</a>
+                            <a href="/" className=' hover:text-primary transition-all duration-300'>Batches</a>
+                            <a href="/" className=' hover:text-primary transition-all duration-300'>Oppurtunities</a>
+                            <a href="/" className=' hover:text-primary transition-all duration-300'>Directory</a>
+                            <a href="/" className=' hover:text-primary transition-all duration-300'>Connections</a>
+                            <a href="/" className=' hover:text-primary transition-all duration-300'>Events</a>
+                            <a href="/" className=' hover:text-primary transition-all duration-300'>Donations</a>
+                            <a href="/" className=' hover:text-primary transition-all duration-300'>Feedback</a>
                         </div>
                     </div>
                 </div>

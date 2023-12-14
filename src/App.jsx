@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import Page_Not_Found from './pages/404';
 import App_Layout from './layouts/app.jsx';
+import Feed from './pages/feed.jsx';
 
 
 const router = createBrowserRouter([
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login_reg_page />
+      },
+      {
+        path: '/feed',
+        element: <Feed />
       }
     ]
   },
