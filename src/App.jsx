@@ -8,6 +8,7 @@ import Login_reg_page from './pages/auth.jsx';
 import {
   createBrowserRouter,
   RouterProvider,
+  redirect
 } from "react-router-dom";
 import Page_Not_Found from './pages/404';
 import App_Layout from './layouts/app.jsx';
