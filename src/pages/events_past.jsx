@@ -1,4 +1,4 @@
-import Events_Navbar from "../components/events_navbar";
+import Events_Navbar from "../components/events/events_navbar";
 export default function Events_Past() {
     return (
         <>
