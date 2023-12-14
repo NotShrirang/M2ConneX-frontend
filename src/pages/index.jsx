@@ -8,11 +8,10 @@ import Footer from '../components/footer'
 const Index = () => {
   return (
     <>
-      <Hero/>
-      <UpcomingEvent/>
-      <TopStories/>
-      <Testimonials/>
-      <Footer/>
+      <Hero />
+      <UpcomingEvent />
+      <TopStories />
+      <Testimonials />
     </>
   )
 }
