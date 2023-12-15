@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BASEURL } from "../../../utils/constants";
+import ApiConfig from "../../../utils/ApiConfig";
 
 export default function Student_Registration() {
   const [data, setData] = useState({
@@ -21,7 +21,7 @@ export default function Student_Registration() {
       return;
     }
     console.log(data);
-    fetch(`${BASEURL}/users/register/`, {
+    fetch(ApiConfig.register, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
