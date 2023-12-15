@@ -2,10 +2,11 @@ import React from 'react'
 import aPlusPlus from '../assets/naac.png';
 import NBA from '../assets/nba.png';
 import homeIcon from '../assets/home.svg';
+import { Link } from 'react-router-dom';
 const Header = () => {
     return (
         <>
-            <div className='w-full h-full flex '>
+            <div className='w-full flex '>
 
                 <div id='collegeLogo' className='shadow-xl'>
                     <div className="bg-white border m-2 py-1 px-2 w-[6rem] rounded-[2rem] hover:text-white hover:bg-opacity-70 hover:bg-black lg:block hidden " id="mainSiteLink">
@@ -30,14 +31,14 @@ const Header = () => {
                             <img src={aPlusPlus} alt="" />
                         </div>
                         <div className='flex items-center gap-x-3'>
-                            <div>
+                            <Link to="/" className='hover:cursor-pointer'>
                                 <img src={homeIcon} width="30px" alt="" />
-                            </div>
-                            <div className='flex gap-x-1'>
-                                <a href="/">Sign Up</a>
+                            </Link>
+                            <Link className='flex gap-x-1' to="/auth">
+                                <p href="/">Sign Up</p>
                                 |
-                                <a href="/">Log In</a>
-                            </div>
+                                <p href="/">Log In</p>
+                            </Link>
                             <div id='searchBtn' className='bg-primary bg-opacity-50 flex items-center gap-x-1 border-2 border-white px-2 py-[0.2rem] rounded-[4rem]'>
                                 <button>Search</button>
                                 <i className="fa-solid fa-magnifying-glass fa-xs" style={{ color: "#ffffff", marginTop: "4px" }}></i>

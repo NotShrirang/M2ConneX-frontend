@@ -4,7 +4,7 @@ import Events_Upcoming from './pages/events_upcoming';
 import Events_Past from './pages/events_past';
 import Events_Gallery from './pages/events_gallery';
 import Events_Layout from './layouts/events.jsx';
-import Login_reg_page from './pages/auth.jsx';
+import Auth from './pages/auth.jsx';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -46,8 +46,8 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: '/login',
-        element: <Login_reg_page />
+        path: '/auth',
+        element: <Auth />
       },
       {
         path: '/feed',
