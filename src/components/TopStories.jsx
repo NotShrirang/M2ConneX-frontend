@@ -10,7 +10,7 @@ const TopStories = () => {
             <div className="w-[20rem] h-[27rem] bg-[#D9D9D9] rounded-lg"></div>
             <div className="w-[20rem] h-[10rem] bg-[#D9D9D9] rounded-lg"></div>
           </div >
-          <div className="flex flex-col gap-y-4">
+          <div className="hidden lg:flex flex-col gap-y-4">
             <div className="w-[20rem] h-[10rem] bg-[#D9D9D9] rounded-lg"></div>
             <div className="w-[20rem] h-[27rem] bg-[#D9D9D9] rounded-lg"></div>
           </div>
@@ -18,7 +18,7 @@ const TopStories = () => {
       </div>
       <div className="flex justify-center items-center">
         <a
-          href="/"
+          href="/feed"
           className=" bg-primary w-[20rem] h-[3rem] text-white text-[2rem] font-semibold text-center rounded-md"
         >
           <button className="mr-4">View Your Feed</button>

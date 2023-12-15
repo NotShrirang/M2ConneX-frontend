@@ -1,4 +1,4 @@
-import Events_Hero from '../components/events/events_hero'
+import Events_Hero from '../components/events/EventHero'
 import { Outlet } from 'react-router-dom';
 
 export default function Events_Layout() {

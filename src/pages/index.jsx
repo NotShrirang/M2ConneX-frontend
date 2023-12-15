@@ -1,9 +1,8 @@
 import React from 'react'
 import Hero from '../components/Hero'
-import UpcomingEvent from '../components/upcoming_event'
-import TopStories from '../components/top_stories'
-import Testimonials from '../components/testimonials'
-import Footer from '../components/footer'
+import UpcomingEvent from '../components/UpcomingEvent'
+import TopStories from '../components/TopStories'
+import Testimonials from '../components/Testimonials'
 
 const Index = () => {
   return (

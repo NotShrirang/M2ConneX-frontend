@@ -1,5 +1,5 @@
-import Events_Navbar from "../components/events/events_navbar";
-import Event_Gallery from "../components/events/gallery";
+import Events_Navbar from "../components/events/EventNavbar";
+import Event_Gallery from "../components/events/EventGallery";
 export default function Events_Gallery() {
     return (
         <>

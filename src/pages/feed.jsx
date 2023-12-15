@@ -1,9 +1,9 @@
 import React from "react";
-import Post from "../components/feed/post";
-import CreatePost from "../components/feed/create_post";
-import AddPeopleCard from "../components/feed/add_people";
+import Post from "../components/feed/Post";
+import CreatePost from "../components/feed/CreatePost";
+import AddPeopleCard from "../components/feed/AddPeople";
 import Arrow from '../assets/arrow.svg'
-import RecommendationBlogs from "../components/feed/recommendation_blogs";
+import RecommendationBlogs from "../components/feed/RecommendationBlogs";
 
 const Feed = () => {
   return (

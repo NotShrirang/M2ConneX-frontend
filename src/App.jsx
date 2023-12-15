@@ -1,10 +1,10 @@
 import React from 'react'
 import Index from './pages'
-import Events_Upcoming from './pages/events_upcoming';
-import Events_Past from './pages/events_past';
-import Events_Gallery from './pages/events_gallery';
+import Events_Upcoming from './pages/EventsUpcoming.jsx';
+import Events_Past from './pages/EventsPast.jsx';
+import Events_Gallery from './pages/EventsGallery.jsx';
 import Events_Layout from './layouts/events.jsx';
-import Auth from './pages/auth.jsx';
+import Auth from './pages/Auth.jsx';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 import Page_Not_Found from './pages/404';
 import App_Layout from './layouts/app.jsx';
-import Feed from './pages/feed.jsx';
+import Feed from './pages/Feed.jsx';
 
 
 const router = createBrowserRouter([

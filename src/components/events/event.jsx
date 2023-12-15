@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import arrows from '../../assets/arrow.svg'
+
 export default function Event({ upcoming = false }) {
     return (
         <div className="w-[100%] h-[28rem] mb-[6.813rem] flex flex-row border-none rounded-lg shadow-xl p-6">
