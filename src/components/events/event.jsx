@@ -12,11 +12,11 @@ export default function Event({ upcoming = false }) {
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla nemo, necessitatibus delectus expedita architecto facere qui animi, a porro veritatis asperiores sed ea dicta iste officia itaque ipsa maxime tempora quisquam voluptateslpa? Commodi necessitatibus reprehenderit sit deleniti mollitia!
                 </div>
                 <Link className="w-[12rem] self-end flex flex-row justify-end items-center text-[1.5rem]">
-                    <div className="text-lightblue my-5"> know more</div>
-                    <div className="w-8 h-1"><img src={arrows} /></div>
+                    <div className="text-[#0038FF] my-5 "> know more</div>
+                    <div className="w-8 h-1 "><img src={arrows} /></div>
                 </Link>
                 {upcoming &&
-                    <button className="ml-[40%] w-[11rem] h-[4.375rem] text-[2.5rem] font-bold text-white rounded-md bg-lightmaroon text-center shadow-md shadow-gray bg-[#962E32]">RVSP</button>
+                    <button className="ml-[30%] w-[11rem] h-[4.375rem] text-[2.5rem] font-bold text-white rounded-md bg-lightmaroon text-center shadow-md shadow-gray bg-[#962E32]">RVSP</button>
                 }
             </div>
         </div>
