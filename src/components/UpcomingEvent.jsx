@@ -14,11 +14,15 @@ const UpcomingEvent = () => {
         </div>
 
         <div className="flex justify-center items-center">
-          <a href="/events" className=" bg-primary w-[12rem] h-[3rem] text-white text-[2rem] font-semibold text-center rounded-md">
-            <button className="mr-4">
-              Event
-            </button>
-            <i class="fa-solid fa-arrow-right fa" style={{color:'#ffffff'}}></i>
+          <a
+            href="/events"
+            className=" bg-primary w-[12rem] h-[3rem] text-white text-[2rem] font-semibold text-center rounded-md"
+          >
+            <button className="mr-4">Event</button>
+            <i
+              className="fa-solid fa-arrow-right fa"
+              style={{ color: "#ffffff" }}
+            ></i>
           </a>
         </div>
       </div>

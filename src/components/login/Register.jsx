@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BASEURL } from "../../utils/constants";
 import Student_Registration from "./inputs/register_student";
-import Alumni_Registration from "./inputs/register_alumini";
+import Alumni_Registration from "./inputs/register_alumni";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
+import ApiConfig from "../../utils/ApiConfig";
 
 export default function Register() {
   const [data, setData] = useState({
@@ -11,7 +15,7 @@ export default function Register() {
     batch: "",
     password: "",
     confirm_password: "",
-    privilege: "1",
+    privilege: "Student",
     department: "1",
     enrollmentYear: "",
     passingOutYear: "",
@@ -19,27 +23,84 @@ export default function Register() {
   });
 
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
 
   const register = (type) => {
-    fetch(BASEURL + "users/register/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...data,
-        privilege: type === "student" ? 1 : type === "alumini" ? 2 : 3,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.status === 200) {
-          alert("Registered Successfully");
+    if (data.password !== data.confirm_password) {
+      alert("Passwords do not match");
+      return;
+    }
+    data.privilege =
+      type === "student" ? "Student" : type === "alumni" ? "Alumni" : "Staff";
+    console.log(data);
+    console.log(ApiConfig.register);
+
+    axios
+      .post(ApiConfig.register, data)
+      .then((res) => {
+        console.log(res);
+        console.log("Account Created");
+        if (res.status === 201) {
+          axios
+            .post(ApiConfig.login, {
+              email: data.email,
+              password: data.password,
+            })
+            .then((response) => {
+              console.log(response);
+              if (response.data.tokens.access) {
+                var decoded = jwtDecode(response.data.tokens.access);
+                const userId = decoded.user_id;
+                localStorage.setItem(
+                  "accessToken",
+                  response.data.tokens.access
+                );
+                localStorage.setItem(
+                  "refreshToken",
+                  response.data.tokens.refresh
+                );
+                localStorage.setItem("role", role);
+                localStorage.setItem("userId", userId);
+                navigate("/feed");
+                alert("Login Successful!");
+              } else {
+                console.log("error");
+                alert("Invalid Credentials");
+              }
+            });
         } else {
-          alert(data.message); // TODO: Add Error Message
+          alert(res.data.message); // TODO: Add Error Message
+        }
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        if (err.status === 200) {
+          console.log(err.response);
+        } else if (err.status != 200) {
+          alert("Something went wrong...");
+        } else {
+          alert("Something went wrong...");
         }
       });
+    // fetch(BASEURL + "users/register/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     ...data,
+    //     privilege: type === "student" ? 1 : type === "alumni" ? 2 : 3,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.status === 200) {
+    //       alert("Registered Successfully");
+    //     } else {
+    //       alert(data.message); // TODO: Add Error Message
+    //     }
+    //   });
   };
 
   const handleBack = () => {
@@ -120,50 +181,50 @@ export default function Register() {
               <p>Select account type</p>
               <div className="w-full cards flex flex-row justify-evenly">
                 <div
-                  class="card px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer"
+                  className="card px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer"
                   onClick={() => {
                     setPage(2);
                   }}
                 >
                   <img
-                    class="w-32"
+                    className="w-32"
                     src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
                     alt="student"
                   />
-                  <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">Student</div>
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-xl mb-2">Student</div>
                   </div>
                 </div>
 
                 <div
-                  class="card px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer"
+                  className="card px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer"
                   onClick={() => {
                     setPage(3);
                   }}
                 >
                   <img
-                    class="w-32"
+                    className="w-32"
                     src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                    alt="alumini"
+                    alt="alumni"
                   />
-                  <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">Alumini</div>
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-xl mb-2">Alumni</div>
                   </div>
                 </div>
 
                 <div
-                  class="card px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer"
+                  className="card px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer"
                   onClick={() => {
                     setPage(4);
                   }}
                 >
                   <img
-                    class="w-32"
+                    className="w-32"
                     src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                    alt="alumini"
+                    alt="staff"
                   />
-                  <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">Faculty</div>
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-xl mb-2">Staff</div>
                   </div>
                 </div>
               </div>
@@ -270,8 +331,8 @@ export default function Register() {
           </>
         ) : page == 3 ? (
           <>
-            <div className="alumini fields flex flex-col items-center justify-center w-full">
-              Enter details for alumini
+            <div className="alumni fields flex flex-col items-center justify-center w-full">
+              Enter details for alumni
               <input
                 required
                 type="text"
@@ -357,7 +418,7 @@ export default function Register() {
               <button
                 className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
                 onClick={() => {
-                  register("alumini");
+                  register("alumni");
                 }}
               >
                 Register
@@ -365,7 +426,7 @@ export default function Register() {
             </div>
           </>
         ) : page == 4 ? (
-          <div className="alumini fields flex flex-col items-center justify-center w-full">
+          <div className="alumni fields flex flex-col items-center justify-center w-full">
             Enter details for faculty
             <input
               required

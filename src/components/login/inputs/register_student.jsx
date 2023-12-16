@@ -21,24 +21,24 @@ export default function Student_Registration() {
       return;
     }
     console.log(data);
-    fetch(ApiConfig.register, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.status === 200) {
-        res.json().then((data) => {
-          console.log(data);
-        });
-      } else {
-        res.json().then((data) => {
-          setError(data.message);
-          console.log(data);
-        });
-      }
-    });
+    // fetch(ApiConfig.register, {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // }).then((res) => {
+    //   if (res.status === 200) {
+    //     res.json().then((data) => {
+    //       console.log(data);
+    //     });
+    //   } else {
+    //     res.json().then((data) => {
+    //       setError(data.message);
+    //       console.log(data);
+    //     });
+    //   }
+    // });
   };
 
   return (
