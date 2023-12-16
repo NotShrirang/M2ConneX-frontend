@@ -1,12 +1,18 @@
-import Events_Navbar from "../components/events/EventNavbar";
 import Event from "../components/events/event";
-export default function Events_Upcoming() {
+export default function Events_Upcoming({events}) {
+
+    
+    // events = events.filter((event) => {
+    //     return event.date >= Date.now()
+    // })
+    console.log(events)
+
     return (
         <div className="flex flex-col items-center justify-center">
-            <Events_Navbar current={1} />
-            <Event upcoming={true} />
-            <Event upcoming={true} />
-            <Event upcoming={true} />
+                        
+            {events.map((event) => {
+                return <Event upcoming={true} event={event} />
+            })}
 
         </div>
     );

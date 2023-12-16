@@ -4,6 +4,7 @@ class ApiConfig {
   static users = BASEURL + "/users";
   static login = BASEURL + "/users/login/";
   static register = BASEURL + "/users/register/";
+  static events = BASEURL + "/event/event";
 }
 
 export default ApiConfig;
