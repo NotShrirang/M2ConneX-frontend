@@ -44,24 +44,61 @@ export default function Login() {
     <div className="flex flex-col">
       <div className="flex flex-row items-center justify-center pt-4">
         <div className="flex flex-col pt-16 items-center justify-center w-full">
-          <div className="flex flex-row pr-4">
-            <label
-              htmlFor="role"
-              className={"px-4 rounded-l-lg w-48 lg:w-64 font-bold"}
-            >
-              Login Type
-            </label>
-            <select
-              name="role"
-              id="role"
-              className="pr-4"
-              onChange={(e) => {
-                setRole(e.target.value);
-              }}
-            >
-              <option value="student">Student</option>
-              <option value="alumni">Alumni</option>
-            </select>
+            
+          <div className="w-full type-selector flex flex-col items-center">
+              <p>Select login type</p>
+              <div className="w-full cards flex flex-row justify-evenly">
+                <div
+                  class={"card w-36 h-40 px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer "
+                  + (role === 'student' ? "border-2 border-primary" : "")}
+                  onClick={() => {
+                    setRole("student");
+                  }}
+                >
+                  <img
+                    class="w-32"
+                    src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
+                    alt="student"
+                  />
+                  <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">Student</div>
+                  </div>
+                </div>
+
+                <div
+                  class={"card w-36 h-40 px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer "
+                  + (role === 'alumini' ? "border-2 border-primary" : "")}
+                  onClick={() => {
+                    setRole('alumini');
+                  }}
+                >
+                  <img
+                    class="w-32"
+                    src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
+                    alt="alumini"
+                  />
+                  <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">Alumini</div>
+                  </div>
+                </div>
+
+                <div
+                  class={"card w-36 h-40 px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer "
+                  + (role === 'faculty' ? "border-2 border-primary" : "")}
+                  onClick={() => {
+                    setRole('faculty');
+                  }}
+                >
+                  <img
+                    class="w-32"
+                    src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
+                    alt="alumini"
+                  />
+                  <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">Faculty</div>
+                  </div>
+                </div>
+            </div>
           </div>
           <input
             type="text"
@@ -81,9 +118,9 @@ export default function Login() {
               setPassword(e.target.value);
             }}
           />
-          <button
+          <button type="submit"
             className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
-            onClick={handleSubmit}
+            onSubmit={handleSubmit}
           >
             Login
           </button>

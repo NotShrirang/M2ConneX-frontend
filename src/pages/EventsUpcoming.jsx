@@ -1,5 +1,5 @@
 import Events_Navbar from "../components/events/EventNavbar";
-import Event from "../components/events/Event";
+import Event from "../components/events/event";
 export default function Events_Upcoming() {
     return (
         <>

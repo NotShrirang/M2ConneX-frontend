@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "../components/feed/Post";
+import Post from "../components/feed/post";
 import CreatePost from "../components/feed/CreatePost";
 import AddPeopleCard from "../components/feed/AddPeople";
 import Arrow from '../assets/arrow.svg'
