@@ -4,6 +4,7 @@ import CreatePost from "../components/feed/CreatePost";
 import AddPeopleCard from "../components/feed/AddPeople";
 import Arrow from '../assets/arrow.svg'
 import RecommendationBlogs from "../components/feed/RecommendationBlogs";
+import Modal from "../components/feed/PostModal";
 
 const Feed = () => {
   return (
@@ -11,14 +12,15 @@ const Feed = () => {
       <div className="w-full flex justify-center items-center">
 
         <div className="w-full flex  justify-center items-start ">
-        <div className="w-1/3 mx-4 rounded-md  my-2 flex flex-col justify-center items-center pb-4 shadow-lg">
+          <div className="w-1/3 mx-4 rounded-md  my-2 flex flex-col justify-center items-center pb-4 shadow-lg">
             <div className=" w-full text-center font-medium  py-2 text-xl">
               <p>Recent Blogs</p>
             </div>
-            <RecommendationBlogs/>
+            
+            <RecommendationBlogs />
             <div className="flex justify-center items-center mt-4 h-[2rem] gap-x-3">
-            <p className="text-[#2051FF] text-base">Read more blogs</p>
-            <img src={Arrow} alt="" className="mt-1" />
+              <p className="text-[#2051FF] text-base">Read more blogs</p>
+              <img src={Arrow} alt="" className="mt-1" />
             </div>
           </div>
 
@@ -31,13 +33,13 @@ const Feed = () => {
             <div className=" w-full text-center font-medium  py-2 text-xl">
               <p>Recommendations</p>
             </div>
-            <AddPeopleCard/>
-            <AddPeopleCard/>
-            <AddPeopleCard/>
-            <AddPeopleCard/>
+            <AddPeopleCard />
+            <AddPeopleCard />
+            <AddPeopleCard />
+            <AddPeopleCard />
             <div className="flex justify-center items-center mt-4 h-[2rem] gap-x-3">
-            <p className="text-[#2051FF] text-base">Find more people</p>
-            <img src={Arrow} alt="" className="mt-1" />
+              <p className="text-[#2051FF] text-base">Find more people</p>
+              <img src={Arrow} alt="" className="mt-1" />
             </div>
           </div>
         </div>
