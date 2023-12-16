@@ -1,9 +1,9 @@
 export default function Events_Hero() {
     return (
         <>
-            <div className="flex flex-col justify-center w-[75rem] h-[42.188rem] bg-gray mx-auto shadow-md shadow-gray mt-[3rem] rounded-3xl">
-                <div className="text-[6rem] font-semibold text-red w-fit mx-auto"> MMCOE Alumni</div>
-                <div className="text-[8rem] font-semibold text-white w-fit mx-auto"> Events</div>
+            <div className="flex flex-col p-4 mt-4 justify-center items-center lg:h-72 w-[95%] bg-gray shadow-md shadow-gray rounded-3xl">
+                <p className="text-7xl font-semibold text-center text-red"> MMCOE Alumni</p>
+                <p className="text-5xl pt-4 font-semibold text-white"> Events</p>
             </div>
         </>
     )

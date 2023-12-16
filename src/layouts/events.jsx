@@ -4,11 +4,11 @@ import { Outlet } from 'react-router-dom';
 export default function Events_Layout() {
 
     return (
-        <>
+        <div className='flex items-center flex-col'>
             <Events_Hero />
-            <div className="w-[75rem] min-h-fit mx-auto flex flex-col">
+            <div className="w-full min-h-fit flex flex-col">
                 <Outlet />
             </div>
-        </>
+        </div>
     )
 }
