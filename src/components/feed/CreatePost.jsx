@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ApiConfig from "../../utils/ApiConfig";
+import KeywordInput from "./keywordInput";
 
-const CreatePost = () => {
+const CreatePost = ({ fetchFeed }) => {
   const [showModal, setShowModal] = useState(false);
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
   const [connectionOnly, setConnectionOnly] = useState(false);
   const [charCount, setCharCount] = useState(0);
+  const [images, setImages] = useState([]);
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -20,8 +23,11 @@ const CreatePost = () => {
     const data = {
       subject: subject,
       body: body,
+      images: images.split(";"),
       isPublic: !connectionOnly,
     };
+
+    console.log(data);
 
     axios
       .post(ApiConfig.feed + "/", data, {
@@ -34,9 +40,10 @@ const CreatePost = () => {
         setShowModal(false);
         setSubject("");
         setBody("");
+        setImages([]);
         setConnectionOnly(false);
 
-        window.location.reload();
+        fetchFeed({ next: null });
       })
       .catch((err) => {
         console.log(err);
@@ -45,14 +52,14 @@ const CreatePost = () => {
 
   return (
     <>
-      <div className="w-full h-[6rem] my-4 flex justify-center items-center border-b-2  border-[#9D9494]">
+      <div className="w-full h-[6rem] my-4 flex justify-center items-center border-b-2 border-[#9D9494]">
         <div
-          className="w-[90%] h-[4rem] flex justify-start items-center gap-x-[9rem] rounded-[4rem] border-[#bc383e] border-2"
+          className="w-[90%] h-[4rem] flex justify-start items-center gap-x-[9rem] rounded-[4rem] bg-white border-[#bc383e] border-2 hover:cursor-pointer hover:text-white transition-all duration-300"
           onClick={() => setShowModal(true)}
         >
-          <div className=" border-[#bc383e] border-2 ml-4 flex justify-center items-center rounded-[2rem] w-[3rem] h-[3rem]">
+          <div className=" border-[#bc383e] border-2 ml-4 flex justify-center items-center rounded-[2rem] w-[3rem] h-[3rem] ">
             <i
-              className="fa-solid fa-user fa-xl"
+              className="fa-solid fa-plus fa-xl"
               style={{ color: "#bc383e" }}
             ></i>
           </div>
@@ -80,15 +87,6 @@ const CreatePost = () => {
                   </div>
                   <div className="">
                     <form className="rounded w-full" onSubmit={handleSubmit}>
-                      <input
-                        type="text"
-                        className="rounded w-full p-5 border-b outline-gray rounded-t"
-                        placeholder="Subject"
-                        value={subject}
-                        onChange={(e) => {
-                          setSubject(e.target.value);
-                        }}
-                      />
                       <textarea
                         name=""
                         id=""
@@ -98,10 +96,39 @@ const CreatePost = () => {
                         placeholder="Share your thoughts"
                         value={body}
                         onChange={(e) => {
+                          if (e.target.value.length > 1000) {
+                            return;
+                          }
                           setBody(e.target.value);
                           setCharCount(e.target.value.length);
                         }}
                       ></textarea>
+                      <div className="flex flex-col justify-between p-4">
+                        <p className="text-sm">Add Images</p>
+                        <KeywordInput
+                          value={images}
+                          setValue={setImages}
+                          flex={"col"}
+                          itemsAlignment={"start"}
+                          links={true}
+                          placeholder={
+                            "Type and press Enter to add image links..."
+                          }
+                        />
+                      </div>
+                      <div className="flex flex-col justify-between p-4">
+                        <p className="text-sm">Add Keywords</p>
+                        <KeywordInput
+                          value={subject}
+                          setValue={setSubject}
+                          flex={"wrap"}
+                          itemsAlignment={"center"}
+                          links={false}
+                          placeholder={
+                            "Type and press Enter to add keywords..."
+                          }
+                        />
+                      </div>
                       <div className="flex justify-between items-center p-4">
                         <div className="flex justify-start items-center gap-x-3">
                           <input

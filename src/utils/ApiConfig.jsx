@@ -6,8 +6,10 @@ class ApiConfig {
   static register = BASEURL + "/users/register/";
   static events = BASEURL + "/event/event";
   static feed = BASEURL + "/feed/feed";
+  static recommendFeed = BASEURL + "/feed/recommend-feed";
   static feedAction = BASEURL + "/feed/feed-action";
   static feedActionDislike = BASEURL + "/feed/feed-action-dislike";
+  static feedActionComment = BASEURL + "/feed/feed-action-comment";
 }
 
 export default ApiConfig;

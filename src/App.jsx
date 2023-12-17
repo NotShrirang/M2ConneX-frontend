@@ -1,17 +1,16 @@
-import React, { useContext } from 'react'
-import Index from './pages'
-import Events from './layouts/events.jsx';
-import Auth from './pages/auth.jsx';
+import React, { useContext } from "react";
+import Index from "./pages";
+import Events from "./layouts/events.jsx";
+import Auth from "./pages/auth.jsx";
 import {
   createBrowserRouter,
   RouterProvider,
-  redirect
+  redirect,
 } from "react-router-dom";
-import Page_Not_Found from './pages/404';
-import App_Layout from './layouts/app.jsx';
-import Feed from './pages/feed.jsx';
-import AuthContext from './authContext.jsx';
-
+import Page_Not_Found from "./pages/404";
+import App_Layout from "./layouts/app.jsx";
+import Feed from "./pages/feed.jsx";
+import AuthContext from "./authContext.jsx";
 
 const noAuthRouter = createBrowserRouter([
   {
@@ -22,21 +21,24 @@ const noAuthRouter = createBrowserRouter([
         element: <Index />,
       },
       {
-        path: '/events',
+        path: "/events",
         element: <Events />,
       },
       {
-        path: '/auth',
-        element: <Auth />
+        path: "/feed",
+        element: <Feed />,
       },
-    ]
+      {
+        path: "/auth",
+        element: <Auth />,
+      },
+    ],
   },
   {
-    path: '/*',
-    element: <Page_Not_Found />
-  }
+    path: "/*",
+    element: <Page_Not_Found />,
+  },
 ]);
-
 
 const AuthRouter = createBrowserRouter([
   {
@@ -47,35 +49,37 @@ const AuthRouter = createBrowserRouter([
         element: <Feed />,
       },
       {
-        path: '/events',
+        path: "/feed",
+        element: <Feed />,
+      },
+      {
+        path: "/events",
         element: <Events />,
       },
-    ]
+    ],
   },
   {
-    path: '/*',
-    element: <Page_Not_Found />
-  }
+    path: "/*",
+    element: <Page_Not_Found />,
+  },
 ]);
 
-
-
 const App = () => {
-  const { auth } = useContext(AuthContext)
-  console.log("from App: " + auth.login)
+  const { auth } = useContext(AuthContext);
+  console.log("from App: " + auth.login);
   return (
     <>
-      {
-        auth.login ?
-          <>
-            <RouterProvider router={AuthRouter} />
-          </> :
-          <>
-            <RouterProvider router={noAuthRouter} />
-          </>
-      }
+      {auth.login ? (
+        <>
+          <RouterProvider router={AuthRouter} />
+        </>
+      ) : (
+        <>
+          <RouterProvider router={noAuthRouter} />
+        </>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
