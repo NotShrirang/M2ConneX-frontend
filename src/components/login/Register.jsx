@@ -82,25 +82,6 @@ export default function Register() {
           alert("Something went wrong...");
         }
       });
-    // fetch(BASEURL + "users/register/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     ...data,
-    //     privilege: type === "student" ? 1 : type === "alumni" ? 2 : 3,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     if (data.status === 200) {
-    //       alert("Registered Successfully");
-    //     } else {
-    //       alert(data.message); // TODO: Add Error Message
-    //     }
-    //   });
   };
 
   const handleBack = () => {

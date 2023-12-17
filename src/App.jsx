@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Index from './pages'
-import Events_Layout from './layouts/events.jsx';
+import Events from './layouts/events.jsx';
 import Auth from './pages/auth.jsx';
 import {
   createBrowserRouter,
@@ -10,9 +10,10 @@ import {
 import Page_Not_Found from './pages/404';
 import App_Layout from './layouts/app.jsx';
 import Feed from './pages/feed.jsx';
+import AuthContext from './authContext.jsx';
 
 
-const router = createBrowserRouter([
+const noAuthRouter = createBrowserRouter([
   {
     element: <App_Layout />,
     children: [
@@ -22,16 +23,33 @@ const router = createBrowserRouter([
       },
       {
         path: '/events',
-        element: <Events_Layout />,
+        element: <Events />,
       },
       {
         path: '/auth',
         element: <Auth />
       },
+    ]
+  },
+  {
+    path: '/*',
+    element: <Page_Not_Found />
+  }
+]);
+
+
+const AuthRouter = createBrowserRouter([
+  {
+    element: <App_Layout />,
+    children: [
       {
-        path: '/feed',
-        element: <Feed />
-      }
+        path: "/",
+        element: <Feed />,
+      },
+      {
+        path: '/events',
+        element: <Events />,
+      },
     ]
   },
   {
@@ -43,10 +61,19 @@ const router = createBrowserRouter([
 
 
 const App = () => {
-
+  const { auth } = useContext(AuthContext)
+  console.log("from App: " + auth.login)
   return (
     <>
-      <RouterProvider router={router} />
+      {
+        auth.login ?
+          <>
+            <RouterProvider router={AuthRouter} />
+          </> :
+          <>
+            <RouterProvider router={noAuthRouter} />
+          </>
+      }
     </>
   )
 }

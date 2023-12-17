@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import ApiConfig from "../../utils/ApiConfig";
+import AuthContext from "../../authContext";
 
 export default function Login() {
+  const { setAuth } = useContext(AuthContext)
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("student");
@@ -27,11 +30,12 @@ export default function Login() {
         if (res.data.tokens.access) {
           var decoded = jwtDecode(res.data.tokens.access);
           const userId = decoded.user_id;
-          localStorage.setItem("accessToken", res.data.tokens.access);
-          localStorage.setItem("refreshToken", res.data.tokens.refresh);
-          localStorage.setItem("role", role);
-          localStorage.setItem("userId", userId);
-          navigate("/feed");
+          // localStorage.setItem("accessToken", res.data.tokens.access);
+          // localStorage.setItem("refreshToken", res.data.tokens.refresh);
+          // localStorage.setItem("role", role);
+          // localStorage.setItem("userId", userId);
+          setAuth({ login: true, role: role, userId: userId, email: res.data.email, tokens: res.data.tokens })
+          navigate("/");
           alert("Login Successful!");
         } else {
           console.log("error");
