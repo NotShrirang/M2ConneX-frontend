@@ -30,10 +30,10 @@ export default function Login() {
         if (res.data.tokens.access) {
           var decoded = jwtDecode(res.data.tokens.access);
           const userId = decoded.user_id;
-          // localStorage.setItem("accessToken", res.data.tokens.access);
-          // localStorage.setItem("refreshToken", res.data.tokens.refresh);
-          // localStorage.setItem("role", role);
-          // localStorage.setItem("userId", userId);
+          localStorage.setItem("accessToken", res.data.tokens.access);
+          localStorage.setItem("refreshToken", res.data.tokens.refresh);
+          localStorage.setItem("role", role);
+          localStorage.setItem("userId", userId);
           setAuth({ login: true, role: role, userId: userId, email: res.data.email, tokens: res.data.tokens })
           navigate("/");
           alert("Login Successful!");

@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import aPlusPlus from '../assets/naac.png';
 import NBA from '../assets/nba.png';
 import homeIcon from '../assets/home.svg';
 import { NavLink, Link } from 'react-router-dom';
 import CollegeInfo from './CollegeInfo';
 import Navbar from './Navbar';
+import AuthContext from '../authContext';
 const Header = () => {
-    const [isLogged, setIsLogged] = useState(false);
+    // const [isLogged, setIsLogged] = useState(false);
+    const { auth , setAuth } = useContext(AuthContext)
+    console.log(auth)
+
+    const handleLogout = () => {
+        setAuth({ login: false, uid: '', uname: '' })
+        localStorage.clear()
+    }
     return (
         <>
             <div className='w-full flex '>
@@ -22,7 +30,7 @@ const Header = () => {
                             <Link to="/" className='hover:cursor-pointer'>
                                 <img src={homeIcon} width="30px" alt="home" />
                             </Link>
-                            {isLogged ? (<button>Log out</button>) :
+                            {auth.login ? (<button onClick={handleLogout}>Log out</button>) :
                                 (<Link className='flex gap-x-1' to="/auth">
                                     <p href="/">Sign Up</p>
                                     |
@@ -37,7 +45,6 @@ const Header = () => {
                     </div>
 
                     <h2 className='md:text-5xl text-3xl pt-4'>Alumni Network</h2>
-                    
                     <Navbar/>
                 </div>
             </div>
