@@ -61,7 +61,7 @@ export default function Register() {
                 );
                 localStorage.setItem("role", role);
                 localStorage.setItem("userId", userId);
-                navigate("/feed");
+                navigate("/");
                 alert("Login Successful!");
               } else {
                 console.log("error");
