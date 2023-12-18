@@ -3,10 +3,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ApiConfig from "../../utils/ApiConfig";
 import KeywordInput from "./keywordInput";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreatePost = ({ fetchFeed }) => {
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState("");
+  const notify = () => toast("Wow so easy!");
 
   const [feedData, setFeedData] = useState({
     subject: "",
@@ -19,10 +22,33 @@ const CreatePost = ({ fetchFeed }) => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
+    if (feedData.body.length === 0) {
+      toast.error("Body cannot be empty", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
     if (feedData.subject.length === 0) {
-      setError("Please add at least one keyword");
+      // setError("");
+      toast.error("Please add at least one keyword", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
+
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       navigate("/auth");
@@ -49,7 +75,7 @@ const CreatePost = ({ fetchFeed }) => {
         setFeedData({
           subject: "",
           body: "",
-          images: [],
+          images: "",
           connectionOnly: false,
           charCount: 0,
         });
@@ -66,7 +92,7 @@ const CreatePost = ({ fetchFeed }) => {
       <div className="w-full h-[6rem] my-4 flex justify-center items-center border-b-2 border-[#9D9494]">
         <div
           className="w-[90%] h-[4rem] flex justify-start items-center gap-x-[9rem] rounded-[4rem] bg-white border-[#bc383e] border-2 hover:cursor-pointer hover:text-white transition-all duration-300"
-          onClick={() => setShowModal(true)}
+          onClick={() => { setShowModal(true) }}
         >
           <div className=" border-[#bc383e] border-2 ml-4 flex justify-center items-center rounded-[2rem] w-[3rem] h-[3rem] ">
             <i
@@ -176,7 +202,7 @@ const CreatePost = ({ fetchFeed }) => {
                       type="button"
                       onClick={() => {
                         setShowModal(false);
-                        setFeedData({ subject: "", body: "", images: [], connectionOnly: false, charCount: 0 })
+                        setFeedData({ subject: "", body: "", images: "", connectionOnly: false, charCount: 0 })
                       }}
                     >
                       Cancel
@@ -195,6 +221,8 @@ const CreatePost = ({ fetchFeed }) => {
           </>
         ) : null}
       </div>
+      <ToastContainer />
+
     </>
   );
 };
