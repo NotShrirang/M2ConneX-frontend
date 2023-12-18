@@ -37,7 +37,7 @@ const KeywordInput = ({
 
   useEffect(() => {
     setValue(keywords.join(";"));
-  }, [keywords, setValue]);
+  }, [keywords]);
 
   return (
     <div>
@@ -65,9 +65,8 @@ const KeywordInput = ({
           </div>
         ))}
         <input
-          className={`${!links && "w - 1 / 3"} ${
-            links && "w-full"
-          } h-10 px-2 m-1 border-2 border-[#9D9494] rounded-md outline-none focus:border-[#FF5555]`}
+          className={`${!links && "w - 1 / 3"} ${links && "w-full"
+            } h-10 px-2 m-1 border-2 border-[#9D9494] rounded-md outline-none focus:border-[#FF5555]`}
           type="text"
           value={inputValue}
           onChange={handleInputChange}

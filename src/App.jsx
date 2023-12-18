@@ -66,7 +66,6 @@ const AuthRouter = createBrowserRouter([
 
 const App = () => {
   const { auth } = useContext(AuthContext);
-  console.log("from App: " + auth.login);
   return (
     <>
       {auth.login ? (

@@ -6,25 +6,33 @@ import KeywordInput from "./keywordInput";
 
 const CreatePost = ({ fetchFeed }) => {
   const [showModal, setShowModal] = useState(false);
-  const [subject, setSubject] = useState("");
-  const [body, setBody] = useState("");
-  const [connectionOnly, setConnectionOnly] = useState(false);
-  const [charCount, setCharCount] = useState(0);
-  const [images, setImages] = useState([]);
+  const [error, setError] = useState("");
+
+  const [feedData, setFeedData] = useState({
+    subject: "",
+    body: "",
+    images: "",
+    connectionOnly: false,
+    charCount: 0,
+  })
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
+    if (feedData.subject.length === 0) {
+      setError("Please add at least one keyword");
+      return;
+    }
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       navigate("/auth");
     }
 
     const data = {
-      subject: subject,
-      body: body,
-      images: images.split(";"),
-      isPublic: !connectionOnly,
+      subject: feedData.subject,
+      body: feedData.body,
+      images: feedData.images.split(";"),
+      isPublic: !feedData.connectionOnly,
     };
 
     console.log(data);
@@ -38,10 +46,13 @@ const CreatePost = ({ fetchFeed }) => {
       .then((res) => {
         console.log(res);
         setShowModal(false);
-        setSubject("");
-        setBody("");
-        setImages([]);
-        setConnectionOnly(false);
+        setFeedData({
+          subject: "",
+          body: "",
+          images: [],
+          connectionOnly: false,
+          charCount: 0,
+        });
 
         fetchFeed({ next: null });
       })
@@ -94,20 +105,27 @@ const CreatePost = ({ fetchFeed }) => {
                         rows="10"
                         className="rounded w-full p-4 border-none outline-gray resize-none"
                         placeholder="Share your thoughts"
-                        value={body}
+                        value={feedData.body}
                         onChange={(e) => {
                           if (e.target.value.length > 1000) {
                             return;
                           }
-                          setBody(e.target.value);
-                          setCharCount(e.target.value.length);
+                          setFeedData({
+                            ...feedData,
+                            body: e.target.value,
+                            charCount: e.target.value.length,
+                          });
                         }}
                       ></textarea>
                       <div className="flex flex-col justify-between p-4">
                         <p className="text-sm">Add Images</p>
                         <KeywordInput
-                          value={images}
-                          setValue={setImages}
+                          value={feedData.images}
+                          setValue={(e) => {
+                            setFeedData({
+                              ...feedData, images: e
+                            })
+                          }}
                           flex={"col"}
                           itemsAlignment={"start"}
                           links={true}
@@ -119,8 +137,8 @@ const CreatePost = ({ fetchFeed }) => {
                       <div className="flex flex-col justify-between p-4">
                         <p className="text-sm">Add Keywords</p>
                         <KeywordInput
-                          value={subject}
-                          setValue={setSubject}
+                          value={feedData.subject}
+                          setValue={(e) => { setFeedData({ ...feedData, subject: e }) }}
                           flex={"wrap"}
                           itemsAlignment={"center"}
                           links={false}
@@ -136,24 +154,25 @@ const CreatePost = ({ fetchFeed }) => {
                             name=""
                             id=""
                             className="w-5 h-5"
-                            checked={connectionOnly}
+                            checked={feedData.connectionOnly}
                             onChange={(e) => {
-                              setConnectionOnly(e.target.checked);
+                              setFeedData({ ...feedData, connectionOnly: e.target.checked });
                             }}
                           />
                           <p className="text-sm">Connection-Only</p>
                         </div>
-                        <p className="text-sm">{charCount}/1000 Characters</p>
+                        <p className="text-sm">{feedData.charCount}/1000 Characters</p>
                       </div>
                     </form>
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                    <p className="text-red font-bold self-start">{error}</p>
                     <button
-                      className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                      className="background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                       type="button"
                       onClick={() => {
                         setShowModal(false);
-                        setBody("");
+                        setFeedData({ subject: "", body: "", images: [], connectionOnly: false, charCount: 0 })
                       }}
                     >
                       Cancel
