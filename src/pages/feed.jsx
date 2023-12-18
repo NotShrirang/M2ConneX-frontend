@@ -25,9 +25,9 @@ const Feed = () => {
       navigate("/auth");
     }
     if (next == null) {
-      setIsLoading(true);
+      // setIsLoading(true);
       axios
-        .get(ApiConfig.feed + "/", {
+        .get(ApiConfig.recommendFeed + "/", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },

@@ -7,6 +7,7 @@ import KeywordInput from "./keywordInput";
 
 const Post = ({ post, fetchFeed }) => {
   const [isLiked, setIsLiked] = useState(post.isLiked);
+  const [likesCount, setLikesCount] = useState(post.likesCount);
   const [isCommentSectionExpanded, setIsCommentSectionExpanded] =
     useState(false);
   const [comment, setComment] = useState("");
@@ -49,6 +50,7 @@ const Post = ({ post, fetchFeed }) => {
         .then((res) => {
           // console.log(res);
           setIsLiked(false);
+          setLikesCount(likesCount - 1);
         })
         .catch((err) => {
           console.log(err);
@@ -71,6 +73,7 @@ const Post = ({ post, fetchFeed }) => {
       .then((res) => {
         // console.log(res);
         setIsLiked(true);
+        setLikesCount(likesCount + 1);
       })
       .catch((err) => {
         console.log(err);
@@ -173,40 +176,57 @@ const Post = ({ post, fetchFeed }) => {
   return (
     <>
       <div className="w-[90%] my-4 border-2 bg-white p-3 border-[#9D9494] rounded">
-        <div className="flex justify-start items-center gap-x-2">
-          <div className=" border-[#bc383e] border-2 ml-0 flex justify-center items-center rounded-[3rem] w-[3.5rem] h-[3.5rem]">
-            {post.profilePicture && (
-              <i className="fa-solid" style={{ color: "#bc383e" }}>
-                <img
-                  className="w-full h-full object-cover rounded-[2.9rem]"
-                  src={post.profilePicture}
-                  alt=""
-                />
-              </i>
-            )}
-            {!post.profilePicture && (
+        <div className="flex justify-between items-center">
+          <div className="flex justify-start items-center gap-x-3">
+            <div className=" border-[#bc383e] border-2 ml-0 flex justify-center items-center rounded-[3rem] w-[3.5rem] h-[3.5rem]">
+              {post.profilePicture && (
+                <i className="fa-solid" style={{ color: "#bc383e" }}>
+                  <img
+                    className="w-full h-full object-cover rounded-[2.9rem]"
+                    src={post.profilePicture}
+                    alt=""
+                  />
+                </i>
+              )}
+              {!post.profilePicture && (
+                <i
+                  className="fa-solid fa-user fa-xl"
+                  style={{ color: "#bc383e" }}
+                >
+                  <img src={post.profilePicture} alt="" />
+                </i>
+              )}
+            </div>
+            <div>
+              <h2 className="text-xl font-medium">{post.userName}</h2>
+              <p className="text-xs">{post.userBio}</p>
+            </div>
+          </div>
+          {post.isEditable && !isEditing && (
+            <button
+              className="flex justify-center items-center gap-x-2"
+              onClick={() => {
+                console.log(images);
+                setIsEditing(true);
+              }}
+            >
               <i
-                className="fa-solid fa-user fa-xl"
-                style={{ color: "#bc383e" }}
-              >
-                <img src={post.profilePicture} alt="" />
-              </i>
-            )}
-          </div>
-          <div>
-            <h2 className="text-xl font-medium">{post.userName}</h2>
-            <p className="text-xs">{post.userBio}</p>
-          </div>
+                className="fa-solid fa-edit fa-lg"
+                style={{ color: "#000" }}
+              ></i>
+            </button>
+          )}
         </div>
         <div className="my-2">
           {post.images.length > 0 && !isEditing && (
             <>
-              <div className="my-3 text-[1rem]">
-                <pre className="">
-                  <span class="inner-pre" style={{ "font-family": "arial" }}>
+              <div className="my-3 text-[1rem] wrap">
+                {/* <pre className="">
+                  <span class="inner-pre" style={{ fontFamily: "arial" }}>
                     {post.body}
                   </span>
-                </pre>
+                </pre> */}
+                {post.body}
               </div>
               <div className="w-full h-100 bg-[#d4d9d9] my-4">
                 <PostCarousel post={post} />
@@ -215,7 +235,8 @@ const Post = ({ post, fetchFeed }) => {
           )}
           {post.images.length === 0 && !isEditing && (
             <div className="my-3 text-[2rem]">
-              <pre>{post.body}</pre>
+              {/* <pre>{post.body}</pre> */}
+              {post.body}
             </div>
           )}
           {isEditing && (
@@ -298,7 +319,7 @@ const Post = ({ post, fetchFeed }) => {
                         style={{ color: "#FF5555" }}
                       ></i>
                     )}
-                    <span>{post.likesCount}</span>
+                    <span>{likesCount}</span>
                   </button>
 
                   <button
@@ -327,20 +348,6 @@ const Post = ({ post, fetchFeed }) => {
                     ></i>
                     <span>{post.sharesCount}</span>
                   </button>
-                  {post.isEditable && (
-                    <button
-                      className="flex justify-center items-center gap-x-2"
-                      onClick={() => {
-                        console.log(images);
-                        setIsEditing(true);
-                      }}
-                    >
-                      <i
-                        className="fa-solid fa-edit fa-lg"
-                        style={{ color: "#000", transform: "rotate(90deg)" }}
-                      ></i>
-                    </button>
-                  )}
                 </div>
                 <div>
                   <button className="flex justify-center items-center gap-x-2">

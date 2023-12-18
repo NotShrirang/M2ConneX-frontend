@@ -71,6 +71,10 @@ const CreatePost = ({ fetchFeed }) => {
         </div>
         {showModal ? (
           <>
+            <div
+              className="fixed inset-0 bg-black opacity-60 z-40"
+              onClick={() => setShowModal(false)}
+            ></div>
             <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
               <div className="relative my-6 mx-auto w-1/2">
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -92,7 +96,7 @@ const CreatePost = ({ fetchFeed }) => {
                         id=""
                         cols="20"
                         rows="10"
-                        className="rounded w-full p-4 border-none outline-gray resize-none"
+                        className="rounded w-full p-5 border-none outline-gray resize-none"
                         placeholder="Share your thoughts"
                         value={body}
                         onChange={(e) => {
@@ -129,7 +133,7 @@ const CreatePost = ({ fetchFeed }) => {
                           }
                         />
                       </div>
-                      <div className="flex justify-between items-center p-4">
+                      <div className="flex justify-between items-center p-2">
                         <div className="flex justify-start items-center gap-x-3">
                           <input
                             type="checkbox"
