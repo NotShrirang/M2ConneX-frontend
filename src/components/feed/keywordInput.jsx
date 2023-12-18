@@ -47,7 +47,7 @@ const KeywordInput = ({
             key={index}
             className="flex flex-row bg-[#EFFBFA] gap-2 text-m p-2 pr-4 rounded-md"
           >
-            {!links && keyword}
+            {!links && keyword.substring(0, 20)}
             {links && (
               <button
                 onClick={(e) => {
@@ -56,7 +56,7 @@ const KeywordInput = ({
                 }}
                 className="text-[#2051FF] hover:text-[#FF5555]"
               >
-                {keyword}
+                {keyword.substring(0, 50) + "..."}
               </button>
             )}
             <button onClick={(e) => handleRemoveKeyword(e, index)}>

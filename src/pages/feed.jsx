@@ -25,7 +25,7 @@ const Feed = () => {
       navigate("/auth");
     }
     if (next == null) {
-      setIsLoading(true);
+      // setIsLoading(true);
       axios
         .get(ApiConfig.recommendFeed + "/", {
           headers: {
@@ -82,7 +82,9 @@ const Feed = () => {
           <div className="w-[60%] flex flex-col items-center border-x-2 border-[#9D9494] bg-[#EFFBFA] mx-6">
             <CreatePost fetchFeed={fetchFeed} />
             {!isLoading &&
-              feed.results.map((post) => <Post post={post} key={post.id} />)}
+              feed.results.map((post) => (
+                <Post post={post} fetchFeed={fetchFeed} key={post.id} />
+              ))}
             {feed.next && (
               <button
                 className="w-full h-12 my-4 text-black font-medium rounded-md"
