@@ -11,6 +11,7 @@ import Page_Not_Found from "./pages/404";
 import App_Layout from "./layouts/app.jsx";
 import Feed from "./pages/feed.jsx";
 import AuthContext from "./authContext.jsx";
+import UserProfile from "./pages/UserProfile.jsx";
 
 const noAuthRouter = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const AuthRouter = createBrowserRouter([
         path: "/events",
         element: <Events />,
       },
+      {
+        path: "/profile",
+        element: <UserProfile />,
+      }
     ],
   },
   {
