@@ -17,3 +17,5 @@ temp
 TODOs.md
 .eslintcache
 utils/constants.jsx
+.env
+.env.local
