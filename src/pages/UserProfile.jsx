@@ -160,7 +160,7 @@ export default function UserProfile() {
                                         type="button"
                                         onClick={handleSubmit}
                                     >
-                                        Save
+                                        Post
                                     </button>
                                 </div>
                             </div>
