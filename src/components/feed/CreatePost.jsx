@@ -91,7 +91,7 @@ const CreatePost = ({ fetchFeed }) => {
     <>
       <div className="w-full h-[6rem] my-4 flex justify-center items-center border-b-2 border-[#9D9494]">
         <div
-          className="w-[90%] h-[4rem] flex justify-start items-center gap-x-[9rem] rounded-[4rem] bg-white border-[#bc383e] border-2 hover:cursor-pointer hover:text-white transition-all duration-300"
+          className="w-[90%] h-[4rem] flex justify-start gap-x-32 items-center rounded-[4rem] bg-white border-[#bc383e] border-2 hover:cursor-pointer hover:text-white transition-all duration-300"
           onClick={() => { setShowModal(true) }}
         >
           <div className=" border-[#bc383e] border-2 ml-4 flex justify-center items-center rounded-[2rem] w-[3rem] h-[3rem] ">
