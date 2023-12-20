@@ -109,6 +109,25 @@ export default function UserProfile() {
     setUser({ ...updateUser });
   };
 
+
+  const experience = [
+    {
+      logo: "https://i.pravatar.cc/500",
+      title: "Students Club",
+      duration: "2021-2025",
+      location: "MMCOE",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+    },
+    {
+      logo: "https://i.pravatar.cc/300",
+      title: "Students Club 2",
+      duration: "2021-2025",
+      location: "MMCOE",
+      description: "Lorem we ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+    }
+  ]
+
+
   return (
     <>
       <div className="flex flex-row w-full bg-[#f4f2ee] justify-center">
@@ -176,11 +195,9 @@ export default function UserProfile() {
                       />
                     </div>
                     <div className="ml-5">
-                      <p>
-                        <span className="font-bold">{act.title}</span>
-                        <p className="text-gray-400 text-[14px] font-medium">
-                          {act.content}
-                        </p>
+                      <span className="font-bold">{act.title}</span>
+                      <p className="text-gray-400 text-[14px] font-medium">
+                        {act.content}
                       </p>
                     </div>
                   </div>
@@ -188,11 +205,23 @@ export default function UserProfile() {
               )
             }
           </div>
-          <div className="Experience rounded-sm flex gap-y-2 mt-16 flex-col shadow-lg drop-shadow-lg bg-white pl-4 py-4">
+          <div className="Experience rounded-sm flex gap-y-2 my-16 flex-col shadow-lg drop-shadow-lg bg-white pl-4 py-4">
             <p className="font-semibold text-xl">Experience</p>
-            <p>
-              {user.bio}
-            </p>
+            {
+              experience.map((exp) =>
+                <div className="flex flex-row justify-center gap-x-2">
+                  <div className="max-w-[48px] h-[48px]">
+                    <img src={exp.logo} alt="" className="max-w-[48px] self-start mt-1 h-[48px] rounded-sm" />
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="text-sm font-bold">{exp.title}</p>
+                    <p className="text-sm font-light">{exp.duration}</p>
+                    <p className="text-sm font-medium">{exp.location}</p>
+                    <p className="text-sm font-medium">{exp.description}</p>
+                  </div>
+                </div>
+              )
+            }
           </div>
         </div>
         <div className="suggestions-and-more flex flex-col w-1/2 full px-8 max-w-md">
