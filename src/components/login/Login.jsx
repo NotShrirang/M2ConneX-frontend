@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import ApiConfig from "../../utils/ApiConfig";
 import AuthContext from "../../authContext";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Login() {
   const { setAuth } = useContext(AuthContext)
@@ -36,15 +37,42 @@ export default function Login() {
           localStorage.setItem("userId", userId);
           setAuth({ login: true, role: role, userId: userId, email: res.data.email, tokens: res.data.tokens })
           navigate("/");
-          alert("Login Successful!");
-        } else {
+          toast.success("Login Successful", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else if (res.status === 401 || res.status === 400) {
           console.log("error");
-          alert("Invalid Credentials");
+          toast.error("Invalid Credentials", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       })
       .catch((err) => {
         console.log(err.response);
-        alert(err.response.data.detail);
+        toast.error(err.response.data.detail, {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
   return (
@@ -141,6 +169,7 @@ export default function Login() {
           </div>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }
