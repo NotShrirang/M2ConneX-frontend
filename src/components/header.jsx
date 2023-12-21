@@ -30,7 +30,7 @@ const Header = () => {
       {
         auth.login ? (
           <>
-            <div className="w-full bg-[#1E1E1E] flex flex-col md:justify-between text-white lg:w-[60%] px-4 shadow-xl">
+            <div className="w-full bg-[#1E1E1E] flex flex-col md:justify-between text-white lg:w-full px-4 shadow-xl">
 
               <div className="flex md:items-center items-start md:justify-center gap-x-3 md:flex-row flex-row-reverse justify-between">
                 <Navbar />
