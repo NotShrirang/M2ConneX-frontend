@@ -3,8 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ApiConfig from "../../utils/ApiConfig";
 import KeywordInput from "./keywordInput";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreatePost = ({ fetchFeed }) => {
   const [showModal, setShowModal] = useState(false);
@@ -15,7 +15,7 @@ const CreatePost = ({ fetchFeed }) => {
     images: "",
     connectionOnly: false,
     charCount: 0,
-  })
+  });
 
   const navigate = useNavigate();
 
@@ -90,7 +90,9 @@ const CreatePost = ({ fetchFeed }) => {
       <div className="w-full h-[6rem] my-4 flex justify-center items-center border-b-2 border-[#9D9494]">
         <div
           className="w-[90%] h-[4rem] flex justify-start gap-x-32 items-center rounded-[4rem] bg-white border-[#bc383e] border-2 hover:cursor-pointer hover:text-white transition-all duration-300"
-          onClick={() => { setShowModal(true) }}
+          onClick={() => {
+            setShowModal(true);
+          }}
         >
           <div className=" border-[#bc383e] border-2 ml-4 flex justify-center items-center rounded-[2rem] w-[3rem] h-[3rem] ">
             <i
@@ -135,7 +137,7 @@ const CreatePost = ({ fetchFeed }) => {
                         placeholder="Share your thoughts"
                         value={feedData.body}
                         onChange={(e) => {
-                          if (e.target.value.length > 1000) {
+                          if (e.target.value.length > 3600) {
                             return;
                           }
                           setFeedData({
@@ -151,8 +153,9 @@ const CreatePost = ({ fetchFeed }) => {
                           value={feedData.images}
                           setValue={(e) => {
                             setFeedData({
-                              ...feedData, images: e
-                            })
+                              ...feedData,
+                              images: e,
+                            });
                           }}
                           flex={"col"}
                           itemsAlignment={"start"}
@@ -166,7 +169,9 @@ const CreatePost = ({ fetchFeed }) => {
                         <p className="text-sm">Add Keywords</p>
                         <KeywordInput
                           value={feedData.subject}
-                          setValue={(e) => { setFeedData({ ...feedData, subject: e }) }}
+                          setValue={(e) => {
+                            setFeedData({ ...feedData, subject: e });
+                          }}
                           flex={"wrap"}
                           itemsAlignment={"center"}
                           links={false}
@@ -184,12 +189,17 @@ const CreatePost = ({ fetchFeed }) => {
                             className="w-5 h-5"
                             checked={feedData.connectionOnly}
                             onChange={(e) => {
-                              setFeedData({ ...feedData, connectionOnly: e.target.checked });
+                              setFeedData({
+                                ...feedData,
+                                connectionOnly: e.target.checked,
+                              });
                             }}
                           />
                           <p className="text-sm">Connection-Only</p>
                         </div>
-                        <p className="text-sm">{feedData.charCount}/1000 Characters</p>
+                        <p className="text-sm">
+                          {feedData.charCount}/3600 Characters
+                        </p>
                       </div>
                     </form>
                   </div>
@@ -199,7 +209,13 @@ const CreatePost = ({ fetchFeed }) => {
                       type="button"
                       onClick={() => {
                         setShowModal(false);
-                        setFeedData({ subject: "", body: "", images: "", connectionOnly: false, charCount: 0 })
+                        setFeedData({
+                          subject: "",
+                          body: "",
+                          images: "",
+                          connectionOnly: false,
+                          charCount: 0,
+                        });
                       }}
                     >
                       Cancel
@@ -219,7 +235,6 @@ const CreatePost = ({ fetchFeed }) => {
         ) : null}
       </div>
       <ToastContainer />
-
     </>
   );
 };

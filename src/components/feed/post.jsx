@@ -251,7 +251,7 @@ const Post = ({ post, fetchFeed }) => {
                   placeholder="Share your thoughts"
                   value={body}
                   onChange={(e) => {
-                    if (e.target.value.length > 1000) {
+                    if (e.target.value.length > 3600) {
                       return;
                     }
                     setBody(e.target.value);
@@ -294,7 +294,7 @@ const Post = ({ post, fetchFeed }) => {
                     />
                     <p className="text-sm">Connection-Only</p>
                   </div>
-                  <p className="text-sm">{charCount}/1000 Characters</p>
+                  <p className="text-sm">{charCount}/3600 Characters</p>
                 </div>
               </div>
             </div>
