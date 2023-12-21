@@ -5,7 +5,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="className-items flex flex-row-reverse pt-4">
+      <div className="items flex flex-row-reverse py-2">
         <label htmlFor="navToggle" className="md:hidden block text-xl">
           <i className="fa-solid fa-bars"></i>
         </label>
