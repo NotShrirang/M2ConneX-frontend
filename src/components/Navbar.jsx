@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
-
   return (
     <>
       <div className="items flex flex-row-reverse py-2">
@@ -34,6 +33,16 @@ function Navbar() {
             }
           >
             Feed
+          </NavLink>
+          <NavLink
+            to="/blogs"
+            className={({ isActive }) =>
+              isActive
+                ? "text-primary"
+                : "hover:text-red transition-all duration-300"
+            }
+          >
+            Blogs
           </NavLink>
           <NavLink
             to="/batches"
