@@ -8,8 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const CreatePost = ({ fetchFeed }) => {
   const [showModal, setShowModal] = useState(false);
-  const [error, setError] = useState("");
-  const notify = () => toast("Wow so easy!");
 
   const [feedData, setFeedData] = useState({
     subject: "",
@@ -196,7 +194,6 @@ const CreatePost = ({ fetchFeed }) => {
                     </form>
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                    <p className="text-red font-bold self-start">{error}</p>
                     <button
                       className="background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                       type="button"

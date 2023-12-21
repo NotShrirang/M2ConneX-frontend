@@ -6,6 +6,7 @@ import Alumni_Registration from "./inputs/register_alumni";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import ApiConfig from "../../utils/ApiConfig";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Register() {
   const [data, setData] = useState({
@@ -25,21 +26,37 @@ export default function Register() {
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  const [emailError, setEmailError] = useState(false);
+
   const register = (type) => {
     if (data.password !== data.confirm_password) {
-      alert("Passwords do not match");
+      // alert("Passwords do not match");
+      toast.error("Passwords do not match", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
     data.privilege =
       type === "student" ? "Student" : type === "alumni" ? "Alumni" : "Staff";
-    console.log(data);
-    console.log(ApiConfig.register);
 
     axios
       .post(ApiConfig.register, data)
       .then((res) => {
-        console.log(res);
-        console.log("Account Created");
         if (res.status === 201) {
           axios
             .post(ApiConfig.login, {
@@ -47,7 +64,7 @@ export default function Register() {
               password: data.password,
             })
             .then((response) => {
-              console.log(response);
+              console.log("response");
               if (response.data.tokens.access) {
                 var decoded = jwtDecode(response.data.tokens.access);
                 const userId = decoded.user_id;
@@ -62,25 +79,45 @@ export default function Register() {
                 localStorage.setItem("role", role);
                 localStorage.setItem("userId", userId);
                 navigate("/");
-                alert("Login Successful!");
+                toast.success("Register Successful", {
+                  position: "bottom-center",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                });
               } else {
-                console.log("error");
-                alert("Invalid Credentials");
+                toast.error("Invalid Credentials", {
+                  position: "bottom-center",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                });
               }
             });
         } else {
-          alert(res.data.message); // TODO: Add Error Message
+          console.log(res)
         }
       })
       .catch((err) => {
-        console.log(err.response.data);
-        if (err.status === 200) {
-          console.log(err.response);
-        } else if (err.status != 200) {
-          alert("Something went wrong...");
-        } else {
-          alert("Something went wrong...");
-        }
+        console.log(err)
+        toast.error(err, {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
 
@@ -140,9 +177,15 @@ export default function Register() {
               required
               type="email"
               placeholder="Email"
-              className="border-2 border-black w-[60%] p-1 mt-8"
+              className={"border-2 border-black w-[60%] p-1 mt-8 " + (emailError ? "outline-red border-red" : "outline-[green] border-[green]")}
               value={data.email}
               onChange={(value) => {
+                if (!validateEmail(value.target.value)) {
+                  setEmailError(true);
+                }
+                else {
+                  setEmailError(false);
+                }
                 setData({ ...data, email: value.target.value });
               }}
             />
@@ -150,6 +193,32 @@ export default function Register() {
             <button
               className="bg-blue text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
               onClick={() => {
+                if (emailError) {
+                  toast.error("Invalid email", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                  });
+                  return;
+                }
+                if (data.lastName.length === 0 || data.firstName.length === 0) {
+                  toast.error("First or Last Name or cannot be empty", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                  });
+                  return
+                }
                 setPage(1);
               }}
             >
@@ -450,6 +519,7 @@ export default function Register() {
           <></>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 }
