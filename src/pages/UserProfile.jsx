@@ -376,7 +376,7 @@ export default function UserProfile() {
                   {analytics["total"]["profile visit"]} profile views
                 </p>
               </div>
-              {analytics.total.feedImpressions && (
+              {analytics.total.feedImpressions != null && (
                 <div className="flex flex-row">
                   <i
                     className="fas fa-line-chart text-lg pl-2"
@@ -387,7 +387,7 @@ export default function UserProfile() {
                   </p>
                 </div>
               )}
-              {analytics.total.search && (
+              {analytics.total.search != null && (
                 <div className="flex flex-row">
                   <i className="fas fa-search text-lg pl-2"></i>
                   <p className="text-md font-medium px-4">
@@ -587,7 +587,7 @@ export default function UserProfile() {
               </p>
             )}
             {userExperience.count == 0 && (
-              <div className="flex flex-row justify-left gap-x-2">
+              <div className="flex flex-row justify-left gap-x-2 pl-4 py-4">
                 <span>No Experiences Found.</span>
               </div>
             )}
@@ -631,7 +631,7 @@ export default function UserProfile() {
               </p>
             )}
             {userSkills.count == 0 && (
-              <div className="flex flex-row justify-left gap-x-2">
+              <div className="flex flex-row justify-left gap-x-2 pl-4 py-4">
                 <span>No Skills Found.</span>
               </div>
             )}
