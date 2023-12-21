@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BASEURL } from "../../utils/constants";
-import Student_Registration from "./inputs/register_student";
-import Alumni_Registration from "./inputs/register_alumni";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import ApiConfig from "../../utils/ApiConfig";
 import { ToastContainer, toast } from "react-toastify";
+import AuthContext from "../../authContext";
 
 export default function Register() {
   const [data, setData] = useState({
@@ -22,6 +20,8 @@ export default function Register() {
     passingOutYear: "",
     college: "",
   });
+
+  const { setAuth } = useContext(AuthContext);
 
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
@@ -79,6 +79,8 @@ export default function Register() {
                 localStorage.setItem("role", role);
                 localStorage.setItem("userId", userId);
                 navigate("/");
+                setAuth({ login: true, role: role, userId: userId, email: res.data.email, tokens: res.data.tokens })
+
                 toast.success("Register Successful", {
                   position: "bottom-center",
                   autoClose: 5000,
