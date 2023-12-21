@@ -36,6 +36,10 @@ const noAuthRouter = createBrowserRouter([
         path: "/auth",
         element: <Auth />,
       },
+      {
+        path: "/blogs",
+        element: <Blogs />,
+      }
     ],
   },
   {

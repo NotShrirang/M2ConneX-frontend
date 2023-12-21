@@ -39,9 +39,8 @@ const Header = () => {
                     <img src={homeIcon} width="30px" alt="home" />
                   </Link>
 
-                  <Link className="flex gap-x-1" to="/auth">
-                    <p href="/">Sign Up</p>|<p href="/">Log In</p>
-                  </Link>
+                  <button onClick={handleLogout}>Log out</button>
+
 
                   <div
                     id="searchBtn"

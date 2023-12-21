@@ -22,7 +22,11 @@ function Blogpost({
                         <p className='text-gray text-sm'>{date}</p>
                     </div>
                     <div className='my-2'>
-                        <p className='text-lg mx-2 text-left font-semibold hover:cursor-pointer hover:text-primary transition-all duration-300'>
+                        <p className='text-lg mx-2 text-left font-semibold hover:cursor-pointer hover:text-primary transition-all duration-300'
+                            onClick={() => { 
+                                // TODO Do something
+                            }}
+                        >
                             {title}
                         </p>
                     </div>
