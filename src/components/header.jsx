@@ -52,6 +52,9 @@ const Header = () => {
                       style={{ color: "#ffffff", marginTop: "4px" }}
                     ></i>
                   </div>
+                  <Link to={"/profile"} className="userprofile hover:cursor-pointer w-[52px] h-16 pt-2 max-w-[52px] min-w-[52px] md:ml-8 mb-1 rounded-xl">
+                    <img src="https://i.pravatar.cc/300" alt="" className="rounded-xl" />
+                  </Link>
                 </div>
               </div>
             </div>
