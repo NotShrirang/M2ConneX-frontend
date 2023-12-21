@@ -309,9 +309,7 @@ export default function UserProfile() {
 
   return (
     <>
-      <div
-        className="flex bg-[#f4f2ee] justify-center flex-col md:items-start items-center md:flex-row"
-      >
+      <div className="flex bg-[#f4f2ee] justify-center flex-col md:items-start items-center md:flex-row">
         <div className="profile-analytics flex flex-col md:pl-8 w-3/4 max-w-4xl">
           <div className="profile-card flex flex-col items-start pl-6 rounded-lg bg-white mt-8 mb-2 shadow-sm drop-shadow-sm h-fit pt-16 pb-8 border border-gray">
             <button
@@ -546,8 +544,9 @@ export default function UserProfile() {
             {userExperience.results &&
               userExperience.results.map((exp, index) => (
                 <div
-                  className={`flex flex-col pl-4 ${index == userExperience.results.length - 1 && "mb-4"
-                    }`}
+                  className={`flex flex-col pl-4 ${
+                    index == userExperience.results.length - 1 && "mb-4"
+                  }`}
                 >
                   <div
                     className="flex flex-row justify-left gap-x-2 mt-2 cursor-pointer"
@@ -594,8 +593,9 @@ export default function UserProfile() {
             {userSkills.results &&
               userSkills.results.map((skill, index) => (
                 <div
-                  className={`flex flex-col pl-4 ${index == userSkills.results.length - 1 && "mb-4"
-                    }`}
+                  className={`flex flex-col pl-4 ${
+                    index == userSkills.results.length - 1 && "mb-4"
+                  }`}
                 >
                   <div
                     className="flex flex-row justify-left items-center gap-x-2 mt-2 cursor-pointer"
@@ -633,9 +633,7 @@ export default function UserProfile() {
             )}
           </div>
         </div>
-        <div
-          className="suggestions-and-more flex flex-col md:w-2/5 w-[80%] px-6 md:max-w-sm pb-8 md:pb-0"
-        >
+        <div className="suggestions-and-more flex flex-col md:w-2/5 w-[80%] px-6 md:max-w-sm pb-8 md:pb-0">
           <div className="suggestions rounded-lg bg-white mt-8 drop-shadow-sm shadow-sm border border-gray">
             <p className="px-6 py-5 text-xl">People also viewed</p>
             {people.map((person, index) => (
@@ -690,9 +688,6 @@ export default function UserProfile() {
                         <button
                           key={person.id}
                           className="border border-gray rounded-l-full rounded-r-full text-gray-500 font-medium w-40 h-10 bg-[#ebebebeb]"
-                          onClick={(e) => {
-                            handleConnect(e, person);
-                          }}
                           disabled
                         >
                           <i className="fa-solid fa-check mr-2 "></i>
