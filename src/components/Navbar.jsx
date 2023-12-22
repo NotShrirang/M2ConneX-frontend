@@ -2,12 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 function Navbar({ login }) {
+  console.log(login)
   return (
     <>
-      <div className={"items flex flex-row-reverse w-full md:py-2 " + (login ? "" : "pt-6")}>
-        <label htmlFor="navToggle" className="md:hidden block text-xl">
+      <div className={"items flex flex-row-reverse w-full md:py-2 " + (login ? "" : "md:pt-6")}>
+        <label htmlFor="navToggle" className={"md:hidden block text-xl  absolute right-4 " + (login ? "top-7" : "top-32")}>
           <i
-            className={"fa-solid fa-bars absolute right-4 " + (login ? "top-7" : "top-32")}
+            className="fa-solid fa-bars"
           ></i>
         </label>
         <input type="checkbox" id="navToggle" className="hidden peer" />

@@ -24,6 +24,8 @@ const Header = () => {
     navigate("/");
   };
 
+  console.log(auth)
+
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     const userId = localStorage.getItem("userId");
@@ -58,7 +60,7 @@ const Header = () => {
         <>
           <div className="w-full bg-[#1E1E1E] flex flex-col md:justify-between text-white lg:w-full px-4 shadow-xl">
             <div className="flex md:items-center items-start md:justify-center gap-x-3 md:flex-row flex-col-reverse justify-between">
-              <Navbar />
+              <Navbar login={true} />
               <div className="flex justify-center md:pt-0 pt-1 items-center gap-x-3">
                 <Link to="/" className="hover:cursor-pointer min-w-max">
                   <img src={homeIcon} className="w-8" alt="home" />
@@ -127,7 +129,7 @@ const Header = () => {
             </div>
 
             <h2 className="md:text-5xl text-3xl pt-4">Alumni Network</h2>
-          <Navbar login={auth.login} />
+            <Navbar login={false} />
           </div>
         </div>
       )}
