@@ -57,15 +57,15 @@ const Header = () => {
       {auth.login ? (
         <>
           <div className="w-full bg-[#1E1E1E] flex flex-col md:justify-between text-white lg:w-full px-4 shadow-xl">
-            <div className="flex md:items-center items-start md:justify-center gap-x-3 md:flex-row flex-row-reverse justify-between">
+            <div className="flex md:items-center items-start md:justify-center gap-x-3 md:flex-row flex-col-reverse justify-between">
               <Navbar />
               <div className="flex justify-center md:pt-0 pt-1 items-center gap-x-3">
-                <Link to="/" className="hover:cursor-pointer">
-                  <img src={homeIcon} width="30px" alt="home" />
+                <Link to="/" className="hover:cursor-pointer min-w-max">
+                  <img src={homeIcon} className="w-8" alt="home" />
                 </Link>
                 <Link
                   to={"/profile"}
-                  className="userprofile hover:cursor-pointer w-[52px] h-16 pt-2 max-w-[52px] min-w-[52px] md:ml-8 mb-1 rounded-xl"
+                  className="userprofile hover:cursor-pointer w-[52px] h-16 pt-2 max-w-[52px] min-w-[52px] mb-1 rounded-xl"
                 >
                   {user.profilePicture ? (
                     <img
@@ -84,8 +84,8 @@ const Header = () => {
                 >
                   <button>Search</button>
                   <i
-                    className="fa-solid fa-magnifying-glass fa-xs"
-                    style={{ color: "#ffffff", marginTop: "4px" }}
+                    className="fa-solid fa-magnifying-glass fa-xs mt-1 text-white"
+                  // style={{ color: "#ffffff", marginTop: "4px" }}
                   ></i>
                 </div>
               </div>
@@ -106,8 +106,8 @@ const Header = () => {
                 <img src={aPlusPlus} alt="" />
               </div>
               <div className="flex items-center gap-x-3">
-                <Link to="/" className="hover:cursor-pointer">
-                  <img src={homeIcon} width="30px" alt="home" />
+                <Link to="/" className="hover:cursor-pointer min-w-max">
+                  <img src={homeIcon} alt="home" className="w-8" />
                 </Link>
 
                 <Link className="flex gap-x-1" to="/auth">
@@ -120,15 +120,14 @@ const Header = () => {
                 >
                   <button>Search</button>
                   <i
-                    className="fa-solid fa-magnifying-glass fa-xs"
-                    style={{ color: "#ffffff", marginTop: "4px" }}
+                    className="fa-solid fa-magnifying-glass fa-xs mt-1 text-white"
                   ></i>
                 </div>
               </div>
             </div>
 
             <h2 className="md:text-5xl text-3xl pt-4">Alumni Network</h2>
-            <Navbar />
+          <Navbar login={auth.login} />
           </div>
         </div>
       )}

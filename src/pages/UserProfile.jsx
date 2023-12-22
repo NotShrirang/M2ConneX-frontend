@@ -636,7 +636,8 @@ export default function UserProfile() {
         <div className="suggestions-and-more flex flex-col md:w-2/5 w-[80%] px-6 md:max-w-sm pb-8 md:pb-0">
           <div className="suggestions rounded-lg bg-white mt-8 drop-shadow-sm shadow-sm border border-gray">
             <p className="px-6 py-5 text-xl">People also viewed</p>
-            {people.map((person, index) => (
+            {
+             people && (people.map((person, index) => (
               <div className="flex flex-col pl-6 pr-4 py-2" key={person.id}>
                 <div className="flex">
                   <div className="w-[60px] h-[60px] rounded-full">
@@ -701,7 +702,7 @@ export default function UserProfile() {
                   <hr className="w-11/12  h-[1px] border-gray mx-auto mt-4" />
                 )}
               </div>
-            ))}
+            )))}
             <p className="text-center mt-2 pt-2 pb-2 cursor-pointer border-t border-gray hover:bg-[#ebebebeb]">
               Show All
             </p>
