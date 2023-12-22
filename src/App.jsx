@@ -15,6 +15,7 @@ import UserProfile from "./pages/UserProfile.jsx";
 import Batchmates from "./pages/Batchmates.jsx";
 import Batches from "./components/Batches.jsx";
 import Blogs from "./pages/Blogs.jsx";
+import Oppurtunities from "./pages/oppurtunities.jsx";
 
 const noAuthRouter = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const AuthRouter = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/oppurtunities",
+        element: <Oppurtunities />,
       }
     ],
   },
