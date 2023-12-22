@@ -9,6 +9,7 @@ import axios from "axios";
 import ApiConfig from "../utils/ApiConfig";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import PeopleRecommendation from "../components/PeopleRecommendation";
 
 const Feed = () => {
   const [feed, setFeed] = useState({});
@@ -138,21 +139,26 @@ const Feed = () => {
 
   return (
     <>
-      <div className="w-full flex justify-center items-center">
-        <div className="w-full flex  justify-center items-start ">
-          <div className="w-1/3 mx-4 rounded-md  my-2 flex flex-col justify-center items-center pb-4 shadow-lg">
-            <div className=" w-full text-center font-medium  py-2 text-xl">
+      <div className="w-full flex justify-center items-center bg-[#f4f2ee]">
+        <div className="w-full flex justify-center items-start">
+          <div className="w-1/5 rounded-lg my-8 flex flex-col justify-center items-center pb-4 shadow-sm border border-gray mx-4 px-8 bg-white">
+            <div className="text-center py-2 text-xl">
               <p>Recent Blogs</p>
             </div>
 
             <RecommendationBlogs />
-            <div className="flex justify-center items-center mt-4 h-[2rem] gap-x-3">
+            <div
+              className="flex justify-center items-center mt-4 h-[2rem] gap-x-3 cursor-pointer border-b border-white hover:border-b hover:border-[#2051FF]"
+              onClick={() => {
+                navigate("/blogs");
+              }}
+            >
               <p className="text-[#2051FF] text-base">Read more blogs</p>
               <img src={Arrow} alt="" className="mt-1" />
             </div>
           </div>
 
-          <div className="w-[60%] flex flex-col items-center border-x-2 border-[#9D9494] bg-[#EFFBFA] mx-6">
+          <div className="w-[60%] flex flex-col items-center border-x-2 shadow-sm border border-gray bg-white">
             <CreatePost fetchFeed={fetchFeed} />
             {!isLoading &&
               feed.results.map((post) => (
@@ -171,91 +177,7 @@ const Feed = () => {
               </button>
             )}
           </div>
-
-          <div className="suggestions-and-more flex flex-col md:w-2/5 w-[80%] px-6 md:max-w-sm pb-8 md:pb-0">
-            <div className="suggestions rounded-lg bg-white mt-8 drop-shadow-sm shadow-sm border border-gray">
-              <p className="px-6 py-5 text-xl">People also viewed</p>
-              {people.results &&
-                people.results.map((person, index) => (
-                  <div className="flex flex-col pl-6 pr-4 py-2" key={person.id}>
-                    <div className="flex">
-                      <div className="w-[60px] h-[60px] rounded-full">
-                        {person.profilePicture && (
-                          <img
-                            src={person.profilePicture}
-                            alt=""
-                            className="max-w-[48px] h-[48px] rounded-full"
-                          />
-                        )}
-                        {!person.profilePicture && (
-                          <i className="fas fa-user-circle text-5xl"></i>
-                        )}
-                      </div>
-                      <div className="ml-4">
-                        <div>
-                          <span className="font-semibold text-lg">
-                            {person.firstName} {person.lastName}
-                          </span>
-                          <p className="text-gray-400 text-[14px]">
-                            {person.bio && person.bio}
-                            {!person.bio &&
-                              person.department &&
-                              "Department of " + DEPARTMENTS[person.department]}
-                            {!person.bio &&
-                              !person.department &&
-                              "Alumni Portal User"}
-                          </p>
-                          {person.mutualConnections.length > 0 && (
-                            <p className="text-gray-400 text-[14px]">
-                              {person.mutualConnections.length} mutual
-                              connections
-                            </p>
-                          )}
-                        </div>
-                        <div className="flex pt-2">
-                          {person.isConnected == "not_connected" && (
-                            <button
-                              key={person.id}
-                              className="border border-gray rounded-l-full rounded-r-full text-gray-500 font-medium w-40 h-10 hover:bg-[#ebebebeb] hover:border-2 transition duration-100 ease-in-out"
-                              onClick={(e) => {
-                                handleConnect(e, person);
-                              }}
-                            >
-                              <i className="fa-solid fa-user-plus mr-2 "></i>
-                              Connect
-                            </button>
-                          )}
-                          {person.isConnected == "pending" && (
-                            <button
-                              key={person.id}
-                              className="border border-gray rounded-l-full rounded-r-full text-gray-500 font-medium w-40 h-10 bg-[#ebebebeb]"
-                              disabled
-                            >
-                              <i className="fa-solid fa-check mr-2 "></i>
-                              Requested
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    {index != people.length - 1 && (
-                      <hr className="w-11/12  h-[1px] border-gray mx-auto mt-4" />
-                    )}
-                  </div>
-                ))}
-              {people.next && (
-                <p
-                  className="text-center mt-2 pt-2 pb-2 cursor-pointer border-t border-gray hover:bg-[#ebebebeb]"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    fetchPeople({ next: people.next });
-                  }}
-                >
-                  Show more
-                </p>
-              )}
-            </div>
-          </div>
+          <PeopleRecommendation />
         </div>
       </div>
     </>

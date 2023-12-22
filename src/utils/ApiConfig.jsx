@@ -17,7 +17,7 @@ class ApiConfig {
   static skills = BASEURL + "/skill/skill";
   static userSkills = BASEURL + "/skill/user-skill";
   static userSkillsByUser = BASEURL + "/skill/user-skill-by-user";
-  static userActivity = BASEURL + "/feed/user-activity/";
+  static userActivity = BASEURL + "/feed/user-activity";
   static userExperience = BASEURL + "/experience/user-experience";
   static connection = BASEURL + "/connection/connection";
   static connectionRequest = BASEURL + "/connection/connection-request/";
