@@ -1,36 +1,42 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import ApiConfig from "../utils/ApiConfig";
-import DEPARTMENTS from "../utils/departments";
-import formatDate from "../utils/date";
-import { EXPERIENCE } from "../utils/skills";
-import PeopleRecommendation from "../components/PeopleRecommendation";
+import ApiConfig from "../../utils/ApiConfig";
+import DEPARTMENTS from "../../utils/departments";
+import formatDate from "../../utils/date";
+import { EXPERIENCE } from "../../utils/skills";
+import PeopleRecommendation from "../PeopleRecommendation";
 
-export default function UserProfile() {
-  // user data fetched from api :readonly
+export default function Profile() {
   const [user, setUser] = useState({});
   const [updateUser, setUpdateUser] = useState({});
-  const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState("");
-  const [analytics, setAnalytics] = useState({
-    total: {},
-    weekly: {},
-    monthly: {},
-  });
   const [userActivity, setUserActivity] = useState({});
   const [userExperience, setUserExperience] = useState({});
   const [userSkills, setUserSkills] = useState({});
 
   const navigate = useNavigate();
+  const { userId } = useParams();
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
-    const userId = localStorage.getItem("userId");
+
     if (!accessToken) {
       navigate("/auth");
     }
 
+    fetchUser();
+    fetchUserActivity({ next: null });
+    fetchUserExperience({ next: null });
+    fetchUserSkills({ next: null });
+  }, []);
+
+  const fetchUser = () => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (!accessToken) {
+      navigate("/auth");
+    }
     axios
       .get(ApiConfig.users + "/" + userId + "/", {
         headers: {
@@ -45,62 +51,10 @@ export default function UserProfile() {
       .catch((err) => {
         console.log(err);
       });
-
-    axios
-      .get(ApiConfig.profileAnalytics, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setAnalytics(res.data);
-        var feedRelated = 0;
-        for (let key in res.data.total) {
-          if (key.startsWith("feed")) {
-            feedRelated += res.data.total[key];
-          }
-        }
-        setAnalytics({
-          ...res.data,
-          total: {
-            ...res.data.total,
-            feedImpressions: feedRelated,
-          },
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    fetchUserActivity({ next: null });
-    fetchUserExperience({ next: null });
-    fetchUserSkills({ next: null });
-  }, []);
-
-  const fetchPeople = () => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) {
-      navigate("/auth");
-    }
-    axios
-      .get(ApiConfig.recommendedConnection, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        // console.log(res.data.results);
-        setPeople(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   const fetchUserActivity = ({ next }) => {
     const accessToken = localStorage.getItem("accessToken");
-    const userId = localStorage.getItem("userId");
     if (!accessToken) {
       navigate("/auth");
     }
@@ -142,7 +96,6 @@ export default function UserProfile() {
 
   const fetchUserExperience = ({ next }) => {
     const accessToken = localStorage.getItem("accessToken");
-    const userId = localStorage.getItem("userId");
     if (!accessToken) {
       navigate("/auth");
     }
@@ -185,7 +138,6 @@ export default function UserProfile() {
 
   const fetchUserSkills = ({ next }) => {
     const accessToken = localStorage.getItem("accessToken");
-    const userId = localStorage.getItem("userId");
     if (!accessToken) {
       navigate("/auth");
     }
@@ -226,11 +178,34 @@ export default function UserProfile() {
       });
   };
 
-  const handleSubmit = (e) => {
+  const handleConnect = (e, person) => {
     e.preventDefault();
-    console.log("Submitted");
-    setShowModal(false);
-    setUser({ ...updateUser });
+    console.log("Connect");
+
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) {
+      navigate("/auth");
+    }
+
+    axios
+      .post(
+        ApiConfig.connectionRequest,
+        {
+          userB: person.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        fetchUser();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -238,14 +213,6 @@ export default function UserProfile() {
       <div className="flex bg-[#f4f2ee] justify-center flex-col md:items-start items-center md:flex-row">
         <div className="profile-analytics flex flex-col md:pl-8 w-3/4 max-w-4xl">
           <div className="profile-card flex flex-col items-start pl-6 rounded-lg bg-white mt-8 mb-2 shadow-sm drop-shadow-sm h-fit pt-16 pb-8 border border-gray">
-            <button
-              className="py-4 absolute top-0 right-5"
-              onClick={() => {
-                setShowModal(true);
-              }}
-            >
-              <i className="fas fa-edit text-2xl"></i>
-            </button>
             <div className="profile-pic flex justify-center items-center mb-4">
               {user.profilePicture != null ? (
                 <img
@@ -286,67 +253,30 @@ export default function UserProfile() {
                 {/* TODO: Add clickable box */}
               </span>
             </div>
-          </div>
-          <div className="analytics rounded-t-lg flex gap-y-2 flex-col shadow-sm drop-shadow-sm border border-gray bg-white pl-4 py-4">
-            <div className="flex flex-col">
-              <p className="font-semibold text-xl">Analytics</p>
-              <div className="flex flex-row gap-x-1 items-center">
-                <i className="fas fa-eye text-sm"></i>
-                <p className="font-md text-md text-gray">Private to you</p>
-              </div>
-            </div>
-            <div className="flex flex-row pt-4 justify-evenly">
-              {analytics["total"]["profile visit"] != null ? (
-                <div className="flex flex-row">
-                  <i className="fas fa-user-friends text-lg pl-2"></i>
-                  <p className="text-md font-medium px-4">
-                    {analytics["total"]["profile visit"]} profile views
-                  </p>
-                </div>
-              ) : (
-                <div className="flex flex-row">
-                  <i className="fas fa-user-friends text-lg pl-2"></i>
-                  <p className="text-md font-medium px-4">0 profile views</p>
-                </div>
+            <div className="flex pt-2">
+              {user.isConnected == "not_connected" && (
+                <button
+                  key={user.id}
+                  className="border border-gray rounded-l-full rounded-r-full text-gray-500 font-medium w-40 h-10 hover:bg-[#ebebebeb] hover:border-2 transition duration-100 ease-in-out"
+                  onClick={(e) => {
+                    handleConnect(e, user);
+                  }}
+                >
+                  <i className="fa-solid fa-user-plus mr-2 "></i>
+                  Connect
+                </button>
               )}
-              {analytics.total.feedImpressions != null ? (
-                <div className="flex flex-row">
-                  <i
-                    className="fas fa-line-chart text-lg pl-2"
-                    aria-hidden="true"
-                  ></i>
-                  <p className="text-md font-medium px-4">
-                    {analytics.total.feedImpressions} post impressions
-                  </p>
-                </div>
-              ) : (
-                <div className="flex flex-row">
-                  <i
-                    className="fas fa-line-chart text-lg pl-2"
-                    aria-hidden="true"
-                  ></i>
-                  <p className="text-md font-medium px-4">0 post impressions</p>
-                </div>
-              )}
-              {analytics.total.search != null ? (
-                <div className="flex flex-row">
-                  <i className="fas fa-search text-lg pl-2"></i>
-                  <p className="text-md font-medium px-4">
-                    {analytics.total.search} search appearances
-                  </p>
-                </div>
-              ) : (
-                <div className="flex flex-row">
-                  <i className="fas fa-search text-lg pl-2"></i>
-                  <p className="text-md font-medium px-4">
-                    0 search appearances
-                  </p>
-                </div>
+              {user.isConnected == "pending" && (
+                <button
+                  key={user.id}
+                  className="border border-gray rounded-l-full rounded-r-full text-gray-500 font-medium w-40 h-10 bg-[#ebebebeb]"
+                  disabled
+                >
+                  <i className="fa-solid fa-check mr-2 "></i>
+                  Requested
+                </button>
               )}
             </div>
-          </div>
-          <div className="w-full rounded-b-lg text-center py-2 shadow-sm drop-shadow-sm border border-gray hover:cursor-pointer bg-white hover:bg-[#ebebebeb]">
-            <p className="text-blue font-medium">Show All analytics</p>
           </div>
 
           <div className="About rounded-lg flex gap-y-2 mt-2 flex-col shadow-sm drop-shadow-sm border border-gray bg-white pl-4 py-4">
@@ -386,7 +316,7 @@ export default function UserProfile() {
                               <img
                                 src={act.data.images[0].image || ""}
                                 alt=""
-                                className="max-w-[100px] h-[80px] w-[80px] rounded-lg"
+                                className="max-w-[100px] h-[80px] w-[80px] rounded-lg border"
                               />
                             )}
                           {!act.data.images[0] && (
@@ -585,220 +515,8 @@ export default function UserProfile() {
             )}
           </div>
         </div>
-        <PeopleRecommendation />
+        <PeopleRecommendation profileUserId={useParams().userId} />
       </div>
-
-      {showModal ? (
-        <>
-          <div
-            className="fixed inset-0 bg-black opacity-60 z-40"
-            onClick={() => setShowModal(false)}
-          ></div>
-          <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative mx-auto w-1/2">
-              <div className="border-0 mt-64 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-center justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
-                  <h3 className="text-2xl font=semibold">Update Data</h3>
-                  <button
-                    className="bg-transparent border-0 text-black float-right"
-                    onClick={() => {
-                      setShowModal(false);
-                      setUpdateUser({ ...user });
-                    }}
-                  >
-                    <span className="text-black opacity-7 h-6 w-6 text-xl block bg-gray-400 py-0 rounded-full">
-                      <i className="fa-solid fa-xmark"></i>
-                    </span>
-                  </button>
-                </div>
-                <div className="">
-                  <form className="rounded w-full" onSubmit={handleSubmit}>
-                    <div className="flex flex-col justify-between pt-4 px-4">
-                      <label htmlFor="firstName" className="text-sm">
-                        First Name
-                      </label>
-                      <input
-                        type="text"
-                        name="firstName"
-                        id="firstName"
-                        className="border-2 border-gray-300 rounded-md p-2"
-                        value={updateUser.firstName}
-                        onChange={(e) => {
-                          setUpdateUser({
-                            ...updateUser,
-                            firstName: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between pt-4 px-4">
-                      <label htmlFor="lastName" className="text-sm">
-                        Last Name
-                      </label>
-                      <input
-                        type="text"
-                        name="lastName"
-                        id="lastName"
-                        className="border-2 border-gray-300 rounded-md p-2"
-                        value={updateUser.lastName}
-                        onChange={(e) => {
-                          setUpdateUser({
-                            ...updateUser,
-                            lastName: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between pt-4 px-4">
-                      <label htmlFor="email" className="text-sm">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        className="border-2 border-gray-300 rounded-md p-2"
-                        value={updateUser.email}
-                        onChange={(e) => {
-                          setUpdateUser({
-                            ...updateUser,
-                            email: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between pt-4 px-4">
-                      <label htmlFor="department" className="text-sm">
-                        Department
-                      </label>
-                      <input
-                        type="text"
-                        name="department"
-                        id="department"
-                        className="border-2 border-gray-300 rounded-md p-2"
-                        value={updateUser.department}
-                        onChange={(e) => {
-                          setUpdateUser({
-                            ...updateUser,
-                            department: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between pt-4 px-4">
-                      <label htmlFor="bio" className="text-sm">
-                        Bio
-                      </label>
-                      <input
-                        type="text"
-                        name="bio"
-                        id="bio"
-                        className="border-2 border-gray-300 rounded-md p-2"
-                        value={updateUser.bio}
-                        onChange={(e) => {
-                          setUpdateUser({ ...updateUser, bio: e.target.value });
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between pt-4 px-4">
-                      <label htmlFor="resume" className="text-sm">
-                        Resume
-                      </label>
-                      <input
-                        type="text"
-                        name="resume"
-                        id="resume"
-                        className="border-2 border-gray-300 rounded-md p-2"
-                        value={updateUser.resume}
-                        onChange={(e) => {
-                          setUpdateUser({
-                            ...updateUser,
-                            resume: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between pt-4 px-4">
-                      <label htmlFor="profilePicture" className="text-sm">
-                        Profile Picture
-                      </label>
-                      <input
-                        type="text"
-                        name="profilePicture"
-                        id="profilePicture"
-                        className="border-2 border-gray-300 rounded-md p-2"
-                        value={updateUser.profilePicture}
-                        onChange={(e) => {
-                          setUpdateUser({
-                            ...updateUser,
-                            profilePicture: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between pt-4 px-4">
-                      <label htmlFor="city" className="text-sm">
-                        City
-                      </label>
-                      <input
-                        type="text"
-                        name="city"
-                        id="city"
-                        className="border-2 border-gray-300 rounded-md p-2"
-                        value={updateUser.city}
-                        onChange={(e) => {
-                          setUpdateUser({
-                            ...updateUser,
-                            city: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between p-4">
-                      <label htmlFor="phoneNumber" className="text-sm">
-                        Phone Number
-                      </label>
-                      <input
-                        type="text"
-                        name="phoneNumber"
-                        id="phoneNumber"
-                        className="border-2 border-gray-300 rounded-md p-2"
-                        value={updateUser.phoneNumber}
-                        onChange={(e) => {
-                          setUpdateUser({
-                            ...updateUser,
-                            phoneNumber: e.target.value,
-                          });
-                        }}
-                      />
-                    </div>
-                  </form>
-                </div>
-                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                  <p className="text-red font-bold self-start">{error}</p>
-                  <button
-                    className="background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                    type="button"
-                    onClick={() => {
-                      setShowModal(false);
-                      setUpdateUser({ ...user });
-                    }}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="bg-primary  w-[5rem] h-[2rem] uppercase text-sm font-bold rounded"
-                    type="button"
-                    onClick={handleSubmit}
-                  >
-                    Post
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : null}
     </>
   );
 }

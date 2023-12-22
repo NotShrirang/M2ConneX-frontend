@@ -1,9 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ApiConfig from "../../utils/ApiConfig";
 import PostCarousel from "./imageCarousel";
 import KeywordInput from "./keywordInput";
+import formatDate from "../../utils/date";
 
 const Post = ({ post, fetchFeed }) => {
   const [isLiked, setIsLiked] = useState(post.isLiked);
@@ -23,6 +25,8 @@ const Post = ({ post, fetchFeed }) => {
   );
   const [subject, setSubject] = useState(post.subject);
   const [connectionOnly, setConnectionOnly] = useState(post.isPublic);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -175,10 +179,15 @@ const Post = ({ post, fetchFeed }) => {
 
   return (
     <>
-      <div className="w-[90%] my-4 border-2 bg-white p-3 border-[#9D9494] rounded">
+      <div className="mx-4 my-2 shadow-sm border border-gray p-3 rounded-lg">
         <div className="flex justify-between items-center">
           <div className="flex justify-start items-center gap-x-3">
-            <div className=" border-[#bc383e] border-2 ml-0 flex justify-center items-center rounded-[3rem] w-[3.5rem] h-[3.5rem]">
+            <div
+              className=" border-[#bc383e] border-2 ml-0 flex justify-center items-center rounded-[3rem] w-[3.5rem] h-[3.5rem] cursor-pointer"
+              onClick={() => {
+                navigate("/users/" + post.user);
+              }}
+            >
               {post.profilePicture && (
                 <i className="fa-solid" style={{ color: "#bc383e" }}>
                   <img
@@ -197,9 +206,29 @@ const Post = ({ post, fetchFeed }) => {
                 </i>
               )}
             </div>
-            <div>
-              <h2 className="text-xl font-medium">{post.userName}</h2>
-              <p className="text-xs">{post.userBio}</p>
+            <div
+              className="flex flex-col justify-center items-start hover:cursor-pointer"
+              onClick={() => {
+                navigate("/users/" + post.user);
+              }}
+            >
+              <div>
+                <h2 className="text-md font-medium hover:text-blue">
+                  {post.userName}
+                </h2>
+              </div>
+              <p className="text-xs">{post.userBio.slice(0, 70) + "..."}</p>
+              <div className="flex flex-row gap-x-2 py-1 items-center">
+                <p className="text-xs">{formatDate(post.createdAt)}</p>
+                <p className="text-xs">
+                  {post.isPublic && (
+                    <i
+                      className="fa-solid fa-globe-asia fa-md"
+                      style={{ color: "#000" }}
+                    ></i>
+                  )}
+                </p>
+              </div>
             </div>
           </div>
           {post.isEditable && !isEditing && (
@@ -211,7 +240,7 @@ const Post = ({ post, fetchFeed }) => {
               }}
             >
               <i
-                className="fa-solid fa-edit fa-lg"
+                className="fa-solid fa-edit fa-md"
                 style={{ color: "#000" }}
               ></i>
             </button>
@@ -234,7 +263,7 @@ const Post = ({ post, fetchFeed }) => {
             </>
           )}
           {post.images.length === 0 && !isEditing && (
-            <div className="my-3 text-[2rem]">
+            <div className="my-4 text-[1rem]">
               {/* <pre>{post.body}</pre> */}
               {post.body}
             </div>
@@ -311,12 +340,24 @@ const Post = ({ post, fetchFeed }) => {
                       <i
                         className="fa-solid fa-arrow-up fa-lg"
                         style={{ color: "#000" }}
+                        onMouseEnter={(e) => {
+                          e.target.style.color = "#FF5555";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.color = "#000";
+                        }}
                       ></i>
                     )}
                     {isLiked && (
                       <i
                         className="fa-solid fa-arrow-up fa-lg"
                         style={{ color: "#FF5555" }}
+                        onMouseEnter={(e) => {
+                          e.target.style.color = "#000";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.color = "#FF5555";
+                        }}
                       ></i>
                     )}
                     <span>{likesCount}</span>
@@ -330,12 +371,24 @@ const Post = ({ post, fetchFeed }) => {
                       <i
                         className="fa-regular fa-comment fa-lg"
                         style={{ color: "#000" }}
+                        onMouseEnter={(e) => {
+                          e.target.style.color = "#FF5555";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.color = "#000";
+                        }}
                       ></i>
                     )}
                     {isCommentSectionExpanded && (
                       <i
                         className="fa-regular fa-comment fa-lg"
                         style={{ color: "#FF5555" }}
+                        onMouseEnter={(e) => {
+                          e.target.style.color = "#000";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.color = "#FF5555";
+                        }}
                       ></i>
                     )}
                     <span>{post.commentsCount}</span>
@@ -345,6 +398,12 @@ const Post = ({ post, fetchFeed }) => {
                     <i
                       className="fa-solid fa-retweet fa-lg"
                       style={{ color: "#000", transform: "rotate(90deg)" }}
+                      onMouseEnter={(e) => {
+                        e.target.style.color = "#FF5555";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.color = "#000";
+                      }}
                     ></i>
                     <span>{post.sharesCount}</span>
                   </button>
@@ -354,6 +413,12 @@ const Post = ({ post, fetchFeed }) => {
                     <i
                       className="fa-solid fa-share fa-lg"
                       style={{ color: "#000" }}
+                      onMouseEnter={(e) => {
+                        e.target.style.color = "#FF5555";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.color = "#000";
+                      }}
                     ></i>
                   </button>
                 </div>

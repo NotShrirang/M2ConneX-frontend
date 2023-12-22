@@ -87,14 +87,14 @@ const CreatePost = ({ fetchFeed }) => {
 
   return (
     <>
-      <div className="w-full h-[6rem] my-4 flex justify-center items-center border-b-2 border-[#9D9494]">
+      <div className="w-full h-[6rem] my-3 flex justify-center items-center border-b-2 border-gray">
         <div
-          className="w-[90%] h-[4rem] flex justify-start gap-x-32 items-center rounded-[4rem] bg-white border-[#bc383e] border-2 hover:cursor-pointer hover:text-white transition-all duration-300"
+          className="w-[90%] h-[4rem] flex justify-start gap-x-3 items-center rounded-[4rem] bg-white border-[#bc383e] border-2 hover:cursor-pointer hover:text-white transition-all duration-300 hover:bg-[#f4f2ee]"
           onClick={() => {
             setShowModal(true);
           }}
         >
-          <div className=" border-[#bc383e] border-2 ml-4 flex justify-center items-center rounded-[2rem] w-[3rem] h-[3rem] ">
+          <div className="border-[#bc383e] border-2 ml-2 flex justify-center items-center rounded-[2rem] w-[3rem] h-[3rem] ">
             <i
               className="fa-solid fa-plus fa-xl"
               style={{ color: "#bc383e" }}
@@ -102,7 +102,7 @@ const CreatePost = ({ fetchFeed }) => {
           </div>
           <button className="">
             <p className="text-xl text-[#bc383e] tracking-wider">
-              Share your thoughts
+              What is happening?!
             </p>
           </button>
         </div>
@@ -127,14 +127,17 @@ const CreatePost = ({ fetchFeed }) => {
                     </button>
                   </div>
                   <div className="">
-                    <form className="rounded w-full" onSubmit={handleSubmit}>
+                    <form
+                      className="rounded w-[96.5%] flex flex-col"
+                      onSubmit={handleSubmit}
+                    >
                       <textarea
                         name=""
                         id=""
                         cols="20"
                         rows="10"
-                        className="rounded w-full p-5 border-none outline-gray resize-none"
-                        placeholder="Share your thoughts"
+                        className="rounded w-full mt-3 mx-3 p-4 border border-gray outline-gray justify-center items-center"
+                        placeholder="Share your thoughts..."
                         value={feedData.body}
                         onChange={(e) => {
                           if (e.target.value.length > 3600) {
@@ -180,8 +183,8 @@ const CreatePost = ({ fetchFeed }) => {
                           }
                         />
                       </div>
-                      <div className="flex justify-between items-center p-2">
-                        <div className="flex justify-start items-center gap-x-3">
+                      <div className="flex justify-between items-center p-2 ml-2">
+                        <div className="flex justify-start items-center gap-x-2">
                           <input
                             type="checkbox"
                             name=""
@@ -205,7 +208,7 @@ const CreatePost = ({ fetchFeed }) => {
                   </div>
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                     <button
-                      className="background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                      className="background-transparent uppercase px-6 py-2 text-lg outline-none focus:outline-none mr-1 mb-1 hover:bg-[#f4f2ee] transition-all duration-300 ease-in-out"
                       type="button"
                       onClick={() => {
                         setShowModal(false);
@@ -221,7 +224,7 @@ const CreatePost = ({ fetchFeed }) => {
                       Cancel
                     </button>
                     <button
-                      className="bg-primary text-white w-[5rem] h-[2rem] uppercase text-sm font-bold rounded"
+                      className="bg-primary text-white px-6 py-2 uppercase text-lg rounded border border-gray shadow-sm hover:shadow-lg hover:bg-[#f4f2ee] hover:text-primary transition-all duration-300 ease-in-out"
                       type="button"
                       onClick={handleSubmit}
                     >
