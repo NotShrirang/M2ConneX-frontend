@@ -221,7 +221,24 @@ export default function Register() {
                   });
                   return
                 }
-                setPage(1);
+
+
+                axios.get(ApiConfig.checkEmail + "?email=" + data.email).then((res) => {
+                  if (res.data.exists) {
+                    toast.error("Email already exists", {
+                      position: "bottom-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
+                  } else {
+                    setPage(1);
+                  }
+                });
               }}
             >
               Next

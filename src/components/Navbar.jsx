@@ -1,18 +1,21 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ login }) {
+  console.log(login)
   return (
     <>
-      <div className="items flex flex-row-reverse py-2">
-        <label htmlFor="navToggle" className="md:hidden block text-xl">
-          <i className="fa-solid fa-bars"></i>
+      <div className={"items flex flex-row-reverse w-full md:py-2 " + (login ? "" : "md:pt-6")}>
+        <label htmlFor="navToggle" className={"md:hidden block text-xl  absolute right-4 " + (login ? "top-7" : "top-32")}>
+          <i
+            className="fa-solid fa-bars"
+          ></i>
         </label>
         <input type="checkbox" id="navToggle" className="hidden peer" />
 
         <div
           id="item-list"
-          className="md:flex-row w-full md:flex md:gap-x-2 md:items-center md:my-4 peer-checked:flex hidden flex-col"
+          className="md:flex-row w-full md:flex md:gap-x-2 md:items-center md:my-4 peer-checked:flex hidden flex-col gap-y-1"
         >
           <NavLink
             to="/events"
