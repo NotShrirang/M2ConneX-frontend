@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ApiConfig from "../../utils/ApiConfig";
@@ -91,6 +91,7 @@ const CreatePost = ({ fetchFeed }) => {
         <div
           className="w-[90%] h-[4rem] flex justify-start gap-x-3 items-center rounded-[4rem] bg-white border-[#bc383e] border-2 hover:cursor-pointer hover:text-white transition-all duration-300 hover:bg-[#f4f2ee]"
           onClick={() => {
+            document.title = "Write Post | MMCOE Alumni Portal";
             setShowModal(true);
           }}
         >
@@ -110,7 +111,10 @@ const CreatePost = ({ fetchFeed }) => {
           <>
             <div
               className="fixed inset-0 bg-black opacity-60 z-40"
-              onClick={() => setShowModal(false)}
+              onClick={() => {
+                document.title = "Feed | MMCOE Alumni Portal";
+                setShowModal(false);
+              }}
             ></div>
             <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
               <div className="relative my-6 mx-auto w-1/2">
@@ -211,6 +215,7 @@ const CreatePost = ({ fetchFeed }) => {
                       className="background-transparent uppercase px-6 py-2 text-lg outline-none focus:outline-none mr-1 mb-1 hover:bg-[#f4f2ee] transition-all duration-300 ease-in-out"
                       type="button"
                       onClick={() => {
+                        document.title = "Feed | MMCOE Alumni Portal";
                         setShowModal(false);
                         setFeedData({
                           subject: "",

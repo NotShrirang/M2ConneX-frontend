@@ -47,6 +47,9 @@ export default function Profile() {
         // console.log(res.data);
         setUser(res.data);
         setUpdateUser(res.data);
+        document.title = res.data.firstName
+          ? res.data.firstName + " " + res.data.lastName + " | " + "Profile"
+          : "Profile";
       })
       .catch((err) => {
         console.log(err);

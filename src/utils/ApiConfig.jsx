@@ -21,6 +21,8 @@ class ApiConfig {
   static userExperience = BASEURL + "/experience/user-experience";
   static connection = BASEURL + "/connection/connection";
   static connectionRequest = BASEURL + "/connection/connection-request/";
+  static connectionRequestAccept = this.connection + "-request-accept/";
+  static notification = BASEURL + "/notification/notification/";
   static checkEmail = BASEURL + "/users/check-email/";
 }
 

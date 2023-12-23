@@ -13,13 +13,14 @@ import PeopleRecommendation from "../components/PeopleRecommendation";
 
 const Feed = () => {
   const [feed, setFeed] = useState({});
-  const [people, setPeople] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchFeed({ next: null });
     fetchPeople({ next: null });
+
+    document.title = "Feed | MMCOE Alumni Portal";
   }, []);
 
   const fetchFeed = ({ next }) => {
@@ -105,36 +106,6 @@ const Feed = () => {
           console.log(err);
         });
     }
-  };
-
-  const handleConnect = (e, person) => {
-    e.preventDefault();
-    console.log("Connect");
-
-    const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) {
-      navigate("/auth");
-    }
-
-    axios
-      .post(
-        ApiConfig.connectionRequest,
-        {
-          userB: person.id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        fetchPeople();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   return (

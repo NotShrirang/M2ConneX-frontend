@@ -41,6 +41,9 @@ export default function UserProfile() {
         // console.log(res.data);
         setUser(res.data);
         setUpdateUser(res.data);
+        document.title = res.data.firstName
+          ? res.data.firstName + " " + res.data.lastName + " | " + "Profile"
+          : "Profile";
       })
       .catch((err) => {
         console.log(err);
@@ -77,26 +80,6 @@ export default function UserProfile() {
     fetchUserExperience({ next: null });
     fetchUserSkills({ next: null });
   }, []);
-
-  const fetchPeople = () => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) {
-      navigate("/auth");
-    }
-    axios
-      .get(ApiConfig.recommendedConnection, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        // console.log(res.data.results);
-        setPeople(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const fetchUserActivity = ({ next }) => {
     const accessToken = localStorage.getItem("accessToken");

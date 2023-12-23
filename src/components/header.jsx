@@ -103,7 +103,7 @@ const Header = () => {
                     ></i>
                   )}
                   {isVisible ? (
-                    <div className="absolute z-10 w-[10rem] flex flex-col justify-evenly items-center mt-16 bg-white rounded-b-xl shadow-xl border border-gray transition-opacity duration-300">
+                    <div className="absolute z-10 flex flex-col justify-evenly items-center mt-16 bg-white rounded-b-xl shadow-xl border border-gray transition-opacity duration-300">
                       <ul className="flex flex-col">
                         <li
                           className="hover:bg-[#f4f2ee] text-black flex flex-row gap-x-4 items-center justify-start cursor-pointer px-7 py-4"
@@ -114,6 +114,16 @@ const Header = () => {
                         >
                           <i className="fa-solid fa-user-circle fa-xl pt-1"></i>
                           <p className="text-md">Profile</p>
+                        </li>
+                        <li
+                          className="hover:bg-[#f4f2ee] text-black flex flex-row gap-x-4 items-center justify-start cursor-pointer px-7 py-4"
+                          onClick={() => {
+                            navigate("/notifications");
+                            setIsVisible(false);
+                          }}
+                        >
+                          <i className="fa-solid fa-bell fa-xl pt-1"></i>
+                          <p className="text-md">Notifications</p>
                         </li>
                         <li
                           className="hover:bg-[#f4f2ee] rounded-b-xl text-black flex flex-row gap-x-4 items-center justify-start cursor-pointer px-8 py-4"
