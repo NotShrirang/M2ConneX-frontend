@@ -12,7 +12,7 @@ const navItems = [
     { item: "Events", link: "/events" },
     { item: "Feed", link: "/feed" },
     { item: "Batches", link: "/batches" },
-    { item: "Opportunities", link: "/opportunities" },
+    { item: "Opportunities", link: "/oppurtunities" },
     { item: "Directory", link: "/directory" },
     { item: "Connections", link: "/connections" },
     { item: "Donations", link: "/donations" },
