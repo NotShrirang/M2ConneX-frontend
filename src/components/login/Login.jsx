@@ -79,7 +79,7 @@ export default function Login() {
     <div className="flex flex-col">
       <form onSubmit={handleSubmit}>
         <div className="flex flex-row items-center justify-center pt-4">
-          <div className="w-full lg:w-2/3 flex flex-col pt-12 items-center justify-center  border-[#dedede] shadow-xl rounded-md">
+          <div className="w-full lg:w-2/3 flex flex-col pt-12 items-center justify-center border-[#dedede] shadow-xl rounded-md">
             <div className="w-full type-selector flex flex-col items-center ">
               <p className="font-medium mb-2">Select login type</p>
               <div className="w-full cards flex flex-row justify-evenly ">
@@ -147,7 +147,7 @@ export default function Login() {
             <input
               type="text"
               placeholder="Email"
-              className="border-2 border-gray outline-none w-[90%] px-2 py-2 rounded"
+              className="border-2 border-gray outline-none rounded w-[90%] px-2 py-2 "
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
