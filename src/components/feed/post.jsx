@@ -7,11 +7,11 @@ import PostCarousel from "./imageCarousel";
 import KeywordInput from "./keywordInput";
 import formatDate from "../../utils/date";
 
-const Post = ({ post, fetchFeed }) => {
+const Post = ({ post, fetchFeed, commentsExpand = false }) => {
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [likesCount, setLikesCount] = useState(post.likesCount);
   const [isCommentSectionExpanded, setIsCommentSectionExpanded] =
-    useState(false);
+    useState(commentsExpand);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -455,9 +455,8 @@ const Post = ({ post, fetchFeed }) => {
           </div>
         </div>
         <div
-          className={`${
-            isCommentSectionExpanded ? "block" : "hidden"
-          } w-full border-t-2 border-[#9D9494] mt-2`}
+          className={`${isCommentSectionExpanded ? "block" : "hidden"
+            } w-full border-t-2 border-[#9D9494] mt-2`}
         >
           {/* Comment input bar and send button */}
           <div className="flex justify-between items-center">

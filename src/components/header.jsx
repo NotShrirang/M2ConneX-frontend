@@ -25,11 +25,10 @@ const Header = () => {
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false);
+      setIsVisible(false);
     }
   };
 
-  console.log(auth);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -38,7 +37,6 @@ const Header = () => {
     navigate("/");
   };
 
-  console.log(auth);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -55,7 +53,6 @@ const Header = () => {
         },
       })
       .then((res) => {
-        // console.log(res.data);
         setUser(res.data);
       })
       .catch((err) => {
@@ -143,7 +140,7 @@ const Header = () => {
                   <button>Search</button>
                   <i
                     className="fa-solid fa-magnifying-glass fa-xs mt-1 text-white"
-                    // style={{ color: "#ffffff", marginTop: "4px" }}
+                  // style={{ color: "#ffffff", marginTop: "4px" }}
                   ></i>
                 </div>
               </div>

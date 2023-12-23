@@ -18,6 +18,7 @@ import Blogs from "./pages/Blogs.jsx";
 import Oppurtunities from "./pages/oppurtunities.jsx";
 import Profile from "./components/profile/profile.jsx";
 import NotificationPage from "./pages/NotificationsPage.jsx";
+import PostPage from "./pages/post_page.jsx";
 
 const noAuthRouter = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ const AuthRouter = createBrowserRouter([
       {
         path: "/notifications",
         element: <NotificationPage />,
+      },
+      {
+        path: "/post/:postId",
+        element: <PostPage />,
       },
       {
         path: "/*",

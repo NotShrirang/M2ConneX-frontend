@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 function Navbar({ login }) {
-  console.log(login)
   return (
     <>
       <div className={"items flex flex-row-reverse w-full md:py-2 " + (login ? "" : "md:pt-6")}>

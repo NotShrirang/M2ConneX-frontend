@@ -24,6 +24,7 @@ class ApiConfig {
   static connectionRequestAccept = this.connection + "-request-accept/";
   static notification = BASEURL + "/notification/notification/";
   static checkEmail = BASEURL + "/users/check-email/";
+  static getPost = BASEURL + "/feed/feed/";
 }
 
 export default ApiConfig;
