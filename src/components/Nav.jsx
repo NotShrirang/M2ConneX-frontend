@@ -19,7 +19,7 @@ const navItems = [
     { item: "Feedback", link: "/feedback" },
 ];
 
-function Nav() {
+function Nav({login}) {
     const [isOpen, setIsOpen] = useState(false);
     const { auth, setAuth } = useContext(AuthContext);
     console.log(auth);

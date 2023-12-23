@@ -1,6 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+const navItems = [
+  { item: "Events", link: "/events" },
+  { item: "Feed", link: "/feed" },
+  { item: "Batches", link: "/batches" },
+  { item: "Opportunities", link: "/opportunities" },
+  { item: "Directory", link: "/directory" },
+  { item: "Connections", link: "/connections" },
+  { item: "Donations", link: "/donations" },
+  { item: "Feedback", link: "/feedback" },
+];
+
 function Navbar({ login }) {
   return (
     <>
@@ -16,96 +27,16 @@ function Navbar({ login }) {
           id="item-list"
           className="md:flex-row w-full md:flex md:gap-x-2 md:items-center md:my-4 peer-checked:flex hidden flex-col gap-y-1"
         >
-          <NavLink
-            to="/events"
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary"
-                : "hover:text-red transition-all duration-300"
-            }
-          >
-            Events
-          </NavLink>
-          <NavLink
-            to="/feed"
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary"
-                : "hover:text-red transition-all duration-300"
-            }
-          >
-            Feed
-          </NavLink>
-          <NavLink
-            to="/blogs"
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary"
-                : "hover:text-red transition-all duration-300"
-            }
-          >
-            Blogs
-          </NavLink>
-          <NavLink
-            to="/batches"
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary"
-                : "hover:text-red transition-all duration-300"
-            }
-          >
-            Batches
-          </NavLink>
-          <NavLink
-            to="/oppurtunities"
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary"
-                : "hover:text-red transition-all duration-300"
-            }
-          >
-            Oppurtunities
-          </NavLink>
-          <NavLink
-            to="/directory"
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary"
-                : "hover:text-red transition-all duration-300"
-            }
-          >
-            Directory
-          </NavLink>
-          <NavLink
-            to="/connections"
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary"
-                : "hover:text-red transition-all duration-300"
-            }
-          >
-            Connections
-          </NavLink>
-          <NavLink
-            to="/donations"
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary"
-                : "hover:text-red transition-all duration-300"
-            }
-          >
-            Donations
-          </NavLink>
-          <NavLink
-            to="/feedback"
-            className={({ isActive }) =>
-              isActive
-                ? "text-primary"
-                : "hover:text-red transition-all duration-300"
-            }
-          >
-            Feedback
-          </NavLink>
+          {navItems.map((item, index) => (
+            <NavLink
+              key={index}
+              to={item.link}
+              className="text-white text-base hover:text-primary transition-all duration-300"
+              activeClassName="text-primary"
+            >
+              {item.item}
+            </NavLink>
+          ))}
         </div>
       </div>
     </>
