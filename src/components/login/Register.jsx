@@ -153,79 +153,52 @@ export default function Register() {
       >
         {page == 0 ? (
           <>
-            <div className="flex flex-row justify-between w-[60%]">
+            <div className="flex flex-col items-center justify-center w-full lg:w-2/3 gap-y-8 border-[#dedede] rounded-md">
+
+              <div className="flex flex-row justify-between w-[80%] mt-4">
+                <input
+                  required
+                  type="text"
+                  placeholder="First Name"
+                  className=" w-full p-2 mr-2 border-2 border-gray outline-none rounded"
+                  value={data.firstName}
+                  onChange={(value) => {
+                    setData({ ...data, firstName: value.target.value });
+                  }}
+                />
+                <input
+                  required
+                  type="text"
+                  placeholder="Last Name"
+                  className="border-2 border-gray outline-none rounded w-full p-2 ml-2"
+                  value={data.lastName}
+                  onChange={(value) => {
+                    setData({ ...data, lastName: value.target.value });
+                  }}
+                />
+              </div>
               <input
                 required
-                type="text"
-                placeholder="First Name"
-                className="border-2 border-black w-full p-1 mr-2"
-                value={data.firstName}
+                type="email"
+                placeholder="Email"
+                className={"border-2 rounded w-[80%] p-2 " + (emailError ? "border-red outline-red" : "border-[green] outline-[green]")}
+                value={data.email}
                 onChange={(value) => {
-                  setData({ ...data, firstName: value.target.value });
+                  if (!validateEmail(value.target.value)) {
+                    setEmailError(true);
+                  }
+                  else {
+                    setEmailError(false);
+                  }
+                  setData({ ...data, email: value.target.value });
                 }}
               />
-              <input
-                required
-                type="text"
-                placeholder="Last Name"
-                className="border-2 border-black w-full p-1 ml-2"
-                value={data.lastName}
-                onChange={(value) => {
-                  setData({ ...data, lastName: value.target.value });
-                }}
-              />
-            </div>
-            <input
-              required
-              type="email"
-              placeholder="Email"
-              className={"border-2 border-black w-[60%] p-1 mt-8 " + (emailError ? "outline-red border-red" : "outline-[green] border-[green]")}
-              value={data.email}
-              onChange={(value) => {
-                if (!validateEmail(value.target.value)) {
-                  setEmailError(true);
-                }
-                else {
-                  setEmailError(false);
-                }
-                setData({ ...data, email: value.target.value });
-              }}
-            />
 
-            <button
-              className="bg-blue text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
-              onClick={() => {
-                if (emailError) {
-                  toast.error("Invalid email", {
-                    position: "bottom-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                  });
-                  return;
-                }
-                if (data.lastName.length === 0 || data.firstName.length === 0) {
-                  toast.error("First or Last Name or cannot be empty", {
-                    position: "bottom-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                  });
-                  return
-                }
-
-
-                axios.get(ApiConfig.checkEmail + "?email=" + data.email).then((res) => {
-                  if (res.data.exists) {
-                    toast.error("Email already exists", {
+              <button
+                className="bg-blue text-white px-4 py-2 rounded-lg my-4 w-32 font-bold"
+                onClick={() => {
+                  if (!validateEmail(data.email)) {
+                    toast.error("Invalid email", {
                       position: "bottom-center",
                       autoClose: 5000,
                       hideProgressBar: false,
@@ -235,14 +208,45 @@ export default function Register() {
                       progress: undefined,
                       theme: "light",
                     });
-                  } else {
-                    setPage(1);
+                    return;
                   }
-                });
-              }}
-            >
-              Next
-            </button>
+
+                  if (data.lastName.length === 0 || data.firstName.length === 0) {
+                    toast.error("First or Last Name or cannot be empty", {
+                      position: "bottom-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
+                    return
+                  }
+
+
+                  axios.get(ApiConfig.checkEmail + "?email=" + data.email).then((res) => {
+                    if (res.data.exists) {
+                      toast.error("Email already exists", {
+                        position: "bottom-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                      });
+                    } else {
+                      setPage(1);
+                    }
+                  });
+                }}
+              >
+                Next
+              </button>
+            </div>
           </>
         ) : page == 1 ? (
           <>

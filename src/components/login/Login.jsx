@@ -12,7 +12,7 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("student");
+  const [role, setRole] = useState("Student");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -79,14 +79,14 @@ export default function Login() {
     <div className="flex flex-col">
       <form onSubmit={handleSubmit}>
         <div className="flex flex-row items-center justify-center pt-4">
-          <div className="flex flex-col pt-16 items-center justify-center w-full">
-            <div className="w-full type-selector flex flex-col items-center">
-              <p>Select login type</p>
-              <div className="w-full cards flex flex-row justify-evenly">
+          <div className="w-full lg:w-2/3 flex flex-col pt-12 items-center justify-center border-[#dedede] rounded-md">
+            <div className="w-full type-selector flex flex-col items-center ">
+              <p className="font-medium mb-2">Select login type</p>
+              <div className="w-full cards flex flex-row justify-evenly ">
                 <div
                   className={
-                    "card w-36 h-40 px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer " +
-                    (role === "student" ? "border-2 border-primary" : "")
+                    "card w-36 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                    (role === "Student" ? "border-[2.2px] border-primary" : "")
                   }
                   onClick={() => {
                     setRole("Student");
@@ -104,8 +104,8 @@ export default function Login() {
 
                 <div
                   className={
-                    "card w-36 h-40 px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer " +
-                    (role === "alumini" ? "border-2 border-primary" : "")
+                    "card w-36 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                    (role === "Alumni" ? "border-[2.2px] border-primary" : "")
                   }
                   onClick={() => {
                     setRole("Alumni");
@@ -123,8 +123,8 @@ export default function Login() {
 
                 <div
                   className={
-                    "card w-36 h-40 px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer " +
-                    (role === "faculty" ? "border-2 border-primary" : "")
+                    "card w-36 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                    (role === "Staff" ? "border-[2.2px] border-primary" : "")
                   }
                   onClick={() => {
                     setRole("Staff");
@@ -141,31 +141,35 @@ export default function Login() {
                 </div>
               </div>
             </div>
-            <input
-              type="text"
-              placeholder="Email"
-              className="border-2 border-black w-[60%] p-1 mt-16"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              className="border-2 border-black w-[60%] p-1 mt-8"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <button
-              type="submit"
-              className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
-              onClick={handleSubmit}
-            >
-              Login
-            </button>
+
+            <div className="lg:w-2/3 w-full h-[15rem] mt-4 gap-y-6 flex flex-col justify-center items-center ">
+
+              <input
+                type="text"
+                placeholder="Email"
+                className="border-2 border-gray outline-none rounded w-[90%] px-2 py-2 "
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                className="border-2 border-gray outline-none w-[90%] px-2 py-2 rounded"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <button
+                type="submit"
+                className="bg-primary text-white px-4 py-2 rounded-lg w-32 font-bold"
+                onClick={handleSubmit}
+              >
+                Login
+              </button>
+            </div>
           </div>
         </div>
       </form>
