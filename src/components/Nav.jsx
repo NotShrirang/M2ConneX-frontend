@@ -81,22 +81,23 @@ function Nav() {
 
     return (
         <>
+
             <div className='w-full h-24 flex justify-between items-center px-4'>
                 <div className='flex justify-start items-center'>
                     <img src="https://www.mmcoe.edu.in/images/logo.png" width="50px" alt="" />
-                    <h2 className='hidden md:block text-xl font-semibold ml-2 '>Marathwada Mitra Mandal's College of Engineering</h2>
-                    <h2 className='md:hidden block text-xl font-semibold ml-2 '>MMCOE</h2>
+                    <h2 className='text-xl font-semibold ml-2'>MMCOE</h2>
 
+                    <div className='w-full flex justify-between items-center pl-4'>
+                        <div>
+                            <Link to="/" className="hover:cursor-pointer">
+                                <img src={homeIcon} width="30px" alt="home" />
+                            </Link>
+                        </div>
+                    </div>
                 </div>
-                <div className='flex justify-center items-center gap-x-2'>
-                    <Profile id="profile" dropdownRef={dropdownRef} user={user} toggleVisibility={toggleVisibility} isVisible={isVisible} setIsVisible={setIsVisible} handleLogout={handleLogout} navigate={navigate} />
-                    {/* <button onClick={handleLogout} className='px-3 py-2 rounded bg-primary text-white hover:bg-opacity-80'>LOGOUT</button> */}
-                </div>
 
-            </div>
 
-            <div className='bg-[#1E1E1E] w-full h-[5rem] flex lg:flex-row-reverse justify-between lg:justify-center lg:gap-x-4 items-center px-4'>
-                <div id="desktop-item-list" className="hidden lg:flex lg:gap-x-4 text-white text-lg">
+                <div id="desktop-item-list" className="flex md:gap-x-2 text-black text-lg max-lg:hidden">
                     {navItems.map((item, index) => (
                         <NavLink
                             key={index}
@@ -112,20 +113,21 @@ function Nav() {
                     ))}
                 </div>
 
-                <div className='w-full lg:w-auto flex justify-between items-center'>
-                    <div>
-                        <Link to="/" className="hover:cursor-pointer">
-                            <img src={homeIcon} width="30px" alt="home" />
-                        </Link>
-                    </div>
-                    <div className='block lg:hidden relative'>
+                <div className='flex justify-center items-center gap-x-2'>
+                    <Profile id="profile" dropdownRef={dropdownRef} user={user} toggleVisibility={toggleVisibility} isVisible={isVisible} setIsVisible={setIsVisible} handleLogout={handleLogout} navigate={navigate} />
+                    {/* <button onClick={handleLogout} className='px-3 py-2 rounded bg-primary text-white hover:bg-opacity-80'>LOGOUT</button> */}
+                    <div className='pl-4 max-lg:block hidden'>
                         <button onClick={toggleMenu}>
-                            <i className="fa-solid fa-bars" style={{ color: 'white', fontSize: '1.3rem' }}></i>
+                            <i className="fa-solid fa-bars text-black text-xl"></i>
                         </button>
-                        {isOpen ? <Responsive isOpen={isOpen} toggleMenu={toggleMenu} /> : null}
                     </div>
                 </div>
+
+
             </div>
+            {isOpen ? <Responsive isOpen={isOpen} toggleMenu={toggleMenu} /> : null}
+
+
         </>
     );
 }
@@ -137,7 +139,7 @@ function Responsive({ isOpen, toggleMenu }) {
         <div
             id="mobile-item-list"
             className={`z-10 ${isOpen
-                ? "w-full flex flex-col lg:gap-x-4 text-white text-lg fixed right-0 top-44 bg-[#1E1E1E]"
+                ? "w-full hidden flex-col lg:gap-x-4 text-white text-lg fixed right-0 top-22 bg-[#1E1E1E] max-lg:flex"
                 : "hidden"
                 }`}
         >
@@ -150,8 +152,8 @@ function Responsive({ isOpen, toggleMenu }) {
                         onClick={toggleMenu}
                         className={({ isActive }) =>
                             isActive
-                                ? "text-primary"
-                                : "hover:text-red transition-all duration-300"
+                                ? "px-4 py-1 text-primary"
+                                : "px-4 py-1 hover:text-red transition-all duration-300"
                         }
                     >
                         {item.item}

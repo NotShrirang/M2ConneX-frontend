@@ -17,7 +17,7 @@ function Navbar({ login }) {
   return (
     <>
       <div className={"items flex flex-row-reverse w-full md:py-2 " + (login ? "" : "pt-6")}>
-        <label htmlFor="navToggle" className={"md:hidden block text-xl  absolute right-4 " + (login ? "top-7" : "top-32")}>
+        <label htmlFor="navToggle" className={"md:hidden block text-xl  absolute right-4 " + (login ? "top-7" : "top-[88px]")}>
           <i
             className="fa-solid fa-bars"
           ></i>
@@ -26,7 +26,7 @@ function Navbar({ login }) {
 
         <div
           id="item-list"
-          className="md:flex-row w-full md:flex md:gap-x-2 md:items-center md:my-4 peer-checked:flex hidden flex-col gap-y-1"
+          className="md:flex-row w-full md:flex md:gap-x-2 md:items-center  peer-checked:flex hidden flex-col gap-y-1"
         >
           {navItems.map((item, index) => (
             <NavLink

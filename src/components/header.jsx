@@ -68,7 +68,7 @@ const Head = () => {
   }, []);
 
   return (
- 
+
     <>
       {auth.login ? (
         <>
@@ -106,7 +106,7 @@ const Head = () => {
               </div>
             </div>
 
-            <h2 className="md:text-5xl text-3xl pt-4">Alumni Network</h2>
+            <h2 className="text-3xl pt-1">Alumni Network</h2>
             <Navbar />
           </div>
         </div>
