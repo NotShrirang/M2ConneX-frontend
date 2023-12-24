@@ -10,6 +10,7 @@ const navItems = [
   { item: "Connections", link: "/connections" },
   { item: "Donations", link: "/donations" },
   { item: "Feedback", link: "/feedback" },
+  { item: "Blogs", link: "/blogs" },
 ];
 
 function Navbar({ login }) {
