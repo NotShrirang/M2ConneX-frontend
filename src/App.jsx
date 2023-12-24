@@ -26,7 +26,7 @@ const noAuthRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Index />,
+        element: <Oppurtunities />,
       },
       {
         path: "/events",
