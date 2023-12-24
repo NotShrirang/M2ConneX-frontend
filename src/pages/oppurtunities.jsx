@@ -1,6 +1,39 @@
 import Oppurtunity from "../components/oppurtunity";
 import img from '../assets/college.png'
 import Select from 'react-select'
+import { useState } from "react";
+import { useLockBodyScroll } from "@uidotdev/usehooks";
+const Options = [
+    { value: 'software engineer', label: 'Software Engineer' },
+    { value: 'mobile developer', label: 'Mobile Developer' },
+    { value: 'frontend developer', label: 'Frontend Developer' },
+    { value: 'backend developer', label: 'Backend Developer' },
+    { value: 'fullstack developer', label: 'Full-stack Developer' },
+    { value: 'ios developer', label: 'iOS Developer' },
+    { value: 'android developer', label: 'Android Developer' },
+]
+
+
+const City = [
+
+    { value: 'pune', label: 'Pune' },
+    { value: 'banglore', label: 'Banglore' },
+    { value: 'hydrebad', label: 'Hydrebad' },
+]
+
+
+const Skills = [
+    { value: 'python', label: 'Python' },
+    { value: 'java', label: 'Java' },
+    { value: 'c++', label: 'C++' },
+    { value: 'c', label: 'C' },
+    { value: 'html', label: 'HTML' },
+    { value: 'css', label: 'CSS' },
+    { value: 'js', label: 'JS' },
+    { value: 'react', label: 'React' },
+    { value: 'django', label: 'Django' },
+    { value: 'flask', label: 'Flask' },
+]
 export default function Oppurtunities() {
     // oppurtunities page
     // Features
@@ -10,24 +43,7 @@ export default function Oppurtunities() {
     // 4. List of scholarships
     // 5. List of competitions
 
-
-    const Options = [
-        { value: 'software engineer', label: 'Software Engineer' },
-        { value: 'mobile developer', label: 'Mobile Developer' },
-        { value: 'frontend developer', label: 'Frontend Developer' },
-        { value: 'backend developer', label: 'Backend Developer' },
-        { value: 'fullstack developer', label: 'Full-stack Developer' },
-        { value: 'ios developer', label: 'iOS Developer' },
-        { value: 'android developer', label: 'Android Developer' },
-    ]
-
-
-    const City = [
-
-        { value: 'pune', label: 'Pune' },
-        { value: 'banglore', label: 'Banglore' },
-        { value: 'hydrebad', label: 'Hydrebad' },
-    ]
+    const [showModal, setShowModal] = useState(false);
 
     const oppurtunities = [
         {
@@ -54,7 +70,7 @@ export default function Oppurtunities() {
         },
     ]
     return (
-        <div className="flex flex-col justify-center items-center w-full">
+        <div className="flex flex-col justify-center items-center w-full relative">
             <p className="text-3xl font-bold pt-4 pl-4">Search for oppurtunities</p>
 
             {/* <div className="flex self-center w-[95%] flex-row items-center justify-center h-full p-4 bg-white rounded-lg shadow-lg drop-shadow-lg ">
@@ -99,43 +115,95 @@ export default function Oppurtunities() {
                     <i class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
+            {showModal ? <FilterModal setShowModal={setShowModal} showModal={showModal} /> : null}
             <Oppurtunity oppurtunities={oppurtunities} />
         </div>
     )
 }
 
-function FilterModal() {
+function FilterModal({ setShowModal, showModal }) {
     return (
         <>
-        <div>
-        <div className="w-[95%] mx-auto p-4 border ">
-                <div className="flex flex-col lg:flex-row my-2">
-                    <div className="w-full lg:w-1/2">
-                        {/* job role  */}
-                        <p>Job title</p>
-                        <Select
-                            isMulti
-                            name="colors"
-                            options={Options}
-                            className="basic-multi-select"
-                            classNamePrefix="Add job title"
-                        />
-                        {/* location  */}
+            <div>
+            {useLockBodyScroll()}
+                <div className="absolute top-12 right-4 z-10 bg-white w-[95%] mx-auto p-4 border shadow-lg">
+                    <div className="flex justify-end">
+                        <button onClick={() => setShowModal(false)}>
+                            <i className="fa-solid fa-close"></i>
+                        </button>
                     </div>
-                    <div className="w-full lg:w-1/2">
+                    <div className="flex flex-col lg:flex-row my-2">
+                        <div className="w-full lg:w-1/2">
+                            {/* job role  */}
+                            <p>Job title</p>
+                            <Select
+                                isMulti
+                                name="colors"
+                                options={Options}
+                                className="basic-multi-select"
+                                classNamePrefix="Add job title"
+                            />
+                            {/* location  */}
+                        </div>
+                        <div className="w-full lg:w-1/2">
 
-                        <p>Job location</p>
+                            <p>Job location</p>
+                            <Select
+                                isMulti
+                                name="colors"
+                                options={City}
+                                className="basic-multi-select"
+                                classNamePrefix="Add job title"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <p>Job type</p>
+                        <div className="flex flex-col justify-between px-2">
+                            <div className="w-1/2 flex gap-2">
+                                <input type="checkbox" name="" id="fulltime" />
+                                <label htmlFor="fulltime">Full time</label>
+                            </div>
+                            <div className="w-1/2 flex gap-2">
+                                <input type="checkbox" name="" id="parttime" />
+                                <label htmlFor="parttime">Part time</label>
+                            </div>
+                            <div className="w-1/2 flex gap-2">
+                                <input type="checkbox" name="" id="internship" />
+                                <label htmlFor="internship">Internship</label>
+                            </div>
+                            <div className="w-1/2 flex gap-2">
+                                <input type="checkbox" name="" id="contract" />
+                                <label htmlFor="contract">Work from home</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full flex-col flex justify-center">
+                        <p>Salary</p>
+                        <input type="range" name="" id="" />
+                    </div>
+                    <div className="w-full">
+
+                        <p>Skills</p>
                         <Select
                             isMulti
                             name="colors"
-                            options={City}
+                            options={Skills}
                             className="basic-multi-select"
                             classNamePrefix="Add job title"
                         />
+                    </div>
+                    <div className="w-full flex-col flex justify-center">
+                        <p>Experience</p>
+                        <input type="range" name="" id="" />
+                    </div>
+                    <div className="flex justify-end">
+                        <button onClick={() => setShowModal(false)} className="bg-[#1e1e1e] text-white p-2 my-2 rounded ">
+                           Show Result
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
         </>
     )
 }
