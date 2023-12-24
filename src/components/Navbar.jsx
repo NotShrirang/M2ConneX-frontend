@@ -15,7 +15,7 @@ const navItems = [
 function Navbar({ login }) {
   return (
     <>
-      <div className={"items flex flex-row-reverse w-full md:py-2 " + (login ? "" : "md:pt-6")}>
+      <div className={"items flex flex-row-reverse w-full md:py-2 " + (login ? "" : "pt-6")}>
         <label htmlFor="navToggle" className={"md:hidden block text-xl  absolute right-4 " + (login ? "top-7" : "top-32")}>
           <i
             className="fa-solid fa-bars"

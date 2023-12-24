@@ -80,7 +80,7 @@ function Nav() {
 
     return (
         <>
-            <div className='w-full h-[6rem] flex justify-between items-center px-4'>
+            <div className='w-full h-24 flex justify-between items-center px-4'>
                 <div className='flex justify-start items-center'>
                     <img src="https://www.mmcoe.edu.in/images/logo.png" width="50px" alt="" />
                     <h2 className='hidden md:block text-xl font-semibold ml-2 '>Marathwada Mitra Mandal's College of Engineering</h2>
@@ -135,7 +135,7 @@ function Responsive({ isOpen, toggleMenu }) {
     return (
         <div
             id="mobile-item-list"
-            className={`${isOpen
+            className={`z-10 ${isOpen
                 ? "w-full flex flex-col lg:gap-x-4 text-white text-lg fixed right-0 top-44 bg-[#1E1E1E]"
                 : "hidden"
                 }`}

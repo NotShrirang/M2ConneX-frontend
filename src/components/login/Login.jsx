@@ -12,7 +12,7 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("student");
+  const [role, setRole] = useState("Student");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -79,7 +79,7 @@ export default function Login() {
     <div className="flex flex-col">
       <form onSubmit={handleSubmit}>
         <div className="flex flex-row items-center justify-center pt-4">
-          <div className="w-full lg:w-2/3 flex flex-col pt-12 items-center justify-center border-[#dedede] shadow-xl rounded-md">
+          <div className="w-full lg:w-2/3 flex flex-col pt-12 items-center justify-center border-[#dedede] rounded-md">
             <div className="w-full type-selector flex flex-col items-center ">
               <p className="font-medium mb-2">Select login type</p>
               <div className="w-full cards flex flex-row justify-evenly ">
@@ -144,32 +144,32 @@ export default function Login() {
 
             <div className="lg:w-2/3 w-full h-[15rem] mt-4 gap-y-6 flex flex-col justify-center items-center ">
 
-            <input
-              type="text"
-              placeholder="Email"
-              className="border-2 border-gray outline-none rounded w-[90%] px-2 py-2 "
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              className="border-2 border-gray outline-none w-[90%] px-2 py-2 rounded"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <button
-              type="submit"
-              className="bg-primary text-white px-4 py-2 rounded-lg w-32 font-bold"
-              onClick={handleSubmit}
+              <input
+                type="text"
+                placeholder="Email"
+                className="border-2 border-gray outline-none rounded w-[90%] px-2 py-2 "
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                className="border-2 border-gray outline-none w-[90%] px-2 py-2 rounded"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <button
+                type="submit"
+                className="bg-primary text-white px-4 py-2 rounded-lg w-32 font-bold"
+                onClick={handleSubmit}
               >
-              Login
-            </button>
-          </div>
+                Login
+              </button>
+            </div>
           </div>
         </div>
       </form>
