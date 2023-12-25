@@ -95,7 +95,7 @@ export default function UserProfile() {
           },
         })
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           setUserActivity(res.data);
         })
         .catch((err) => {
@@ -219,7 +219,7 @@ export default function UserProfile() {
   return (
     <>
       <div className="flex bg-[#f4f2ee] justify-center flex-col md:items-start items-center md:flex-row">
-        <div className="profile-analytics flex flex-col md:pl-8 w-3/4 max-w-4xl">
+        <div className="flex flex-col md:pl-8 w-3/4 max-w-4xl">
           <div className="profile-card flex flex-col items-start pl-6 rounded-lg bg-white mt-8 mb-2 shadow-sm drop-shadow-sm h-fit pt-16 pb-8 border border-gray">
             <button
               className="py-4 absolute top-0 right-5"
@@ -346,6 +346,9 @@ export default function UserProfile() {
                     <div
                       className="flex flex-col cursor-pointer pl-4"
                       key={act.id}
+                      onClick={() => {
+                        navigate("/feed/" + act.data.id);
+                      }}
                     >
                       <p className="text-sm pb-1">
                         {user.firstName + " " + user.lastName}
@@ -360,7 +363,7 @@ export default function UserProfile() {
                             act.data.images[0] &&
                             act.data.images[0].image == "" && (
                               <div className="max-w-[100px] h-[80px] w-[80px] rounded-lg border flex flex-col justify-center items-center">
-                                <i class="fa fa-file-text text-2xl"></i>
+                                <i className="fa fa-file-text text-2xl"></i>
                               </div>
                             )}
                           {act.data.images &&
@@ -374,7 +377,7 @@ export default function UserProfile() {
                             )}
                           {!act.data.images[0] && (
                             <div className="max-w-[100px] h-[80px] w-[80px] rounded-lg border flex flex-col justify-center items-center">
-                              <i class="fa fa-file-text text-2xl"></i>
+                              <i className="fa fa-file-text text-2xl"></i>
                             </div>
                           )}
                         </div>
@@ -398,14 +401,15 @@ export default function UserProfile() {
                       </div>
                       <div className="flex flex-row gap-x-2 mt-2 pl-1">
                         <p className="text-sm pb-1 text-blue">
-                          <i class="fa fa-arrow-up"></i> {act.data.likesCount}
+                          <i className="fa fa-arrow-up"></i>{" "}
+                          {act.data.likesCount}
                         </p>
                         <p className="text-sm pb-1 text-blue">
-                          <i class="fa fa-comment-o"></i>{" "}
+                          <i className="fa fa-comment-o"></i>{" "}
                           {act.data.commentsCount}
                         </p>
                         <p className="text-sm pb-1 text-blue">
-                          <i class="fa fa-share"></i> {act.data.sharesCount}
+                          <i className="fa fa-share"></i> {act.data.sharesCount}
                         </p>
                       </div>
                       {index != userActivity.results.length - 1 && (
@@ -418,6 +422,9 @@ export default function UserProfile() {
                     <div
                       className="flex flex-col cursor-pointer pl-4"
                       key={act.id}
+                      onClick={() => {
+                        navigate("/feed/" + act.data.feed);
+                      }}
                     >
                       <p className="text-sm pb-1">
                         {user.firstName + " " + user.lastName}{" "}
@@ -431,10 +438,10 @@ export default function UserProfile() {
                       <div className="flex flex-row">
                         <div className="max-w-[100px] h-[80px] w-[80px] rounded-lg border flex flex-col justify-center items-center">
                           {act.data.action == "LIKE" && (
-                            <i class="fa fa-arrow-up text-2xl"></i>
+                            <i className="fa fa-arrow-up text-2xl"></i>
                           )}
                           {act.data.action == "COMMENT" && (
-                            <i class="fa fa-commenting-o text-2xl"></i>
+                            <i className="fa fa-commenting-o text-2xl"></i>
                           )}
                         </div>
                         <div className="ml-5">
@@ -488,7 +495,7 @@ export default function UserProfile() {
                     key={exp.id}
                   >
                     <div className="max-w-[100px] h-[80px] w-[80px] rounded-lg border flex flex-col justify-center items-center">
-                      <i class="fa fa-briefcase text-2xl"></i>
+                      <i className="fa fa-briefcase text-2xl"></i>
                     </div>
                     <div className="flex flex-col">
                       <p className="text-sm font-bold">{exp.designation}</p>
@@ -537,7 +544,7 @@ export default function UserProfile() {
                     key={skill.id}
                   >
                     <div className="max-w-[100px] h-[80px] w-[80px] rounded-lg border flex flex-col justify-center items-center">
-                      <i class="fa fa-rocket text-2xl"></i>
+                      <i className="fa fa-rocket text-2xl"></i>
                     </div>
                     <div className="flex flex-col">
                       <p className="text-lg font-bold">{skill.skillName}</p>

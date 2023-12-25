@@ -23,8 +23,14 @@ class ApiConfig {
   static connectionRequest = BASEURL + "/connection/connection-request/";
   static connectionRequestAccept = this.connection + "-request-accept/";
   static notification = BASEURL + "/notification/notification/";
+  static notificationRead = BASEURL + "/notification/read/";
   static checkEmail = BASEURL + "/users/check-email/";
   static getPost = BASEURL + "/feed/feed/";
+  static opportunities = BASEURL + "/opportunity/opportunity/";
+  static opportunityAppication =
+    BASEURL + "/opportunity/opportunity-application/";
+  static recommendOpportunities =
+    BASEURL + "/opportunity/recommend-opportunity/";
 }
 
 export default ApiConfig;

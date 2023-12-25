@@ -133,7 +133,12 @@ const Feed = () => {
             <CreatePost fetchFeed={fetchFeed} />
             {!isLoading &&
               feed.results.map((post) => (
-                <Post post={post} fetchFeed={fetchFeed} key={post.id} />
+                <Post
+                  post={post}
+                  fetchFeed={fetchFeed}
+                  key={post.id}
+                  isSeparate={false}
+                />
               ))}
             {feed.next && (
               <button

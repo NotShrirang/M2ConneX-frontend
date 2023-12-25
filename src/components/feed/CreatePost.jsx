@@ -110,29 +110,33 @@ const CreatePost = ({ fetchFeed }) => {
         {showModal ? (
           <>
             <div
-              className="fixed inset-0 bg-black opacity-60 z-40"
+              className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center justify-center z-50"
               onClick={() => {
                 document.title = "Feed | MMCOE Alumni Portal";
                 setShowModal(false);
               }}
-            ></div>
-            <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-              <div className="relative my-6 mx-auto w-1/2">
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                  <div className="flex items-center justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
-                    <h3 className="text-2xl font=semibold">Create Post</h3>
-                    <button
-                      className="bg-transparent border-0 text-black float-right"
-                      onClick={() => setShowModal(false)}
-                    >
-                      <span className="text-black opacity-7 h-6 w-6 text-xl block bg-gray-400 py-0 rounded-full">
-                        <i className="fa-solid fa-xmark"></i>
-                      </span>
-                    </button>
-                  </div>
+            >
+              <div
+                className="flex flex-col items-center justify-center gap-y-4 w-[65%] h-[95%] bg-white border border-gray rounded-lg shadow-sm drop-shadow-sm z-60"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <div className="flex items-center justify-between w-full p-5 border-b border-solid border-gray-300 rounded-t ">
+                  <h3 className="text-2xl font=semibold">Create Post</h3>
+                  <button
+                    className="bg-transparent border-0 text-black float-right"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <span className="text-black opacity-7 h-6 w-6 text-xl block bg-gray-400 py-0 rounded-full">
+                      <i className="fa-solid fa-xmark"></i>
+                    </span>
+                  </button>
+                </div>
+                <div className="flex flex-col w-full bg-white outline-none focus:outline-none overflow-y-scroll p-4">
                   <div className="">
                     <form
-                      className="rounded w-[96.5%] flex flex-col"
+                      className="rounded w-full flex flex-col"
                       onSubmit={handleSubmit}
                     >
                       <textarea
@@ -140,7 +144,7 @@ const CreatePost = ({ fetchFeed }) => {
                         id=""
                         cols="20"
                         rows="10"
-                        className="rounded w-full mt-3 mx-3 p-4 border border-gray outline-gray justify-center items-center"
+                        className="rounded w-full border border-gray outline-gray justify-center items-center p-4"
                         placeholder="Share your thoughts..."
                         value={feedData.body}
                         onChange={(e) => {
@@ -210,32 +214,32 @@ const CreatePost = ({ fetchFeed }) => {
                       </div>
                     </form>
                   </div>
-                  <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                    <button
-                      className="background-transparent uppercase px-6 py-2 text-lg outline-none focus:outline-none mr-1 mb-1 hover:bg-[#f4f2ee] transition-all duration-300 ease-in-out"
-                      type="button"
-                      onClick={() => {
-                        document.title = "Feed | MMCOE Alumni Portal";
-                        setShowModal(false);
-                        setFeedData({
-                          subject: "",
-                          body: "",
-                          images: "",
-                          connectionOnly: false,
-                          charCount: 0,
-                        });
-                      }}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      className="bg-primary text-white px-6 py-2 uppercase text-lg rounded border border-gray shadow-sm hover:shadow-lg hover:bg-[#f4f2ee] hover:text-primary transition-all duration-300 ease-in-out"
-                      type="button"
-                      onClick={handleSubmit}
-                    >
-                      Post
-                    </button>
-                  </div>
+                </div>
+                <div className="flex items-center justify-end w-full border border-gray p-6 rounded-b">
+                  <button
+                    className="background-transparent uppercase px-6 py-2 text-lg outline-none focus:outline-none mr-1 mb-1 hover:bg-[#f4f2ee] transition-all duration-300 ease-in-out"
+                    type="button"
+                    onClick={() => {
+                      document.title = "Feed | MMCOE Alumni Portal";
+                      setShowModal(false);
+                      setFeedData({
+                        subject: "",
+                        body: "",
+                        images: "",
+                        connectionOnly: false,
+                        charCount: 0,
+                      });
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="bg-primary text-white px-6 py-2 uppercase text-lg rounded border border-gray shadow-sm hover:shadow-lg hover:bg-[#f4f2ee] hover:text-primary transition-all duration-300 ease-in-out"
+                    type="button"
+                    onClick={handleSubmit}
+                  >
+                    Post
+                  </button>
                 </div>
               </div>
             </div>

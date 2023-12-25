@@ -15,7 +15,7 @@ import UserProfile from "./pages/UserProfile.jsx";
 import Batchmates from "./pages/Batchmates.jsx";
 import Batches from "./components/Batches.jsx";
 import Blogs from "./pages/Blogs.jsx";
-import Oppurtunities from "./pages/oppurtunities.jsx";
+import OpportunityPage from "./pages/OppurtonityPage.jsx";
 import Profile from "./components/profile/profile.jsx";
 import NotificationPage from "./pages/NotificationsPage.jsx";
 import PostPage from "./pages/post_page.jsx";
@@ -65,6 +65,10 @@ const AuthRouter = createBrowserRouter([
         element: <Feed />,
       },
       {
+        path: "/feed/:postId",
+        element: <PostPage />,
+      },
+      {
         path: "/events",
         element: <Events />,
       },
@@ -85,8 +89,8 @@ const AuthRouter = createBrowserRouter([
         element: <Blogs />,
       },
       {
-        path: "/oppurtunities",
-        element: <Oppurtunities />,
+        path: "/opportunities",
+        element: <OpportunityPage />,
       },
       {
         path: "/users/:userId",
@@ -95,10 +99,6 @@ const AuthRouter = createBrowserRouter([
       {
         path: "/notifications",
         element: <NotificationPage />,
-      },
-      {
-        path: "/post/:postId",
-        element: <PostPage />,
       },
       {
         path: "/*",

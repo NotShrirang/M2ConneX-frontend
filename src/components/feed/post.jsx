@@ -6,8 +6,14 @@ import ApiConfig from "../../utils/ApiConfig";
 import PostCarousel from "./imageCarousel";
 import KeywordInput from "./keywordInput";
 import formatDate from "../../utils/date";
+import { toast } from "react-toastify";
 
-const Post = ({ post, fetchFeed, commentsExpand = false }) => {
+const Post = ({
+  post,
+  fetchFeed,
+  commentsExpand = false,
+  isSeparate = false,
+}) => {
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [likesCount, setLikesCount] = useState(post.likesCount);
   const [isCommentSectionExpanded, setIsCommentSectionExpanded] =
@@ -25,6 +31,9 @@ const Post = ({ post, fetchFeed, commentsExpand = false }) => {
   );
   const [subject, setSubject] = useState(post.subject);
   const [connectionOnly, setConnectionOnly] = useState(post.isPublic);
+  const [postUserIsConnected, setPostUserIsConnected] = useState(
+    post.isUserConnected
+  );
 
   const navigate = useNavigate();
 
@@ -32,6 +41,9 @@ const Post = ({ post, fetchFeed, commentsExpand = false }) => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       navigate("/auth");
+    }
+    if (commentsExpand) {
+      fetchComments();
     }
   }, []);
 
@@ -177,59 +189,121 @@ const Post = ({ post, fetchFeed, commentsExpand = false }) => {
       });
   };
 
+  const handleConnect = (e, person) => {
+    e.preventDefault();
+    console.log("Connect");
+
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) {
+      navigate("/auth");
+    }
+
+    axios
+      .post(
+        ApiConfig.connectionRequest,
+        {
+          userB: person,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
-      <div className="mx-4 my-2 shadow-sm border border-gray p-3 rounded-lg">
+      <div
+        className={`${
+          !isSeparate && "my-2"
+        } shadow-sm border border-gray p-3 rounded-lg w-[96%] bg-white`}
+      >
         <div className="flex justify-between items-center">
-          <div className="flex justify-start items-center gap-x-3">
-            <div
-              className=" border-[#bc383e] border-2 ml-0 flex justify-center items-center rounded-[3rem] w-[3.5rem] h-[3.5rem] cursor-pointer"
-              onClick={() => {
-                navigate("/users/" + post.user);
-              }}
-            >
-              {post.profilePicture && (
-                <i className="fa-solid" style={{ color: "#bc383e" }}>
-                  <img
-                    className="w-full h-full object-cover rounded-[2.9rem]"
-                    src={post.profilePicture}
-                    alt=""
-                  />
-                </i>
-              )}
-              {!post.profilePicture && (
-                <i
-                  className="fa-solid fa-user fa-xl"
-                  style={{ color: "#bc383e" }}
-                >
-                  <img src={post.profilePicture} alt="" />
-                </i>
-              )}
-            </div>
-            <div
-              className="flex flex-col justify-center items-start hover:cursor-pointer"
-              onClick={() => {
-                navigate("/users/" + post.user);
-              }}
-            >
-              <div>
-                <h2 className="text-md font-medium hover:text-blue">
-                  {post.userName}
-                </h2>
+          <div className="flex flex-row justify-center items-center w-full">
+            <div className="flex flex-row justify-start items-center w-full gap-x-3">
+              <div
+                className=" border-[#bc383e] border-2 ml-0 flex justify-center items-center rounded-[3rem] w-[3.5rem] h-[3.5rem] cursor-pointer"
+                onClick={() => {
+                  navigate("/users/" + post.user);
+                }}
+              >
+                {post.profilePicture && (
+                  <i className="fa-solid" style={{ color: "#bc383e" }}>
+                    <img
+                      className="w-full h-full object-cover rounded-[2.9rem]"
+                      src={post.profilePicture}
+                      alt=""
+                    />
+                  </i>
+                )}
+                {!post.profilePicture && (
+                  <i
+                    className="fa-solid fa-user fa-xl"
+                    style={{ color: "#bc383e" }}
+                  >
+                    <img src={post.profilePicture} alt="" />
+                  </i>
+                )}
               </div>
-              <p className="text-xs">{post.userBio.slice(0, 70) + "..."}</p>
-              <div className="flex flex-row gap-x-2 py-1 items-center">
-                <p className="text-xs">{formatDate(post.createdAt)}</p>
-                <p className="text-xs">
-                  {post.isPublic && (
-                    <i
-                      className="fa-solid fa-globe-asia fa-md"
-                      style={{ color: "#000" }}
-                    ></i>
-                  )}
-                </p>
+              <div
+                className="flex flex-col justify-center items-start hover:cursor-pointer"
+                onClick={() => {
+                  navigate("/users/" + post.user);
+                }}
+              >
+                <div>
+                  <h2 className="text-md font-medium hover:text-blue">
+                    {post.userName}
+                  </h2>
+                </div>
+                <p className="text-xs">{post.userBio.slice(0, 70) + "..."}</p>
+                <div className="flex flex-row gap-x-2 py-1 items-center">
+                  <p className="text-xs">{formatDate(post.createdAt)}</p>
+                  <p className="text-xs">
+                    {post.isPublic && (
+                      <i
+                        className="fa-solid fa-globe-asia fa-md"
+                        style={{ color: "#000" }}
+                      ></i>
+                    )}
+                  </p>
+                </div>
               </div>
             </div>
+            {!post.isEditable && (
+              <div className="flex">
+                {postUserIsConnected == "not_connected" && (
+                  <button
+                    key={post.id}
+                    className="border border-gray rounded-l-full rounded-r-full text-gray-500 font-medium w-40 h-10 hover:bg-[#ebebebeb] hover:border-2 transition duration-100 ease-in-out"
+                    onClick={(e) => {
+                      handleConnect(e, post.user);
+                      setPostUserIsConnected("pending");
+                    }}
+                  >
+                    <i className="fa-solid fa-user-plus mr-2 "></i>
+                    Connect
+                  </button>
+                )}
+                {postUserIsConnected == "pending" && (
+                  <button
+                    key={post.id}
+                    className="border border-gray rounded-l-full rounded-r-full text-gray-500 font-medium w-40 h-10 bg-[#ebebebeb]"
+                    disabled
+                  >
+                    <i className="fa-solid fa-check mr-2 "></i>
+                    Requested
+                  </button>
+                )}
+              </div>
+            )}
           </div>
           {post.isEditable && !isEditing && (
             <button
@@ -251,18 +325,45 @@ const Post = ({ post, fetchFeed, commentsExpand = false }) => {
             <>
               <div className="my-3 text-[1rem] wrap">
                 {/* <pre className="">
-                  <span class="inner-pre" style={{ fontFamily: "arial" }}>
-                    {post.body}
-                  </span>
-                </pre> */}
-                {post.body}
+                    <span className="inner-pre" style={{ fontFamily: "arial" }}>
+                      {post.body}
+                    </span>
+                  </pre> */}
+                {post.body.slice(0, 500) + "..."} <br />
+                <div
+                  className="text-blue cursor-pointer hover:font-bold"
+                  onClick={() => {
+                    navigate("/feed/" + post.id);
+                  }}
+                >
+                  See More
+                </div>
               </div>
               <div className="w-full h-100 bg-[#d4d9d9] my-4">
                 <PostCarousel post={post} />
               </div>
             </>
           )}
-          {post.images.length === 0 && !isEditing && (
+          {post.images.length === 0 && !isEditing && !isSeparate && (
+            <div
+              className="my-4 text-[1rem] cursor-pointer"
+              onClick={() => {
+                navigate("/feed/" + post.id);
+              }}
+            >
+              {/* <pre>{post.body}</pre> */}
+              {post.body.slice(0, 500) + "..."} <br />
+              <div
+                className="text-blue cursor-pointer hover:font-bold"
+                onClick={() => {
+                  navigate("/feed/" + post.id);
+                }}
+              >
+                See More
+              </div>
+            </div>
+          )}
+          {post.images.length === 0 && !isEditing && isSeparate && (
             <div className="my-4 text-[1rem]">
               {/* <pre>{post.body}</pre> */}
               {post.body}
@@ -409,7 +510,15 @@ const Post = ({ post, fetchFeed, commentsExpand = false }) => {
                   </button>
                 </div>
                 <div>
-                  <button className="flex justify-center items-center gap-x-2">
+                  <button
+                    className="flex justify-center items-center gap-x-2"
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        window.location.href + "/" + post.id
+                      );
+                      toast.success("Link Copied to Clipboard");
+                    }}
+                  >
                     <i
                       className="fa-solid fa-share fa-lg"
                       style={{ color: "#000" }}
@@ -455,11 +564,12 @@ const Post = ({ post, fetchFeed, commentsExpand = false }) => {
           </div>
         </div>
         <div
-          className={`${isCommentSectionExpanded ? "block" : "hidden"
-            } w-full border-t-2 border-[#9D9494] mt-2`}
+          className={`${
+            isCommentSectionExpanded ? "block" : "hidden"
+          } w-full border-t-2 border-[#9D9494] mt-2`}
         >
           {/* Comment input bar and send button */}
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center mt-3">
             <input
               type="text"
               className="w-full h-10 px-4 m-1 border-2 border-[#9D9494] rounded-md outline-none focus:border-[#FF5555]"
@@ -477,7 +587,7 @@ const Post = ({ post, fetchFeed, commentsExpand = false }) => {
               ></i>
             </button>
           </div>
-          {comments && (
+          {comments.length != 0 ? (
             <div className="flex flex-col justify-left items-left gap-x-2">
               <div className="m-2 self-center">Comments</div>
               {comments.map((comment) => (
@@ -486,30 +596,39 @@ const Post = ({ post, fetchFeed, commentsExpand = false }) => {
                   key={comment.id}
                 >
                   <div className=" border-[#bc383e] border-2 ml-4 flex justify-center items-center rounded-[1.5rem] w-[2rem] h-[2rem]">
-                    {post.profilePicture && (
+                    {comment.profilePicture && (
                       <i className="fa-solid" style={{ color: "#bc383e" }}>
                         <img
                           className="w-full h-full object-cover rounded-[1.3rem]"
-                          src={post.profilePicture}
+                          src={comment.profilePicture}
                           alt=""
                         />
                       </i>
                     )}
-                    {!post.profilePicture && (
+                    {!comment.profilePicture && (
                       <i
                         className="fa-solid fa-user fa-xl"
                         style={{ color: "#bc383e" }}
                       >
-                        <img src={post.profilePicture} alt="" />
+                        <img src={comment.profilePicture} alt="" />
                       </i>
                     )}
                   </div>
                   <div>
-                    <h2 className="text-xs font-medium">{post.userName}</h2>
+                    <div className="flex justify-start items-center gap-x-2">
+                      <h2 className="text-xs font-medium">
+                        {comment.userName} {" • "}
+                      </h2>
+                      <p className="text-xs">{formatDate(comment.createdAt)}</p>
+                    </div>
                     <p className="text-xs">{comment.comment}</p>
                   </div>
                 </div>
               ))}
+            </div>
+          ) : (
+            <div className="flex justify-center items-center gap-x-2">
+              <div className="m-2 self-center">No Comments</div>
             </div>
           )}
         </div>

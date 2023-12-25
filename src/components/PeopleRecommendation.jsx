@@ -71,7 +71,7 @@ const PeopleRecommendation = ({ profileUserId }) => {
       )
       .then((res) => {
         console.log(res.data);
-        fetchPeople();
+        fetchPeople({ next: null });
       })
       .catch((err) => {
         console.log(err);
@@ -79,17 +79,17 @@ const PeopleRecommendation = ({ profileUserId }) => {
   };
 
   return (
-    <div className="suggestions-and-more flex flex-col md:w-2/5 px-6 md:max-w-sm pb-8 md:pb-0">
-      <div className="suggestions rounded-lg bg-white mt-8 drop-shadow-sm shadow-sm border border-gray">
+    <div className="suggestions-and-more flex flex-col md:w-1/4 px-4 md:max-w-sm md:pb-0">
+      <div className="suggestions rounded-lg bg-white flex flex-col mt-8 drop-shadow-sm shadow-sm border border-gray">
         <p className="px-6 py-5 text-xl">You may also know</p>
         {people.results &&
           people.results
             .filter((person) => person.id != profileUserId)
             .map((person, index) => (
-              <div className="flex flex-col pl-6 pr-4 py-2" key={person.id}>
-                <div className="flex">
+              <div className="flex flex-col ml-4 py-2" key={person.id}>
+                <div className="flex flex-row gap-x-4">
                   <div
-                    className="w-[60px] h-[60px] rounded-full cursor-pointer"
+                    className="w-[60px] h-[60px] rounded-full cursor-pointer flex flex-col items-left justify-center"
                     onClick={() => {
                       navigate("/users/" + person.id);
                       window.location.reload();
@@ -106,7 +106,7 @@ const PeopleRecommendation = ({ profileUserId }) => {
                       <i className="fas fa-user-circle text-5xl"></i>
                     )}
                   </div>
-                  <div className="ml-4">
+                  <div className="flex flex-col items-left w-full">
                     <div>
                       <span
                         className="font-semibold text-lg cursor-pointer"
@@ -124,7 +124,9 @@ const PeopleRecommendation = ({ profileUserId }) => {
                           window.location.reload();
                         }}
                       >
-                        {person.bio && person.bio.slice(0, 100) + "..."}
+                        {person.bio &&
+                          person.bio.slice(0, 100) +
+                            (person.bio.length > 100 ? "..." : "")}
                         {!person.bio &&
                           person.department &&
                           "Department of " + DEPARTMENTS[person.department]}
