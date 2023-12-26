@@ -18,6 +18,7 @@ class ApiConfig {
   static userSkills = BASEURL + "/skill/user-skill";
   static userSkillsByUser = BASEURL + "/skill/user-skill-by-user";
   static userActivity = BASEURL + "/feed/user-activity";
+  static experience = BASEURL + "/experience/experience";
   static userExperience = BASEURL + "/experience/user-experience";
   static connection = BASEURL + "/connection/connection";
   static connectionRequest = BASEURL + "/connection/connection-request/";
@@ -31,6 +32,7 @@ class ApiConfig {
     BASEURL + "/opportunity/opportunity-application/";
   static recommendOpportunities =
     BASEURL + "/opportunity/recommend-opportunity/";
+  static cities = BASEURL + "/csc/city/";
 }
 
 export default ApiConfig;

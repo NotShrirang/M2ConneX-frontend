@@ -282,10 +282,26 @@ export default function Profile() {
             </div>
           </div>
 
-          <div className="About rounded-lg flex gap-y-2 mt-2 flex-col shadow-sm drop-shadow-sm border border-gray bg-white pl-4 py-4">
-            <p className="font-semibold text-xl">About</p>
-            <p>{user.bio}</p>
-          </div>
+          {user.bio && (
+            <div className="About rounded-lg flex gap-y-2 mt-2 flex-col shadow-sm drop-shadow-sm border border-gray bg-white pl-4 py-4">
+              <p className="font-semibold text-xl">Bio</p>
+              <p>{user.bio}</p>
+            </div>
+          )}
+
+          {user.resume && (
+            <div className="Resume rounded-lg flex gap-y-2 mt-2 flex-col shadow-sm drop-shadow-sm border border-gray bg-white pl-4 py-4">
+              <p className="font-semibold text-xl">Resume</p>
+              <button
+                className="bg-[#ebebebeb] border border-gray text-black font-bold py-2 px-4 rounded-lg mr-4 hover:bg-primary hover:text-white transition-all duration-300"
+                onClick={() => {
+                  window.open(user.resume, "_blank");
+                }}
+              >
+                View
+              </button>
+            </div>
+          )}
 
           <div className="Activity rounded-lg flex gap-y-2 flex-col mt-2 shadow-sm drop-shadow-sm border border-gray bg-white pt-4">
             <p className="font-semibold text-xl pl-4">Activity</p>
