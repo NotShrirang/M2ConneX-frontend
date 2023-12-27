@@ -9,15 +9,15 @@ import axios from "axios";
 import ApiConfig from "../utils/ApiConfig";
 
 const navItems = [
-  { item: "Events", link: "/events" },
   { item: "Feed", link: "/feed" },
-  { item: "Batches", link: "/batches" },
   { item: "Opportunities", link: "/opportunities" },
-  { item: "Directory", link: "/directory" },
   { item: "Connections", link: "/connections" },
+  { item: "Events", link: "/events" },
+  { item: "Blogs", link: "/blogs" },
+  { item: "Batches", link: "/batches" },
+  { item: "Directory", link: "/directory" },
   { item: "Donations", link: "/donations" },
   { item: "Feedback", link: "/feedback" },
-  { item: "Blogs", link: "/blogs" },
 ];
 
 function Nav() {

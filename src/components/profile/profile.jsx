@@ -471,7 +471,8 @@ export default function Profile() {
                         {!exp.isCurrent && exp.endDate}
                       </p>
                       <p className="text-sm font-medium">
-                        {exp.description.slice(0, 100) + "..."}
+                        {exp.description &&
+                          exp.description.slice(0, 100) + "..."}
                       </p>
                     </div>
                   </div>

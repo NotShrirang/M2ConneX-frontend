@@ -10,7 +10,6 @@ class ApiConfig {
   static feedAction = BASEURL + "/feed/feed-action";
   static feedActionDislike = BASEURL + "/feed/feed-action-dislike";
   static feedActionComment = BASEURL + "/feed/feed-action-comment";
-  static connections = BASEURL + "/connection/connection";
   static recommendedConnection = BASEURL + "/connection/recommend-connection";
   static analytics = BASEURL + "/analytics/analytics";
   static profileAnalytics = BASEURL + "/analytics/analytics-count/";
@@ -23,6 +22,7 @@ class ApiConfig {
   static connection = BASEURL + "/connection/connection";
   static connectionRequest = BASEURL + "/connection/connection-request/";
   static connectionRequestAccept = this.connection + "-request-accept/";
+  static connectionRequestReject = this.connection + "-request-reject/";
   static notification = BASEURL + "/notification/notification/";
   static notificationRead = BASEURL + "/notification/read/";
   static checkEmail = BASEURL + "/users/check-email/";

@@ -19,6 +19,7 @@ import OpportunityPage from "./pages/OpportunityPage.jsx";
 import Profile from "./components/profile/profile.jsx";
 import NotificationPage from "./pages/NotificationsPage.jsx";
 import PostPage from "./pages/post_page.jsx";
+import ConnectionPage from "./pages/ConnectionsPage.jsx";
 
 const noAuthRouter = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ const AuthRouter = createBrowserRouter([
       {
         path: "/notifications",
         element: <NotificationPage />,
+      },
+      {
+        path: "connections",
+        element: <ConnectionPage />,
       },
       {
         path: "/*",
