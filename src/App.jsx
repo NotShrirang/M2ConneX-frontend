@@ -15,7 +15,7 @@ import UserProfile from "./pages/UserProfile.jsx";
 import Batchmates from "./pages/Batchmates.jsx";
 import Batches from "./components/Batches.jsx";
 import Blogs from "./pages/Blogs.jsx";
-import OpportunityPage from "./pages/OppurtonityPage.jsx";
+import OpportunityPage from "./pages/OpportuinityPage.jsx";
 import Profile from "./components/profile/profile.jsx";
 import NotificationPage from "./pages/NotificationsPage.jsx";
 import PostPage from "./pages/post_page.jsx";

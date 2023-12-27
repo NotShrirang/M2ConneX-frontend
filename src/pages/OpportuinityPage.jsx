@@ -166,7 +166,7 @@ export default function OpportunityPage() {
         <div className="flex w-[95%] flex-col items-center justify-center gap-x-4 gap-y-2 h-full p-4 border border-gray mt-4">
           <div className="flex flex-row gap-x-2 w-full">
             <input
-              className="w-full h-10 pl-4 pr-4 text-xl border rounded-lg outline-none border border-gray"
+              className="w-full h-10 pl-4 pr-4 text-xl rounded-lg outline-none border border-gray"
               placeholder="Search for opportunities"
               value={search}
               onChange={(e) => {
@@ -217,12 +217,12 @@ export default function OpportunityPage() {
           </div>
           {isFilterOpen ? (
             <div className="flex flex-col w-full items-between justify-center z-10">
-              <div className="flex flex-row items-center justify-start gap-x-4 h-full max-sm:flex-wrap  sm:max-md:flex-wrap md:max-lg:flex-wrap lg:flex-row gap-y-2 justify-center">
+              <div className="flex flex-row items-center gap-x-4 h-full max-sm:flex-wrap  sm:max-md:flex-wrap md:max-lg:flex-wrap lg:flex-row gap-y-2 justify-center">
                 <div className="flex flex-row w-full gap-x-4 items-center justify-center">
                   <div className="flex flex-col gap-y-2 w-full">
                     <input
                       id="skillSearchInput"
-                      className="min-w-full h-10 pl-4 pr-4 text-xl border rounded-lg outline-none border border-gray"
+                      className="min-w-full h-10 pl-4 pr-4 text-xl rounded-lg outline-none border border-gray"
                       placeholder="Search for skills (min 3 characters)"
                       value={skillSearch}
                       onBlur={(e) => {
@@ -291,7 +291,7 @@ export default function OpportunityPage() {
                   Type
                   <select
                     id="typeSelect"
-                    className="w-40 h-10 pl-4 pr-4 text-xl border rounded-lg outline-none border border-gray"
+                    className="w-40 h-10 pl-4 pr-4 text-xl rounded-lg outline-none border border-gray"
                     onChange={(e) => {
                       fetchOpportunities({
                         search: `?search=${search}&type=${e.target.value}`,
@@ -311,7 +311,7 @@ export default function OpportunityPage() {
                     Working
                     <select
                       id="workModeSelect"
-                      className="w-40 h-10 pl-4 pr-4 text-xl border rounded-lg outline-none border border-gray"
+                      className="w-40 h-10 pl-4 pr-4 text-xl rounded-lg outline-none border border-gray"
                       onChange={(e) => {
                         setSkillSearch("");
                         fetchOpportunities({
