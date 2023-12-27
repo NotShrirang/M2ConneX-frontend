@@ -267,9 +267,14 @@ const Post = ({
                 <div className="flex flex-row gap-x-2 py-1 items-center">
                   <p className="text-xs">{formatDate(post.createdAt)}</p>
                   <p className="text-xs">
-                    {post.isPublic && (
+                    {post.isPublic ? (
                       <i
                         className="fa-solid fa-globe-asia fa-md"
+                        style={{ color: "#000" }}
+                      ></i>
+                    ) : (
+                      <i
+                        className="fa-solid fa-user-lock fa-md"
                         style={{ color: "#000" }}
                       ></i>
                     )}

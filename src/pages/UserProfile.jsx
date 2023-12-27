@@ -65,7 +65,7 @@ export default function UserProfile() {
         },
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setUser(res.data);
         setUpdateUser(res.data);
         document.title = res.data.firstName

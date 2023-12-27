@@ -12,7 +12,7 @@ const PostCarousel = ({ post }) => {
   };
 
   return (
-    <div className="relative w-full h-64">
+    <div className="relative w-full h-full">
       {post.images && post.images.length > 0 && (
         <>
           {post.images.map((image, index) => (

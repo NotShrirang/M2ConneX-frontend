@@ -44,12 +44,12 @@ export default function PostPage() {
   };
 
   return (
-    <>
+    <div className="w-full flex flex-col items-center justify-start p-8 bg-[#f0f2f5]">
       {isLoading ? (
         <></>
       ) : (
-        <div className="w-full flex justify-center h-screen pt-8 bg-[#f0f2f5]">
-          <div className="md:w-[70%]">
+        <div className="md:w-[70%]">
+          <div className="w-full flex flex-col justify-center items-center">
             <Post
               post={post}
               key={post.id}
@@ -60,6 +60,6 @@ export default function PostPage() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

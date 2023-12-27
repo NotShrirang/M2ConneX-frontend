@@ -10,45 +10,15 @@ import Events_Gallery from "../pages/EventsGallery";
 
 export default function Events_Layout() {
   const [current, setCurrent] = useState(1);
+  const [events, setEvents] = useState({});
+  const [user, setUser] = useState({});
+  const [clubs, setClubs] = useState([]);
+  const [isClubAdmin, setIsClubAdmin] = useState(false);
   const navigate = useNavigate();
 
-  const [events, setEvents] = useState({
-    count: 7,
-    next: "http://localhost:8000/event/event/?page=2",
-    previous: null,
-    results: [
-      {
-        id: "00858cd4-b898-43da-ab53-09cfbf769ea3",
-        name: "New Year",
-        description: "New year Party for all students",
-        date: "2023-12-31",
-        time: "12:00:00",
-        venue: "college",
-        department: "1",
-        link: null,
-        createdByUser: "12921664-6ad7-447a-809e-8b08423b6bd1",
-        userName: "Swanand Kulkarni",
-        userProfilePicture: null,
-        createdAt: "2023-12-16T08:33:07.850430Z",
-        updatedAt: "2023-12-16T08:33:07.850456Z",
-      },
-    ],
-  });
-
   useEffect(() => {
-    // const getEvents = async () => {
-    // fetch(ApiConfig.events, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // }).then(response => response.json())
-    //     .then(data => {
-    //         console.log(data)
-    //     }).catch(err => console.log(err)
-    //     )
-
     const accessToken = localStorage.getItem("accessToken");
+    const userId = localStorage.getItem("userId");
     if (accessToken == null) {
       navigate("/auth");
     }
@@ -64,19 +34,38 @@ export default function Events_Layout() {
         setEvents(response.data);
       })
       .catch((err) => console.log(err));
-    // };
+
+    axios
+      .get(ApiConfig.users + "/" + userId + "/", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((response) => {
+        const data = response.data;
+        setUser(response.data);
+        var clubs = data["clubs"];
+        clubs = clubs.filter((club) => {
+          if (club.isClubAdmin) {
+            setIsClubAdmin(true);
+            return club;
+          }
+        });
+        setClubs(clubs);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
     <div className="flex items-center flex-col">
-      <Events_Hero />
-      <div className="w-full min-h-fit flex flex-col">
-        <div className="flex items-center justify-evenly w-full py-2 bg-primary rounded-3xl my-8 font-bold">
+      <Events_Hero isClubAdmin={isClubAdmin} clubsList={clubs} />
+      <div className="w-full min-h-fit flex flex-col items-center">
+        <div className="flex items-center justify-evenly w-[95%] py-1 bg-primary rounded-lg my-8 font-bold">
           <p
             onClick={() => {
               setCurrent(1);
             }}
-            className={`text-center text-2xl rounded-3xl p-2 hover:cursor-pointer ${
+            className={`w-[33%] text-center font-medium rounded-lg p-2 hover:cursor-pointer ${
               current === 1 ? "bg-black text-white" : ""
             }`}
           >
@@ -86,7 +75,7 @@ export default function Events_Layout() {
             onClick={() => {
               setCurrent(2);
             }}
-            className={`text-center text-2xl rounded-3xl p-2 hover:cursor-pointer ${
+            className={`w-[33%] text-center font-medium rounded-lg p-2 hover:cursor-pointer ${
               current === 2 ? "bg-black text-white" : ""
             }`}
           >
@@ -97,7 +86,7 @@ export default function Events_Layout() {
             onClick={() => {
               setCurrent(3);
             }}
-            className={`text-center text-2xl rounded-3xl p-2 hover:cursor-pointer ${
+            className={`w-[33%] text-center font-medium rounded-lg p-2 hover:cursor-pointer ${
               current === 3 ? "bg-black text-white" : ""
             }`}
           >
@@ -106,11 +95,11 @@ export default function Events_Layout() {
         </div>
 
         {current === 1 ? (
-          <Events_Upcoming events={events.results} />
+          <Events_Upcoming events={events.results && events.results} />
         ) : current === 2 ? (
-          <Events_Past events={events.results} />
+          <Events_Past events={events.results && events.results} />
         ) : (
-          <Events_Gallery />
+          <Events_Gallery events={events.results && events.results} />
         )}
       </div>
     </div>

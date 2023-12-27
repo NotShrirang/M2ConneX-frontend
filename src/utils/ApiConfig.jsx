@@ -33,6 +33,7 @@ class ApiConfig {
   static recommendOpportunities =
     BASEURL + "/opportunity/recommend-opportunity/";
   static cities = BASEURL + "/csc/city/";
+  static clubs = BASEURL + "/club/club/";
 }
 
 export default ApiConfig;
