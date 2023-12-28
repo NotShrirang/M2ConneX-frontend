@@ -1,27 +1,39 @@
 import React from "react";
 import College from "../assets/college.png";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <div className="w-full relative h-[70vh] lg:h-screen  flex justify-center items-center">
-        <img src={College} alt="" className="absolute w-[100%] lg:w-[70%]" />
+      <div className="w-full relative h-[70vh] flex justify-center items-center">
+        <img
+          src={College}
+          alt=""
+          className="absolute max-w-[70%] h-[100%] lg:w-[100%]"
+        />
         <div className="z-10 text-center">
-          <h2 className="text-primary font-semibold text-[3rem] ">
-            MMCOE Alumni
+          <h2 className="text-primary font-semibold text-[5rem] ">
+            MMCOE Alumni Network
           </h2>
-          <p className="text-white font-bold text-[4rem] z-10">Welcome Home</p>
+          <button
+            className="bg-primary text-white text-2xl font-semibold px-4 py-2 rounded-md mt-4 hover:bg-[#ff0000] transition duration-300 ease-in-out cursor-pointer scale-100 hover:scale-110"
+            onClick={() => navigate("/auth")}
+          >
+            Get Started
+            <i className="fas fa-arrow-right ml-2 hover:scale-110"></i>
+          </button>
         </div>
       </div>
 
-      <div className="text-black w-[100%] lg:w-[70%] flex lg:flex-row flex-col justify-center items-center mx-auto">
+      <div className="text-black w-[100%] lg:w-[70%] flex lg:flex-row flex-col justify-center items-center mx-auto cursor-pointer">
         <div className="w-[49%] flex flex-col justify-center items-center">
-          <p className="text-[6rem] font-bold">15</p>
+          <p className="text-[6rem] font-bold">15+</p>
           <p className="text-lg">years of excellence</p>
         </div>
         <div className="hidden lg:block border-2 border-opacity-50 h-[9rem]"></div>
         <div className="w-[49%] flex flex-col justify-center items-center">
-          <p className="text-[6rem] font-bold">15000</p>
+          <p className="text-[6rem] font-bold">15000+</p>
           <p className="text-lg">Students</p>
         </div>
       </div>

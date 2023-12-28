@@ -13,6 +13,7 @@ class ApiConfig {
   static recommendedConnection = BASEURL + "/connection/recommend-connection";
   static analytics = BASEURL + "/analytics/analytics";
   static profileAnalytics = BASEURL + "/analytics/analytics-count/";
+  static yourInfluence = BASEURL + "/analytics/your-influence/";
   static skills = BASEURL + "/skill/skill";
   static userSkills = BASEURL + "/skill/user-skill";
   static userSkillsByUser = BASEURL + "/skill/user-skill-by-user";
@@ -34,6 +35,7 @@ class ApiConfig {
     BASEURL + "/opportunity/recommend-opportunity/";
   static cities = BASEURL + "/csc/city/";
   static clubs = BASEURL + "/club/club/";
+  static blogs = BASEURL + "/blog/blog/";
 }
 
 export default ApiConfig;

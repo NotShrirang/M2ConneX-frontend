@@ -110,26 +110,28 @@ const Feed = () => {
 
   return (
     <>
-      <div className="w-full flex justify-center items-center bg-[#f4f2ee]">
-        <div className="w-full flex justify-center items-start">
-          <div className="w-1/5 rounded-lg my-8 flex flex-col justify-center items-center pb-4 shadow-sm border border-gray mx-4 px-8 bg-white">
-            <div className="text-center py-2 text-xl">
-              <p>Recent Blogs</p>
-            </div>
+      <div className="w-full flex justify-center items-start bg-[#f4f2ee] h-full">
+        <div className="w-full flex flex-row justify-center items-start gap-x-4 mx-4 my-8 max-md:flex-col max-md:items-center max-md:w-[95%] max-md:gap-y-4 lg:flex-row lg:mb-8">
+          {window.innerWidth > 768 && (
+            <div className="lg:w-1/5 rounded-lg my-8 flex flex-col justify-center items-center pb-4 shadow-sm border border-gray px-8 bg-white max-md:w-[95%] my-0">
+              <div className="text-center py-2 text-xl">
+                <p>Recent Blogs</p>
+              </div>
 
-            <RecommendationBlogs />
-            <div
-              className="flex justify-center items-center mt-4 h-[2rem] gap-x-3 cursor-pointer border-b border-white hover:border-b hover:border-[#2051FF]"
-              onClick={() => {
-                navigate("/blogs");
-              }}
-            >
-              <p className="text-[#2051FF] text-base">Read more blogs</p>
-              <img src={Arrow} alt="" className="mt-1" />
+              <RecommendationBlogs />
+              <div
+                className="flex justify-center items-center mt-4 h-[2rem] gap-x-3 cursor-pointer border-b border-white hover:border-b hover:border-[#2051FF]"
+                onClick={() => {
+                  navigate("/blogs");
+                }}
+              >
+                <p className="text-[#2051FF] text-base">Read more blogs</p>
+                <img src={Arrow} alt="" className="mt-1" />
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="w-[60%] flex flex-col items-center border-x-2 shadow-sm border border-gray bg-white">
+          <div className="w-[60%] flex flex-col items-center border-x-2 shadow-sm border border-gray bg-white max-md:w-[95%] lg:w-[60%]">
             <CreatePost fetchFeed={fetchFeed} />
             {!isLoading &&
               feed.results.map((post) => (
@@ -153,7 +155,9 @@ const Feed = () => {
               </button>
             )}
           </div>
-          <PeopleRecommendation />
+          <div className="w-1/5 max-md:w-[95%] lg:w-1/5">
+            {window.innerWidth > 768 && <PeopleRecommendation />}
+          </div>
         </div>
       </div>
     </>

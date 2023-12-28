@@ -465,8 +465,8 @@ export default function UserProfile() {
   return (
     <>
       <ToastContainer />
-      <div className="flex bg-[#f4f2ee] justify-center flex-col md:items-start items-center md:flex-row">
-        <div className="flex flex-col md:pl-8 w-3/4 max-w-4xl">
+      <div className="flex bg-[#f4f2ee] justify-center flex-col md:items-start items-center md:flex-row md:gap-x-4 lg:w-full lg:gap-x-4">
+        <div className="flex flex-col md:pl-8 w-3/4 max-w-4xl lg:w-3/4">
           <div className="profile-card flex flex-col items-start px-6 rounded-lg bg-white mt-8 mb-2 shadow-sm drop-shadow-sm h-fit pt-16 pb-8 border border-gray">
             <button
               className="py-4 absolute top-0 right-5"
@@ -585,7 +585,7 @@ export default function UserProfile() {
             {user.bio ? <p>{user.bio}</p> : <p>No Bio Found</p>}
           </div>
 
-          {user.resume ? (
+          {user.resume && (
             <div className="About rounded-lg flex gap-y-2 mt-2 flex-col shadow-sm drop-shadow-sm border border-gray bg-white pl-4 py-4">
               <p className="font-semibold text-xl">Resume</p>
               <button
@@ -597,8 +597,6 @@ export default function UserProfile() {
                 View
               </button>
             </div>
-          ) : (
-            <p>No Resume Found</p>
           )}
 
           <div className="Activity rounded-lg flex gap-y-2 flex-col mt-2 shadow-sm drop-shadow-sm border border-gray bg-white pt-4">
@@ -890,7 +888,9 @@ export default function UserProfile() {
             )}
           </div>
         </div>
-        <PeopleRecommendation />
+        <div className="flex flex-col w-1/4 max-w-1/4 md:w-1/4 md:mt-8 md:mr-8">
+          {window.innerWidth > 768 && <PeopleRecommendation />}
+        </div>
       </div>
 
       {showModal ? (

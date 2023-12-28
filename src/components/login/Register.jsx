@@ -58,6 +58,16 @@ export default function Register() {
       .post(ApiConfig.register, data)
       .then((res) => {
         if (res.status === 201) {
+          toast.success("Register Successful", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           axios
             .post(ApiConfig.login, {
               email: data.email,
@@ -79,7 +89,13 @@ export default function Register() {
                 localStorage.setItem("role", role);
                 localStorage.setItem("userId", userId);
                 navigate("/");
-                setAuth({ login: true, role: role, userId: userId, email: res.data.email, tokens: res.data.tokens })
+                setAuth({
+                  login: true,
+                  role: role,
+                  userId: userId,
+                  email: res.data.email,
+                  tokens: res.data.tokens,
+                });
 
                 toast.success("Register Successful", {
                   position: "bottom-center",
@@ -105,11 +121,11 @@ export default function Register() {
               }
             });
         } else {
-          console.log(res)
+          console.log(res);
         }
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         toast.error(err, {
           position: "bottom-center",
           autoClose: 5000,
@@ -154,7 +170,6 @@ export default function Register() {
         {page == 0 ? (
           <>
             <div className="flex flex-col items-center justify-center w-full lg:w-2/3 gap-y-8 border-[#dedede] rounded-md">
-
               <div className="flex flex-row justify-between w-[80%] mt-4">
                 <input
                   required
@@ -181,13 +196,17 @@ export default function Register() {
                 required
                 type="email"
                 placeholder="Email"
-                className={"border-2 rounded w-[80%] p-2 " + (emailError ? "border-red outline-red" : "border-[green] outline-[green]")}
+                className={
+                  "border-2 rounded w-[80%] p-2 " +
+                  (emailError
+                    ? "border-red outline-red"
+                    : "border-[green] outline-[green]")
+                }
                 value={data.email}
                 onChange={(value) => {
                   if (!validateEmail(value.target.value)) {
                     setEmailError(true);
-                  }
-                  else {
+                  } else {
                     setEmailError(false);
                   }
                   setData({ ...data, email: value.target.value });
@@ -211,7 +230,10 @@ export default function Register() {
                     return;
                   }
 
-                  if (data.lastName.length === 0 || data.firstName.length === 0) {
+                  if (
+                    data.lastName.length === 0 ||
+                    data.firstName.length === 0
+                  ) {
                     toast.error("First or Last Name or cannot be empty", {
                       position: "bottom-center",
                       autoClose: 5000,
@@ -222,26 +244,27 @@ export default function Register() {
                       progress: undefined,
                       theme: "light",
                     });
-                    return
+                    return;
                   }
 
-
-                  axios.get(ApiConfig.checkEmail + "?email=" + data.email).then((res) => {
-                    if (res.data.exists) {
-                      toast.error("Email already exists", {
-                        position: "bottom-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                      });
-                    } else {
-                      setPage(1);
-                    }
-                  });
+                  axios
+                    .get(ApiConfig.checkEmail + "?email=" + data.email)
+                    .then((res) => {
+                      if (res.data.exists) {
+                        toast.error("Email already exists", {
+                          position: "bottom-center",
+                          autoClose: 5000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                        });
+                      } else {
+                        setPage(1);
+                      }
+                    });
                 }}
               >
                 Next
@@ -311,7 +334,7 @@ export default function Register() {
                 required
                 type="text"
                 placeholder="Batch"
-                className="border-2 border-black w-[60%] p-1 mt-8"
+                className="border-2 border-black w-[60%] p-1 mt-4"
                 value={data.batch}
                 onChange={(value) => {
                   setData({ ...data, batch: value.target.value });
@@ -380,6 +403,20 @@ export default function Register() {
                 onChange={(value) => {
                   setData({ ...data, password: value.target.value });
                 }}
+                onBlur={(value) => {
+                  if (value.target.value.length < 8) {
+                    toast.error("Password must be atleast 8 characters", {
+                      position: "bottom-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
+                  }
+                }}
               />
               <input
                 required
@@ -389,6 +426,20 @@ export default function Register() {
                 value={data.confirm_password}
                 onChange={(value) => {
                   setData({ ...data, confirm_password: value.target.value });
+                }}
+                onBlur={(value) => {
+                  if (value.target.value.length < 8) {
+                    toast.error("Password must be atleast 8 characters", {
+                      position: "bottom-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "light",
+                    });
+                  }
                 }}
               />
               <button

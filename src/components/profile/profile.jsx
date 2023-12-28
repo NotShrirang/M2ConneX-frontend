@@ -213,8 +213,8 @@ export default function Profile() {
 
   return (
     <>
-      <div className="flex bg-[#f4f2ee] justify-center flex-col md:items-start items-center md:flex-row">
-        <div className="flex flex-col md:pl-8 w-3/4 max-w-4xl">
+      <div className="flex bg-[#f4f2ee] justify-center flex-col md:items-start items-center md:flex-row lg:w-full lg:gap-x-4">
+        <div className="flex flex-col md:pl-8 w-3/4 max-w-4xl lg:w-3/4">
           <div className="profile-card flex flex-col items-start pl-6 rounded-lg bg-white mt-8 mb-2 shadow-sm drop-shadow-sm h-fit pt-16 pb-8 border border-gray">
             <div className="profile-pic flex justify-center items-center mb-4">
               {user.profilePicture != null ? (
@@ -542,7 +542,11 @@ export default function Profile() {
             )}
           </div>
         </div>
-        <PeopleRecommendation profileUserId={useParams().userId} />
+        <div className="flex flex-col w-1/4 max-w-[300px] lg:w-1/4 mt-8">
+          {window.innerWidth > 768 && (
+            <PeopleRecommendation profileUserId={useParams().userId} />
+          )}
+        </div>
       </div>
     </>
   );

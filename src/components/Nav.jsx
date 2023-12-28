@@ -81,7 +81,7 @@ function Nav() {
 
   return (
     <>
-      <div className="w-full h-24 flex justify-between items-center px-4">
+      <div className="w-full h-24 flex justify-between items-center px-4 bg-white shadow-2xl">
         <div className="flex justify-start items-center">
           <img
             src="https://www.mmcoe.edu.in/images/logo.png"

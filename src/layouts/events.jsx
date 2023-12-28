@@ -57,7 +57,7 @@ export default function Events_Layout() {
   }, []);
 
   return (
-    <div className="flex items-center flex-col">
+    <div className="flex items-center flex-col h-full">
       <Events_Hero isClubAdmin={isClubAdmin} clubsList={clubs} />
       <div className="w-full min-h-fit flex flex-col items-center">
         <div className="flex items-center justify-evenly w-[95%] py-1 bg-primary rounded-lg my-8 font-bold">
