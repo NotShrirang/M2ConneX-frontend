@@ -114,7 +114,7 @@ function Nav() {
               }
             >
               <div class='has-tooltip'>
-                <span class='tooltip rounded shadow-lg p-1 bg-gray-100 text-red-500 mt-8 text-black'>{item.item}</span>
+                <span class='tooltip bg-white rounded-lg border border-gray shadow-lg mt-8 text-black'>{item.item}</span>
                 <i className={`${item.icon} px-4 text-xl`}></i>
               </div>
             </NavLink>
