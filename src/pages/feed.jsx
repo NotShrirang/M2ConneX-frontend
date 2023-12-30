@@ -110,7 +110,7 @@ const Feed = () => {
 
   return (
     <>
-      <div className="w-full flex justify-center items-start bg-[#f4f2ee] h-full">
+      <div className="w-full flex justify-center items-start bg-[#f4f2ee] min-h-screen">
         <div className="w-full flex flex-row justify-center items-start gap-x-4 mx-4 my-8 max-md:flex-col max-md:items-center max-md:w-[95%] max-md:gap-y-4 lg:flex-row lg:mb-8">
           {window.innerWidth > 768 && (
             <div className="lg:w-1/5 rounded-lg my-8 flex flex-col justify-center items-center pb-4 shadow-sm border border-gray px-8 bg-white max-md:w-[95%] my-0">

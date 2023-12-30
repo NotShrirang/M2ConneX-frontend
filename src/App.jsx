@@ -20,6 +20,7 @@ import Profile from "./components/profile/profile.jsx";
 import NotificationPage from "./pages/NotificationsPage.jsx";
 import PostPage from "./pages/post_page.jsx";
 import ConnectionPage from "./pages/ConnectionsPage.jsx";
+import BlogPage from "./components/blogs/BlogPage.jsx";
 
 const noAuthRouter = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ const AuthRouter = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/blogs/:blogId",
+        element: <BlogPage />,
       },
       {
         path: "/opportunities",

@@ -19,6 +19,7 @@ export default function Register() {
     enrollmentYear: "",
     passingOutYear: "",
     college: "",
+    otp: "",
   });
 
   const { setAuth } = useContext(AuthContext);
@@ -59,6 +60,41 @@ export default function Register() {
       .then((res) => {
         if (res.status === 201) {
           toast.success("Register Successful", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setPage(5);
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err, {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
+  };
+
+  const verifyOTP = () => {
+    axios
+      .post(ApiConfig.verifyOTP, { email: data.email, otp: data.otp })
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("OTP verified", {
             position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -584,6 +620,27 @@ export default function Register() {
               className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
               onClick={() => {
                 register("faculty");
+              }}
+            >
+              Register
+            </button>
+          </div>
+        ) : page == 5 ? (
+          // OTP page
+          <div className="otp flex flex-col items-center justify-center w-full">
+            <input
+              type="text"
+              placeholder="OTP"
+              className="border-2 border-black w-[60%] p-1 mt-8"
+              value={data.otp}
+              onChange={(value) => {
+                setData({ ...data, otp: value.target.value });
+              }}
+            />
+            <button
+              className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
+              onClick={() => {
+                verifyOTP();
               }}
             >
               Register

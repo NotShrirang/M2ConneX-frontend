@@ -4,6 +4,7 @@ class ApiConfig {
   static users = BASEURL + "/users/users";
   static login = BASEURL + "/users/login/";
   static register = BASEURL + "/users/register/";
+  static verifyOTP = BASEURL + "/otp/verify-otp/";
   static events = BASEURL + "/event/event";
   static feed = BASEURL + "/feed/feed";
   static recommendFeed = BASEURL + "/feed/recommend-feed";
@@ -36,6 +37,8 @@ class ApiConfig {
   static cities = BASEURL + "/csc/city/";
   static clubs = BASEURL + "/club/club/";
   static blogs = BASEURL + "/blog/blog/";
+  static blogComment = BASEURL + "/blog/blog-comment/";
+  static blogAction = BASEURL + "/blog/blog-action/";
 }
 
 export default ApiConfig;

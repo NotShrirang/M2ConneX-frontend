@@ -5,10 +5,12 @@ import BlogPost from "../components/Blogpost";
 import axios from "axios";
 import ApiConfig from "../utils/ApiConfig";
 import { useNavigate } from "react-router-dom";
+import formatDate from "../utils/date";
 
 function Blogs() {
   const [blogs, setBlogs] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchBlogs({ next: null });
@@ -62,16 +64,17 @@ function Blogs() {
 
   return (
     <>
-      <div className="w-full flex justify-center items-center h-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 h-full">
+      <div className="w-full flex justify-center items-start h-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 h">
           {blogs.results &&
             blogs.results.map((blog) => (
               <BlogPost
-                img={blog.img}
+                img={blog.image}
                 title={blog.title}
-                author={blog.author}
-                date={blog.date}
-                category={blog.category}
+                author={blog.authorFirstName + " " + blog.authorLastName}
+                date={formatDate(blog.createdAt)}
+                category={"#" + String(blog.keywords).split(",").join(" #")}
+                blog={blog}
               />
             ))}
         </div>
