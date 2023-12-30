@@ -62,7 +62,6 @@ const ConnectButton = ({ userId }) => {
       })
       .then((res) => {
         setPerson(res.data);
-        console.log(res.data);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -115,7 +114,8 @@ const ConnectButton = ({ userId }) => {
         <button
           key={person.id}
           className="border border-gray rounded-l-full rounded-r-full text-gray-500 font-medium w-40 h-10 bg-[#ebebebeb]"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             navigate("/users/" + person.id);
             window.location.reload();
           }}

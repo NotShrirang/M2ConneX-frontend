@@ -7,11 +7,20 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import axios from "axios";
 import ApiConfig from "../utils/ApiConfig";
+import logo from "../assets/logo.svg";
 
 const navItems = [
   { item: "Feed", link: "/feed", icon: "fa-solid fa-home" },
-  { item: "Opportunities", link: "/opportunities", icon: "fa-solid fa-briefcase" },
-  { item: "Connections", link: "/connections", icon: "fa-solid fa-user-friends" },
+  {
+    item: "Opportunities",
+    link: "/opportunities",
+    icon: "fa-solid fa-briefcase",
+  },
+  {
+    item: "Connections",
+    link: "/connections",
+    icon: "fa-solid fa-user-friends",
+  },
   { item: "Events", link: "/events", icon: "fa-solid fa-calendar" },
   { item: "Blogs", link: "/blogs", icon: "fa-solid fa-newspaper" },
   { item: "Batches", link: "/batches", icon: "fa-solid fa-users" },
@@ -82,21 +91,21 @@ function Nav() {
   return (
     <>
       <div className="w-full h-16 flex justify-between items-center px-4 bg-white shadow-2xl">
-        <div className="flex justify-start items-center">
-          <img
-            src="https://www.mmcoe.edu.in/images/logo.png"
-            width="50px"
-            alt=""
-          />
-          <h2 className="text-xl font-semibold ml-2">MMCOE</h2>
+        <div
+          className="flex justify-start items-center cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          <img src={logo} width="200px" alt="" />
 
-          <div className="w-full flex justify-between items-center pl-4">
+          {/* <div className="w-full flex justify-between items-center pl-4">
             <div>
               <Link to="/" className="hover:cursor-pointer">
                 <img src={homeIcon} width="30px" alt="home" />
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div
@@ -113,8 +122,10 @@ function Nav() {
                   : "hover:text-red transition-all duration-300"
               }
             >
-              <div class='has-tooltip'>
-                <span class='tooltip bg-white rounded-lg border border-gray shadow-lg mt-8 text-black'>{item.item}</span>
+              <div class="has-tooltip">
+                <span class="tooltip bg-white rounded-lg border border-gray shadow-lg mt-8 text-black p-4">
+                  {item.item}
+                </span>
                 <i className={`${item.icon} px-4 text-xl`}></i>
               </div>
             </NavLink>
@@ -149,10 +160,11 @@ function Responsive({ isOpen, toggleMenu }) {
   return (
     <div
       id="mobile-item-list"
-      className={`z-10 ${isOpen
-        ? "w-full hidden flex-col lg:gap-x-4 text-black text-lg fixed right-0 top-22 bg-[#f4f2ee] border-b pt-2 max-lg:flex"
-        : "hidden"
-        }`}
+      className={`z-10 ${
+        isOpen
+          ? "w-full hidden flex-col lg:gap-x-4 text-black text-lg fixed right-0 top-22 bg-[#f4f2ee] border-b pt-2 max-lg:flex"
+          : "hidden"
+      }`}
     >
       {useLockBodyScroll()}
       {navItems.map((item, index) => (

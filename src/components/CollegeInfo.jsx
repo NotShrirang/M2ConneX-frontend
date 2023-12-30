@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../assets/logo.svg";
 
 const CollegeInfo = () => {
   return (
@@ -10,15 +11,12 @@ const CollegeInfo = () => {
                 </div> */}
         <div className="flex items-center" id="Logo">
           <div
-            className="w-24 p-4 hover:bg-gray-100 cursor-pointer"
+            className="w-full p-4 hover:bg-gray-100 cursor-pointer"
             onClick={() => {
               window.location.href = "/";
             }}
           >
-            <img
-              src="https://www.mmcoe.edu.in/images/logo.png"
-              alt="MMCOE Logo"
-            />
+            <img src={logo} width="200px" alt="" />
           </div>
           <div className="text-center px-4 lg:block hidden">
             <h1 className="text-2xl font-bold">

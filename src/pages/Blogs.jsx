@@ -6,6 +6,7 @@ import axios from "axios";
 import ApiConfig from "../utils/ApiConfig";
 import { useNavigate } from "react-router-dom";
 import formatDate from "../utils/date";
+import College from "../assets/college.png";
 
 function Blogs() {
   const [blogs, setBlogs] = useState({});
@@ -64,12 +65,12 @@ function Blogs() {
 
   return (
     <>
-      <div className="w-full flex justify-center items-start h-full">
+      <div className="w-full flex justify-center items-start min-h-full my-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 h">
           {blogs.results &&
             blogs.results.map((blog) => (
               <BlogPost
-                img={blog.image}
+                img={blog.image ? blog.image : College}
                 title={blog.title}
                 author={blog.authorFirstName + " " + blog.authorLastName}
                 date={formatDate(blog.createdAt)}
@@ -78,6 +79,19 @@ function Blogs() {
               />
             ))}
         </div>
+      </div>
+      <div className="flex justify-center items-center my-8">
+        {blogs.next && (
+          <button
+            className="bg-primary text-white font-semibold px-4 py-2 rounded-full"
+            onClick={() => {
+              fetchBlogs({ next: blogs.next });
+            }}
+          >
+            <i className="fa-solid fa-arrow-down mr-2"></i>
+            Load More
+          </button>
+        )}
       </div>
     </>
   );

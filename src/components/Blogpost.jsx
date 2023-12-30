@@ -7,15 +7,20 @@ function Blogpost({ img, title, author, date, category, blog }) {
   const navigate = useNavigate();
   return (
     <>
-      <div className="border-[1px] border-[#dedede] shadow-sm w-96 rounded-3xl h-full flex flex-col justify-between">
-        <div className="max-w-96">
+      <div className="border-[2px] border-[#dedede] shadow-sm w-96 rounded-3xl h-full flex flex-col justify-between  hover:shadow-xl transition-all duration-300">
+        <div
+          className="max-w-96 cursor-pointer h-full rounded-3xl overflow-hidden items-center justify-center flex"
+          onClick={() => {
+            navigate("/blogs/" + blog.id);
+          }}
+        >
           <img
             src={img}
             alt=""
-            className="w-96 rounded-3xl border border-gray"
+            className="rounded-3xl aspect-w-full aspect-h-full object-cover"
           />
         </div>
-        <div className="p-4 flex flex-col items-between justify-center h-full">
+        <div className="p-4 flex flex-col items-between justify-end rounded-3xl">
           <div className="flex justify-between items-center my-2">
             <p className="bg-[#ebebebeb] px-2 text-sm font-semibold py-[0.125rem] rounded-[1rem]">
               {category}
@@ -41,7 +46,7 @@ function Blogpost({ img, title, author, date, category, blog }) {
               />
             </div>
             <h3 className="">{author}</h3>
-            <p className="text-black text-xs bg-[#ebebebeb] rounded-3xl p-1">
+            <p className="text-black text-xs bg-[#ebebebeb] rounded-3xl px-2 py-1">
               {Math.round(blog.content.split(" ").length / 200)} min read
             </p>
           </div>

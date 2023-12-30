@@ -39,6 +39,7 @@ class ApiConfig {
   static blogs = BASEURL + "/blog/blog/";
   static blogComment = BASEURL + "/blog/blog-comment/";
   static blogAction = BASEURL + "/blog/blog-action/";
+  static blogActionDislike = BASEURL + "/blog/blog-dislike/";
 }
 
 export default ApiConfig;
