@@ -6,14 +6,22 @@ import { jwtDecode } from "jwt-decode";
 import ApiConfig from "../../utils/ApiConfig";
 import AuthContext from "../../authContext";
 import { ToastContainer, toast } from "react-toastify";
+import EyeOpen from "./EyeOpen";
+import EyeClose from "./EyeClose";
 
 export default function Login() {
   const { setAuth } = useContext(AuthContext)
 
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("Student");
   const navigate = useNavigate();
+
+
+  const handleShowPassword = () => {
+    setIsShowPassword(!isShowPassword);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -153,15 +161,19 @@ export default function Login() {
                   setEmail(e.target.value);
                 }}
               />
+              <div className="border-2 border-gray outline-none w-[90%] px-2 py-2 rounded flex items-center">
+
               <input
-                type="password"
+                type={isShowPassword?"text" : "password"}
                 placeholder="Password"
-                className="border-2 border-gray outline-none w-[90%] px-2 py-2 rounded"
+                className="w-full border-none outline-none"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-              />
+                />
+                {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
+                </div>
               <button
                 type="submit"
                 className="bg-primary text-white px-4 py-2 rounded-lg w-32 font-bold"
@@ -177,3 +189,7 @@ export default function Login() {
     </div>
   );
 }
+
+
+
+

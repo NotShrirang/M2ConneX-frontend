@@ -5,6 +5,8 @@ import axios from "axios";
 import ApiConfig from "../../utils/ApiConfig";
 import { ToastContainer, toast } from "react-toastify";
 import AuthContext from "../../authContext";
+import EyeOpen from "./EyeOpen";
+import EyeClose from "./EyeClose";
 
 export default function Register() {
   const [data, setData] = useState({
@@ -24,8 +26,13 @@ export default function Register() {
 
   const { setAuth } = useContext(AuthContext);
 
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
+
+  const handleShowPassword = () => {
+    setIsShowPassword(!isShowPassword);
+  };
 
   const validateEmail = (email) => {
     return String(email)
@@ -493,6 +500,7 @@ export default function Register() {
           <>
             <div className="alumni fields flex flex-col items-center justify-center w-full">
               Enter details for alumni
+
               <input
                 required
                 type="text"
@@ -502,7 +510,7 @@ export default function Register() {
                 onChange={(value) => {
                   setData({ ...data, batch: value.target.value });
                 }}
-              />
+                />
               <select
                 required
                 name="department"
@@ -557,24 +565,31 @@ export default function Register() {
                   }}
                 />
               </div>
+              <div className="border-2 border-black w-[60%] p-1 mt-8 flex">
+
               <input
-                type="password"
+                type={isShowPassword ? "text" : "password"}
                 placeholder="Password"
-                className="border-2 border-black w-[60%] p-1 mt-8"
+                className="w-full border-none outline-none"
                 value={data.password}
                 onChange={(value) => {
                   setData({ ...data, password: value.target.value });
                 }}
-              />
+                />
+                {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
+                </div>
+                <div className="border-2 border-black w-[60%] p-1 mt-8 flex">
               <input
-                type="password"
+                type={isShowPassword ? "text" : "password"}
                 placeholder="Confirm Password"
-                className="border-2 border-black w-[60%] p-1 mt-8"
+                className="w-full border-none outline-none"
                 value={data.confirm_password}
                 onChange={(value) => {
                   setData({ ...data, confirm_password: value.target.value });
                 }}
               />
+              {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
+              </div>
               <button
                 className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
                 onClick={() => {
@@ -598,24 +613,30 @@ export default function Register() {
                 setData({ ...data, college: value.target.value });
               }}
             />
+            <div className="border-2 border-black w-[60%] p-1 mt-8 flex items-center">
             <input
-              type="password"
+              type={isShowPassword ? "text" : "password"}
               placeholder="Password"
-              className="border-2 border-black w-[60%] p-1 mt-8"
+              className="w-full border-none outline-none"
               value={data.password}
               onChange={(value) => {
                 setData({ ...data, password: value.target.value });
               }}
-            />
+              />
+            {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
+              </div>
+            <div className="border-2 border-black w-[60%] p-1 mt-8 flex items-center">
             <input
-              type="password"
+              type={isShowPassword ? "text" : "password"}
               placeholder="Confirm Password"
-              className="border-2 border-black w-[60%] p-1 mt-8"
+              className="w-full border-none outline-none"
               value={data.confirm_password}
               onChange={(value) => {
                 setData({ ...data, confirm_password: value.target.value });
               }}
-            />
+              />
+            {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
+              </div>
             <button
               className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
               onClick={() => {
