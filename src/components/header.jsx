@@ -78,14 +78,14 @@ const Head = () => {
 
           <div
             id="navItems"
-            className="bg-[#1E1E1E] flex flex-col md:justify-between text-white lg:w-[60%] px-4 w-full shadow-xl"
+            className="bg-[#1E1E1E] flex flex-col md:justify-between text-white px-4 w-full shadow-xl"
           >
             <div className="flex justify-between w-full pt-2">
               {/* <div className="flex">
                 <img src={NBA} alt="" />
                 <img src={aPlusPlus} alt="" />
               </div> */}
-              <h2 className="text-6xl pt-1">Alumni Network</h2>
+              <h2 className="text-4xl pt-1">Alumni Network</h2>
               <div className="flex items-center gap-x-3 ">
                 <Link to="/" className="hover:cursor-pointer min-w-max">
                   <img src={homeIcon} alt="home" className="w-8" />

@@ -9,15 +9,15 @@ import axios from "axios";
 import ApiConfig from "../utils/ApiConfig";
 
 const navItems = [
-  { item: "Feed", link: "/feed" },
-  { item: "Opportunities", link: "/opportunities" },
-  { item: "Connections", link: "/connections" },
-  { item: "Events", link: "/events" },
-  { item: "Blogs", link: "/blogs" },
-  { item: "Batches", link: "/batches" },
-  { item: "Directory", link: "/directory" },
-  { item: "Donations", link: "/donations" },
-  { item: "Feedback", link: "/feedback" },
+  { item: "Feed", link: "/feed", icon: "fa-solid fa-home" },
+  { item: "Opportunities", link: "/opportunities", icon: "fa-solid fa-briefcase" },
+  { item: "Connections", link: "/connections", icon: "fa-solid fa-user-friends" },
+  { item: "Events", link: "/events", icon: "fa-solid fa-calendar" },
+  { item: "Blogs", link: "/blogs", icon: "fa-solid fa-newspaper" },
+  { item: "Batches", link: "/batches", icon: "fa-solid fa-users" },
+  { item: "Directory", link: "/directory", icon: "fa-solid fa-address-book" },
+  { item: "Donations", link: "/donations", icon: "fa-solid fa-donate" },
+  { item: "Feedback", link: "/feedback", icon: "fa-solid fa-comment-alt" },
 ];
 
 function Nav() {
@@ -81,7 +81,7 @@ function Nav() {
 
   return (
     <>
-      <div className="w-full h-24 flex justify-between items-center px-4 bg-white shadow-2xl">
+      <div className="w-full h-16 flex justify-between items-center px-4 bg-white shadow-2xl">
         <div className="flex justify-start items-center">
           <img
             src="https://www.mmcoe.edu.in/images/logo.png"
@@ -113,7 +113,10 @@ function Nav() {
                   : "hover:text-red transition-all duration-300"
               }
             >
-              {item.item}
+              <div class='has-tooltip'>
+                <span class='tooltip rounded shadow-lg p-1 bg-gray-100 text-red-500 mt-8 text-black'>{item.item}</span>
+                <i className={`${item.icon} px-4 text-xl`}></i>
+              </div>
             </NavLink>
           ))}
         </div>
@@ -146,11 +149,10 @@ function Responsive({ isOpen, toggleMenu }) {
   return (
     <div
       id="mobile-item-list"
-      className={`z-10 ${
-        isOpen
-          ? "w-full hidden flex-col lg:gap-x-4 text-white text-lg fixed right-0 top-22 bg-[#1E1E1E] max-lg:flex"
-          : "hidden"
-      }`}
+      className={`z-10 ${isOpen
+        ? "w-full hidden flex-col lg:gap-x-4 text-black text-lg fixed right-0 top-22 bg-[#f4f2ee] border-b pt-2 max-lg:flex"
+        : "hidden"
+        }`}
     >
       {useLockBodyScroll()}
       {navItems.map((item, index) => (
