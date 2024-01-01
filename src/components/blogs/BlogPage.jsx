@@ -5,6 +5,7 @@ import ApiConfig from "../../utils/ApiConfig";
 import ConnectButton from "../connections/ConnectButton";
 import formatDate from "../../utils/date";
 import Markdown from "react-markdown";
+import PeopleRecommendation from "../PeopleRecommendation";
 
 const BlogPage = () => {
   const [blog, setBlog] = useState({});
@@ -16,6 +17,9 @@ const BlogPage = () => {
 
   useEffect(() => {
     fetchBlog();
+    if (window.innerWidth > 1024) {
+      setIsCommenting(true);
+    }
   }, []);
 
   const fetchBlog = () => {
@@ -152,10 +156,12 @@ const BlogPage = () => {
     </div>
   ) : (
     <div className="w-full flex flex-col justify-center items-center my-6 mb-8 w-full">
-      <h1 className="text-cemter font-extrabold tracking-tighter text-4xl/[4rem] font-['Montersatt'] w-full">
-        {blog.title}
-      </h1>
-      <div className="flex max-md:flex-col md:max-lg:flex-col lg:w-full mx-6">
+      <div className="flex max-md:flex-col md:max-lg:flex-col lg:w-[95%] mx-6">
+        <h1 className="text-cemter font-extrabold tracking-tighter text-4xl/[4rem] font-['Montersatt'] w-full">
+          {blog.title}
+        </h1>
+      </div>
+      <div className="flex max-md:flex-col md:max-lg:flex-col md:max-lg:items-center lg:w-[95%] mx-6">
         <div className="flex flex-col lg:w-[30%]">
           <div className="flex justify-start items-center gap-x-2 mt-4">
             <div className="w-[3.5rem] h-[3.5rem] flex justify-center items-center rounded-[2rem] border-[#dedede] border-[1px]">
@@ -172,7 +178,7 @@ const BlogPage = () => {
             <div className="flex flex-col">
               <div className="flex items-center justify-start gap-x-2">
                 <h3
-                  className="font-semibold text-xl hover:cursor-pointer hover:text-blue hover:underline transition-all duration-300"
+                  className="font-semibold text-xl hover:cursor-pointer hover:text-blue hover:underline transition-all duration-300 w-[50%]"
                   onClick={(e) => {
                     e.preventDefault();
                     navigate("/users/" + blog.author);
@@ -182,7 +188,9 @@ const BlogPage = () => {
                   {blog.authorFirstName + " " + blog.authorLastName}
                 </h3>
                 <div className="w-1 h-1 rounded-full bg-[#757575]"></div>
-                <ConnectButton userId={blog.author} />
+                <div className="w-[50%]">
+                  <ConnectButton userId={blog.author} />
+                </div>
               </div>
               <div className="flex items-center justify-start gap-x-2">
                 <p className="text-center text-[#757575]">
@@ -293,7 +301,7 @@ const BlogPage = () => {
                               />
                             </div>
                             <div
-                              className="flex flex-col w-[70%]"
+                              className="flex flex-col w-full"
                               style={{ wordWrap: "break-word" }}
                             >
                               <div className="flex items-center justify-start gap-x-2">
@@ -331,9 +339,13 @@ const BlogPage = () => {
               </div>
             )}
           </div>
+          <div className="w-[95%] sm:max-md:w-[95%] lg:w-[90%] mt-8">
+            {window.innerWidth > 1024 && <PeopleRecommendation />}
+            {window.innerWidth <= 1024 && <PeopleRecommendation flex="row" />}
+          </div>
         </div>
-        <div className="flex flex-col lg:w-[70%] gap-y-4">
-          <div className="max-lg:my-6 border border-gray rounded-lg flex justify-center items-center">
+        <div className="flex flex-col max-lg:w-[90%] md:max-lg:items-center lg:w-[70%] gap-y-4">
+          <div className="max-lg:my-6 border border-gray rounded-lg flex justify-center items-center max-lg:w-[90%]">
             <img
               src={blog.image}
               alt={blog.title}
@@ -341,7 +353,7 @@ const BlogPage = () => {
               style={{ maxHeight: "500px" }}
             />
           </div>
-          <div className="text-xl">
+          <div className="text-xl/7 max-md:w-[90%] font-[Times] tracking-wider text-left">
             <Markdown>{blog.content}</Markdown>
           </div>
         </div>

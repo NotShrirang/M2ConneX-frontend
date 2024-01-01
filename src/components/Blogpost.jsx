@@ -7,7 +7,7 @@ function Blogpost({ img, title, author, date, category, blog }) {
   const navigate = useNavigate();
   return (
     <>
-      <div className="border-[2px] border-[#dedede] shadow-sm w-96 rounded-3xl h-full flex flex-col justify-between  hover:shadow-xl transition-all duration-300">
+      <div className="border-[2px] border-[#dedede] shadow-sm w-96 rounded-3xl h-4/5 flex flex-col justify-between  hover:shadow-xl transition-all duration-300">
         <div
           className="max-w-96 cursor-pointer h-full rounded-3xl overflow-hidden items-center justify-center flex"
           onClick={() => {
@@ -47,7 +47,8 @@ function Blogpost({ img, title, author, date, category, blog }) {
             </div>
             <h3 className="">{author}</h3>
             <p className="text-black text-xs bg-[#ebebebeb] rounded-3xl px-2 py-1">
-              {Math.round(blog.content.split(" ").length / 200)} min read
+              {blog.content && Math.round(blog.content.split(" ").length / 200)}{" "}
+              min read
             </p>
           </div>
         </div>

@@ -67,6 +67,19 @@ function Blogs() {
     <>
       <div className="w-full flex justify-center items-start min-h-full my-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 h">
+          {isLoading &&
+            [...Array(6)].map((item, index) => (
+              <BlogPost
+                img={""}
+                title={"Loading..."}
+                author={"Loading..."}
+                date={"Loading..."}
+                category={"Loading..."}
+                blog={{}}
+              />
+            ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 h">
           {blogs.results &&
             blogs.results.map((blog) => (
               <BlogPost

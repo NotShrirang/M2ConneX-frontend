@@ -66,7 +66,7 @@ export default function Register() {
       .post(ApiConfig.register, data)
       .then((res) => {
         if (res.status === 201) {
-          toast.success("Register Successful", {
+          toast.success("OTP Sent Successfully", {
             position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -140,7 +140,7 @@ export default function Register() {
                   tokens: res.data.tokens,
                 });
 
-                toast.success("Register Successful", {
+                toast.success("Registered Successfully!", {
                   position: "bottom-center",
                   autoClose: 5000,
                   hideProgressBar: false,
@@ -151,7 +151,7 @@ export default function Register() {
                   theme: "light",
                 });
               } else {
-                toast.error("Invalid Credentials", {
+                toast.error("Invalid Credentials!", {
                   position: "bottom-center",
                   autoClose: 5000,
                   hideProgressBar: false,
@@ -500,7 +500,6 @@ export default function Register() {
           <>
             <div className="alumni fields flex flex-col items-center justify-center w-full">
               Enter details for alumni
-
               <input
                 required
                 type="text"
@@ -510,7 +509,7 @@ export default function Register() {
                 onChange={(value) => {
                   setData({ ...data, batch: value.target.value });
                 }}
-                />
+              />
               <select
                 required
                 name="department"
@@ -566,29 +565,36 @@ export default function Register() {
                 />
               </div>
               <div className="border-2 border-black w-[60%] p-1 mt-8 flex">
-
-              <input
-                type={isShowPassword ? "text" : "password"}
-                placeholder="Password"
-                className="w-full border-none outline-none"
-                value={data.password}
-                onChange={(value) => {
-                  setData({ ...data, password: value.target.value });
-                }}
+                <input
+                  type={isShowPassword ? "text" : "password"}
+                  placeholder="Password"
+                  className="w-full border-none outline-none"
+                  value={data.password}
+                  onChange={(value) => {
+                    setData({ ...data, password: value.target.value });
+                  }}
                 />
-                {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
-                </div>
-                <div className="border-2 border-black w-[60%] p-1 mt-8 flex">
-              <input
-                type={isShowPassword ? "text" : "password"}
-                placeholder="Confirm Password"
-                className="w-full border-none outline-none"
-                value={data.confirm_password}
-                onChange={(value) => {
-                  setData({ ...data, confirm_password: value.target.value });
-                }}
-              />
-              {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
+                {isShowPassword ? (
+                  <EyeOpen onClick={handleShowPassword} />
+                ) : (
+                  <EyeClose onClick={handleShowPassword} />
+                )}
+              </div>
+              <div className="border-2 border-black w-[60%] p-1 mt-8 flex">
+                <input
+                  type={isShowPassword ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  className="w-full border-none outline-none"
+                  value={data.confirm_password}
+                  onChange={(value) => {
+                    setData({ ...data, confirm_password: value.target.value });
+                  }}
+                />
+                {isShowPassword ? (
+                  <EyeOpen onClick={handleShowPassword} />
+                ) : (
+                  <EyeClose onClick={handleShowPassword} />
+                )}
               </div>
               <button
                 className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
@@ -614,29 +620,37 @@ export default function Register() {
               }}
             />
             <div className="border-2 border-black w-[60%] p-1 mt-8 flex items-center">
-            <input
-              type={isShowPassword ? "text" : "password"}
-              placeholder="Password"
-              className="w-full border-none outline-none"
-              value={data.password}
-              onChange={(value) => {
-                setData({ ...data, password: value.target.value });
-              }}
+              <input
+                type={isShowPassword ? "text" : "password"}
+                placeholder="Password"
+                className="w-full border-none outline-none"
+                value={data.password}
+                onChange={(value) => {
+                  setData({ ...data, password: value.target.value });
+                }}
               />
-            {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
-              </div>
+              {isShowPassword ? (
+                <EyeOpen onClick={handleShowPassword} />
+              ) : (
+                <EyeClose onClick={handleShowPassword} />
+              )}
+            </div>
             <div className="border-2 border-black w-[60%] p-1 mt-8 flex items-center">
-            <input
-              type={isShowPassword ? "text" : "password"}
-              placeholder="Confirm Password"
-              className="w-full border-none outline-none"
-              value={data.confirm_password}
-              onChange={(value) => {
-                setData({ ...data, confirm_password: value.target.value });
-              }}
+              <input
+                type={isShowPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                className="w-full border-none outline-none"
+                value={data.confirm_password}
+                onChange={(value) => {
+                  setData({ ...data, confirm_password: value.target.value });
+                }}
               />
-            {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
-              </div>
+              {isShowPassword ? (
+                <EyeOpen onClick={handleShowPassword} />
+              ) : (
+                <EyeClose onClick={handleShowPassword} />
+              )}
+            </div>
             <button
               className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
               onClick={() => {
