@@ -8,6 +8,7 @@ import { useRef } from "react";
 import axios from "axios";
 import ApiConfig from "../utils/ApiConfig";
 import logo from "../assets/logo.svg";
+import ReactJoyride from "react-joyride";
 
 const navItems = [
   { item: "Feed", link: "/feed", icon: "fa-solid fa-home" },
@@ -29,10 +30,35 @@ const navItems = [
   { item: "Feedback", link: "/feedback", icon: "fa-solid fa-comment-alt" },
 ];
 
+
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
-  console.log(auth);
+
+  const [state, setState] = useState({
+    run: false,
+    steps: [
+      {
+        target: ".nav",
+        content: "Welcome to the M2ConneX, MMCOE's Alumni Portal!",
+      },
+      {
+        target: window.innerWidth > 1024 ? "#desktop-item-list" : "#menutoggle",
+        content: "Here are the various features of the portal!",
+      },
+      {
+        target: ".userprofile",
+        content: "Click here to view your profile and logout!",
+      }
+    ],
+  });
+
+  useEffect(() => {
+    if (localStorage.getItem("visited") === "false" || localStorage.getItem("visited") === null) {
+      setState((state) => ({ ...state, run: true }));
+      localStorage.setItem("visited", "true");
+    }
+  }, []);
 
   const [user, setUser] = useState({});
   const dropdownRef = useRef(null);
@@ -90,7 +116,7 @@ function Nav() {
 
   return (
     <>
-      <div className="w-full h-16 flex justify-between items-center px-4 bg-white shadow-2xl">
+      <div className="nav w-full h-16 flex justify-between items-center px-4 bg-white shadow-2xl">
         <div
           className="flex justify-start items-center cursor-pointer"
           onClick={() => {
@@ -122,8 +148,8 @@ function Nav() {
                   : "hover:text-red transition-all duration-300"
               }
             >
-              <div class="has-tooltip">
-                <span class="tooltip bg-white rounded-lg border border-gray shadow-lg mt-8 text-black p-4">
+              <div className="has-tooltip">
+                <span className="tooltip bg-white rounded-lg border border-gray shadow-lg mt-8 text-black p-4">
                   {item.item}
                 </span>
                 <i className={`${item.icon} px-4 text-xl`}></i>
@@ -144,14 +170,31 @@ function Nav() {
             navigate={navigate}
           />
           {/* <button onClick={handleLogout} className='px-3 py-2 rounded bg-primary text-white hover:bg-opacity-80'>LOGOUT</button> */}
-          <div className="pl-4 max-lg:block hidden">
-            <button onClick={toggleMenu}>
+          <div className="pl-4 max-lg:block hidden" id="menutoggle">
+            <button onClick={toggleMenu} >
               <i className="fa-solid fa-bars text-black text-xl"></i>
             </button>
           </div>
         </div>
       </div>
       {isOpen ? <Responsive isOpen={isOpen} toggleMenu={toggleMenu} /> : null}
+
+
+      <ReactJoyride
+        continuous
+        hideCloseButton
+        run={state.run}
+        scrollToFirstStep
+        showProgress
+        showSkipButton
+        steps={state.steps}
+        styles={{
+          options: {
+            zIndex: 10000,
+          },
+        }}
+      />
+
     </>
   );
 }
@@ -160,11 +203,10 @@ function Responsive({ isOpen, toggleMenu }) {
   return (
     <div
       id="mobile-item-list"
-      className={`z-10 ${
-        isOpen
-          ? "w-full hidden flex-col lg:gap-x-4 text-black text-lg fixed right-0 top-22 bg-[#f4f2ee] border-b pt-2 max-lg:flex"
-          : "hidden"
-      }`}
+      className={`z-10 ${isOpen
+        ? "w-full hidden flex-col lg:gap-x-4 text-black text-lg fixed right-0 top-22 bg-[#f4f2ee] border-b pt-2 max-lg:flex"
+        : "hidden"
+        }`}
     >
       {useLockBodyScroll()}
       {navItems.map((item, index) => (
