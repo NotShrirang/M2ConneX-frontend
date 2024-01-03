@@ -18,11 +18,6 @@ const CollegeInfo = () => {
           >
             <img src={logo} width="200px" alt="" />
           </div>
-          <div className="text-center px-4 lg:block hidden">
-            <h1 className="text-2xl font-bold">
-              Marathwada Mitra Mandal's College of Engineering
-            </h1>
-          </div>
         </div>
       </div>
     </>

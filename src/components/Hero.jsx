@@ -1,6 +1,7 @@
 import React from "react";
 import College from "../assets/college.png";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/M2Connex.svg";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -13,9 +14,10 @@ const Hero = () => {
           className="absolute max-w-[70%] h-[100%] lg:w-[100%] border border-gray rounded-3xl shadow-xl brightness-75"
         />
         <div className="z-10 text-center">
-          <h2 className="text-primary font-semibold text-[5rem] ">M2ConneX</h2>
+          {/* <h2 className="text-primary font-semibold text-[5rem] ">M2ConneX</h2> */}
+          <img src={logo} alt="" className="" />
           <button
-            className="bg-primary text-white text-2xl font-semibold px-4 py-2 rounded-md mt-4 hover:bg-[#ff0000] transition duration-300 ease-in-out cursor-pointer scale-100 hover:scale-110"
+            className="bg-primary text-white text-2xl font-semibold px-4 py-2 mt-4 rounded-md hover:bg-[#ff0000] transition duration-300 ease-in-out cursor-pointer scale-100 hover:scale-110"
             onClick={() => navigate("/auth")}
           >
             Get Started
