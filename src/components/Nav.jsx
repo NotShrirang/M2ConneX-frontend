@@ -256,13 +256,14 @@ function Profile({
 
   return (
     <div
-      className="userprofile hover:cursor-pointer w-[52px] h-16 pt-2 max-w-[52px] min-w-[52px] mb-1 rounded-xl flex flex-col items-center"
+      className="userprofile hover:cursor-pointer w-[40px] border-2 h-12 pt-2 max-w-[40px] min-w-[52px] mb-1 rounded-[2rem] flex flex-col items-center hover:border-primary hover:bg-primary hover:bg-opacity-10 transition-all duration-300"
       ref={dropdownRef}
     >
       {user.profilePicture ? (
         <img
           src={user.profilePicture}
           alt=""
+          width="35px"
           className="rounded-xl focus:outline-none"
           onClick={toggleVisibility}
         />
