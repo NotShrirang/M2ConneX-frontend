@@ -155,7 +155,7 @@ const BlogPage = () => {
       </div>
     </div>
   ) : (
-    <div className="w-full flex flex-col justify-center items-center my-6 mb-8 w-full">
+    <div className="w-full flex flex-col justify-center items-center my-6 mb-8">
       <div className="flex max-md:flex-col md:max-lg:flex-col lg:w-[95%] mx-6">
         <h1 className="text-cemter font-extrabold tracking-tighter text-4xl/[4rem] font-['Montersatt'] w-full">
           {blog.title}
