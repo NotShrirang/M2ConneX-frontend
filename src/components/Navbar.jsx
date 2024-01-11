@@ -18,7 +18,7 @@ function Navbar({ login }) {
     <>
       <div
         className={
-          "items flex flex-row-reverse w-full md:py-2 " + (login ? "" : "pt-6")
+          "items flex flex-row-reverse w-full md:py-2" + (login ? "" : "pt-6")
         }
       >
         <label
@@ -34,13 +34,13 @@ function Navbar({ login }) {
 
         <div
           id="item-list"
-          className="md:flex-row w-full md:flex md:gap-x-2 md:items-center  peer-checked:flex hidden flex-col gap-y-1"
+          className="md:flex-row w-full md:flex md:gap-x-2 md:items-center bg-[#1E1E1E] z-10 mt-[1.2rem] md:mt-0 peer-checked:flex hidden flex-col gap-y-1"
         >
           {navItems.map((item, index) => (
             <NavLink
               key={index}
               to={item.link}
-              className="text-white text-base hover:text-primary transition-all duration-300"
+              className="text-white text-base hover:text-primary transition-all duration-300 p-2"
               activeClassName="text-primary"
             >
               {item.item}

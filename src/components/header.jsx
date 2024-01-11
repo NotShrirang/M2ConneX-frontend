@@ -78,9 +78,9 @@ const Head = () => {
 
           <div
             id="navItems"
-            className="bg-[#1E1E1E] flex flex-col md:justify-between text-white px-4 w-full shadow-xl"
+            className="bg-[#1E1E1E] flex flex-col md:justify-between text-white w-full shadow-xl h-[8rem] md:h-fit"
           >
-            <div className="flex justify-between w-full pt-2">
+            <div className="flex flex-col md:flex-row justify-between w-full pt-2">
               {/* <div className="flex">
                 <img src={NBA} alt="" />
                 <img src={aPlusPlus} alt="" />
@@ -89,18 +89,19 @@ const Head = () => {
               <h1 className="text-2xl pt-1">
                 Marathwada Mitra Mandal's College of Engineering
               </h1>
-              <div className="flex justify-center items-center gap-x-1">
-                <Link to="/" className="hover:cursor-pointer min-w-max">
-                  <img src={homeIcon} alt="home" className="w-8" />
+              <div className="flex justify-between items-center md:w-[26%] w-[80%] md:pr-2">
+                <Link to="/" className="hover:cursor-pointer">
+                  <img src={homeIcon} alt="home" className="w-[1.4rem] md:w-[2rem]" />
                 </Link>
 
-                <Link className="flex gap-x-1" to="/auth">
-                  <p href="/">Sign Up</p>|<p href="/">Log In</p>
+                <Link className="flex gap-x-1 text-[0.8rem] md:text-[1rem]" to="/auth">
+                  <p className="border-white pr-2 border-r-2" href="/">Sign Up</p>
+                  <p className="pl-2" href="/">Log In</p>
                 </Link>
 
                 <div
                   id="searchBtn"
-                  className="bg-primary bg-opacity-50 flex items-center gap-x-1 border-2 border-white px-2 py-[0.2rem] rounded-[4rem]"
+                  className="bg-primary bg-opacity-50 flex md:flex-grow ml-2 items-center gap-x-1 border-2 border-white px-2 py-[0.2rem] rounded-[4rem]"
                 >
                   <button>Search</button>
                   <i className="fa-solid fa-magnifying-glass fa-xs mt-1 text-white"></i>
