@@ -7,6 +7,11 @@ import { ToastContainer, toast } from "react-toastify";
 import AuthContext from "../../authContext";
 import EyeOpen from "./EyeOpen";
 import EyeClose from "./EyeClose";
+import student from "../../assets/student.svg";
+import alumni from "../../assets/alumni.svg";
+import faculty from "../../assets/teacher.svg";
+import register_image from "../../assets/register.jpg";
+
 
 export default function Register() {
   const [data, setData] = useState({
@@ -44,7 +49,7 @@ export default function Register() {
 
   const [emailError, setEmailError] = useState(false);
 
-  const register = (type) => {
+  const register = () => {
     if (data.password !== data.confirm_password) {
       // alert("Passwords do not match");
       toast.error("Passwords do not match", {
@@ -59,9 +64,6 @@ export default function Register() {
       });
       return;
     }
-    data.privilege =
-      type === "student" ? "Student" : type === "alumni" ? "Alumni" : "Staff";
-
     axios
       .post(ApiConfig.register, data)
       .then((res) => {
@@ -76,7 +78,7 @@ export default function Register() {
             progress: undefined,
             theme: "light",
           });
-          setPage(5);
+          setPage(3);
         } else {
           console.log(res);
         }
@@ -129,12 +131,12 @@ export default function Register() {
                   "refreshToken",
                   response.data.tokens.refresh
                 );
-                localStorage.setItem("role", role);
+                localStorage.setItem("role", data.privilege);
                 localStorage.setItem("userId", userId);
                 navigate("/");
                 setAuth({
                   login: true,
-                  role: role,
+                  role: data.privilege,
                   userId: userId,
                   email: res.data.email,
                   tokens: res.data.tokens,
@@ -190,9 +192,9 @@ export default function Register() {
     }
   };
 
-  const [role, setRole] = useState("4");
   return (
-    <div className="flex flex-col">
+
+    <div className="flex flex-row w-full py-28">
       {page != 0 ? (
         <div>
           <button className="self-start ml-4" onClick={handleBack}>
@@ -204,6 +206,7 @@ export default function Register() {
       ) : (
         <></>
       )}
+
       <div
         className={
           "inputs flex flex-col items-center justify-center w-full " +
@@ -212,7 +215,66 @@ export default function Register() {
       >
         {page == 0 ? (
           <>
-            <div className="flex flex-col items-center justify-center w-full lg:w-2/3 gap-y-8 border-[#dedede] rounded-md">
+
+            <div className="w-full cards flex flex-row justify-evenly ">
+              <div
+                className={
+                  "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                  (data.privilege === "Student" ? "border-[2.2px] border-primary" : "")
+                }
+                onClick={() => {
+                  setData({ ...data, privilege: "Student" });
+                }}
+              >
+                <img
+                  className="w-32"
+                  src={student}
+                  alt="student"
+                />
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl mb-2">Student</div>
+                </div>
+              </div>
+
+              <div
+                className={
+                  "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                  (data.privilege === "Alumni" ? "border-[2.2px] border-primary" : "")
+                }
+                onClick={() => {
+                  setData({ ...data, privilege: "Alumni" });
+                }}
+              >
+                <img
+                  className="w-32"
+                  src={alumni}
+                  alt="alumni"
+                />
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl mb-2">Alumni</div>
+                </div>
+              </div>
+
+              <div
+                className={
+                  "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                  (data.privilege === "Staff" ? "border-[2.2px] border-primary" : "")
+                }
+                onClick={() => {
+                  setData({ ...data, privilege: "Staff" });
+                }}
+              >
+                <img
+                  className="w-32"
+                  src={faculty}
+                  alt="staff"
+                />
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl mb-2">Staff</div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col items-center justify-center w-full lg:w-full gap-y-8 border-[#dedede] rounded-md">
               <div className="flex flex-row justify-between w-[80%] mt-4">
                 <input
                   required
@@ -314,378 +376,329 @@ export default function Register() {
               </button>
             </div>
           </>
-        ) : page == 1 ? (
-          <>
-            <div className="w-full type-selector flex flex-col items-center">
-              <p>Select account type</p>
-              <div className="w-full cards flex flex-row justify-evenly">
-                <div
-                  className="card px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer"
-                  onClick={() => {
-                    setPage(2);
+        ) : page == 1 && data.privilege == "Student" ?
+          (
+            <>
+              <div className="student-fields flex flex-col w-full items-center">
+                Enter details for student
+                <input
+                  required
+                  type="text"
+                  placeholder="Batch"
+                  className="border-2 border-black w-[60%] p-1 mt-4"
+                  value={data.batch}
+                  onChange={(value) => {
+                    setData({ ...data, batch: value.target.value });
+                  }}
+                />
+                <select
+                  required
+                  name="department"
+                  id="department"
+                  className="border-2 border-black w-[60%] p-1 mt-8"
+                  onChange={(value) => {
+                    setData({ ...data, department: value.target.value });
                   }}
                 >
-                  <img
-                    className="w-32"
-                    src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                    alt="student"
+                  <option value="1">Computer Engineering</option>
+                  <option value="2">Mechanical Engineering</option>
+                  <option value="3">
+                    Electronics & Telecommunication Engineering
+                  </option>
+                  <option value="4">Electrical Engineering</option>
+                  <option value="5">Information Technology</option>
+                  <option value="6">
+                    Artificial Intelligence & Data Science
+                  </option>
+                  <option value="7">First Year Engineering</option>
+                  <option value="8">MBA</option>
+                </select>
+                <div className="flex flex-col w-full items-center mt-4">
+                  <label htmlFor="enrollment" className="w-[60%]">
+                    Enrollment Year
+                  </label>
+                  <input
+                    required
+                    type="date"
+                    id="enrollment"
+                    value={data.enrollmentYear}
+                    placeholder="Enrollment Year"
+                    className="border-2 border-black w-[60%] p-1"
+                    onChange={(value) => {
+                      setData({ ...data, enrollmentYear: value.target.value });
+                    }}
                   />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">Student</div>
-                  </div>
                 </div>
-
-                <div
-                  className="card px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer"
-                  onClick={() => {
-                    setPage(3);
-                  }}
-                >
-                  <img
-                    className="w-32"
-                    src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                    alt="alumni"
+                <div className="flex flex-col w-full items-center mt-4">
+                  <label htmlFor="passout" className="w-[60%]">
+                    Passing out Year
+                  </label>
+                  <input
+                    required
+                    type="date"
+                    id="passout"
+                    value={data.passingOutYear}
+                    placeholder="Pass out Year"
+                    className="border-2 border-black w-[60%] p-1"
+                    onChange={(value) => {
+                      setData({ ...data, passingOutYear: value.target.value });
+                    }}
                   />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">Alumni</div>
-                  </div>
                 </div>
-
-                <div
-                  className="card px-8 rounded overflow-hidden shadow-lg flex justify-center items-center flex-col hover:cursor-pointer"
-                  onClick={() => {
-                    setPage(4);
-                  }}
-                >
-                  <img
-                    className="w-32"
-                    src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                    alt="staff"
-                  />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">Staff</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : page == 2 ? (
-          <>
-            <div className="student-fields flex flex-col w-full items-center">
-              Enter details for student
-              <input
-                required
-                type="text"
-                placeholder="Batch"
-                className="border-2 border-black w-[60%] p-1 mt-4"
-                value={data.batch}
-                onChange={(value) => {
-                  setData({ ...data, batch: value.target.value });
-                }}
-              />
-              <select
-                required
-                name="department"
-                id="department"
-                className="border-2 border-black w-[60%] p-1 mt-8"
-                onChange={(value) => {
-                  setData({ ...data, department: value.target.value });
-                }}
-              >
-                <option value="1">Computer Engineering</option>
-                <option value="2">Mechanical Engineering</option>
-                <option value="3">
-                  Electronics & Telecommunication Engineering
-                </option>
-                <option value="4">Electrical Engineering</option>
-                <option value="5">Information Technology</option>
-                <option value="6">
-                  Artificial Intelligence & Data Science
-                </option>
-                <option value="7">First Year Engineering</option>
-                <option value="8">MBA</option>
-              </select>
-              <div className="flex flex-col w-full items-center mt-4">
-                <label htmlFor="enrollment" className="w-[60%]">
-                  Enrollment Year
-                </label>
                 <input
                   required
-                  type="date"
-                  id="enrollment"
-                  value={data.enrollmentYear}
-                  placeholder="Enrollment Year"
-                  className="border-2 border-black w-[60%] p-1"
-                  onChange={(value) => {
-                    setData({ ...data, enrollmentYear: value.target.value });
-                  }}
-                />
-              </div>
-              <div className="flex flex-col w-full items-center mt-4">
-                <label htmlFor="passout" className="w-[60%]">
-                  Passing out Year
-                </label>
-                <input
-                  required
-                  type="date"
-                  id="passout"
-                  value={data.passingOutYear}
-                  placeholder="Pass out Year"
-                  className="border-2 border-black w-[60%] p-1"
-                  onChange={(value) => {
-                    setData({ ...data, passingOutYear: value.target.value });
-                  }}
-                />
-              </div>
-              <input
-                required
-                type="password"
-                placeholder="Password"
-                className="border-2 border-black w-[60%] p-1 mt-8"
-                value={data.password}
-                onChange={(value) => {
-                  setData({ ...data, password: value.target.value });
-                }}
-                onBlur={(value) => {
-                  if (value.target.value.length < 8) {
-                    toast.error("Password must be atleast 8 characters", {
-                      position: "bottom-center",
-                      autoClose: 5000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
-                    });
-                  }
-                }}
-              />
-              <input
-                required
-                type="password"
-                placeholder="Confirm Password"
-                className="border-2 border-black w-[60%] p-1 mt-8"
-                value={data.confirm_password}
-                onChange={(value) => {
-                  setData({ ...data, confirm_password: value.target.value });
-                }}
-                onBlur={(value) => {
-                  if (value.target.value.length < 8) {
-                    toast.error("Password must be atleast 8 characters", {
-                      position: "bottom-center",
-                      autoClose: 5000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
-                    });
-                  }
-                }}
-              />
-              <button
-                type="submit"
-                className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
-                onClick={() => {
-                  register("student");
-                }}
-              >
-                Register
-              </button>
-            </div>
-          </>
-        ) : page == 3 ? (
-          <>
-            <div className="alumni fields flex flex-col items-center justify-center w-full">
-              Enter details for alumni
-              <input
-                required
-                type="text"
-                placeholder="Batch"
-                className="border-2 border-black w-[60%] p-1 mt-8"
-                value={data.batch}
-                onChange={(value) => {
-                  setData({ ...data, batch: value.target.value });
-                }}
-              />
-              <select
-                required
-                name="department"
-                id="department"
-                className="border-2 border-black w-[60%] p-1 mt-8"
-                onChange={(value) => {
-                  setData({ ...data, department: value.target.value });
-                }}
-              >
-                <option value="1">Computer Engineering</option>
-                <option value="2">Mechanical Engineering</option>
-                <option value="3">
-                  Electronics & Telecommunication Engineering
-                </option>
-                <option value="4">Electrical Engineering</option>
-                <option value="5">Information Technology</option>
-                <option value="6">
-                  Artificial Intelligence & Data Science
-                </option>
-                <option value="7">First Year Engineering</option>
-                <option value="8">MBA</option>
-              </select>
-              <div className="flex flex-col w-full items-center mt-4">
-                <label htmlFor="enrollment" className="w-[60%]">
-                  Enrollment Year
-                </label>
-                <input
-                  required
-                  type="date"
-                  id="enrollment"
-                  value={data.enrollmentYear}
-                  placeholder="Enrollment Year"
-                  className="border-2 border-black w-[60%] p-1"
-                  onChange={(value) => {
-                    setData({ ...data, enrollmentYear: value.target.value });
-                  }}
-                />
-              </div>
-              <div className="flex flex-col w-full items-center mt-4">
-                <label htmlFor="passout" className="w-[60%]">
-                  Passing out Year
-                </label>
-                <input
-                  required
-                  type="date"
-                  id="passout"
-                  value={data.passingOutYear}
-                  placeholder="Pass out Year"
-                  className="border-2 border-black w-[60%] p-1"
-                  onChange={(value) => {
-                    setData({ ...data, passingOutYear: value.target.value });
-                  }}
-                />
-              </div>
-              <div className="border-2 border-black w-[60%] p-1 mt-8 flex">
-                <input
-                  type={isShowPassword ? "text" : "password"}
+                  type="password"
                   placeholder="Password"
-                  className="w-full border-none outline-none"
+                  className="border-2 border-black w-[60%] p-1 mt-8"
                   value={data.password}
                   onChange={(value) => {
                     setData({ ...data, password: value.target.value });
                   }}
+                  onBlur={(value) => {
+                    if (value.target.value.length < 8) {
+                      toast.error("Password must be atleast 8 characters", {
+                        position: "bottom-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                      });
+                    }
+                  }}
                 />
-                {isShowPassword ? (
-                  <EyeOpen onClick={handleShowPassword} />
-                ) : (
-                  <EyeClose onClick={handleShowPassword} />
-                )}
-              </div>
-              <div className="border-2 border-black w-[60%] p-1 mt-8 flex">
                 <input
-                  type={isShowPassword ? "text" : "password"}
+                  required
+                  type="password"
                   placeholder="Confirm Password"
-                  className="w-full border-none outline-none"
+                  className="border-2 border-black w-[60%] p-1 mt-8"
                   value={data.confirm_password}
                   onChange={(value) => {
                     setData({ ...data, confirm_password: value.target.value });
                   }}
+                  onBlur={(value) => {
+                    if (value.target.value.length < 8) {
+                      toast.error("Password must be atleast 8 characters", {
+                        position: "bottom-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                      });
+                    }
+                  }}
                 />
-                {isShowPassword ? (
-                  <EyeOpen onClick={handleShowPassword} />
-                ) : (
-                  <EyeClose onClick={handleShowPassword} />
-                )}
+                <button
+                  type="submit"
+                  className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
+                  onClick={() => {
+                    register("student");
+                  }}
+                >
+                  Register
+                </button>
               </div>
+            </>
+          ) : page == 1 && data.privilege == "Alumni" ? (
+            <>
+              <div className="alumni fields flex flex-col items-center justify-center w-full">
+                Enter details for alumni
+                <input
+                  required
+                  type="text"
+                  placeholder="Batch"
+                  className="border-2 border-black w-[60%] p-1 mt-8"
+                  value={data.batch}
+                  onChange={(value) => {
+                    setData({ ...data, batch: value.target.value });
+                  }}
+                />
+                <select
+                  required
+                  name="department"
+                  id="department"
+                  className="border-2 border-black w-[60%] p-1 mt-8"
+                  onChange={(value) => {
+                    setData({ ...data, department: value.target.value });
+                  }}
+                >
+                  <option value="1">Computer Engineering</option>
+                  <option value="2">Mechanical Engineering</option>
+                  <option value="3">
+                    Electronics & Telecommunication Engineering
+                  </option>
+                  <option value="4">Electrical Engineering</option>
+                  <option value="5">Information Technology</option>
+                  <option value="6">
+                    Artificial Intelligence & Data Science
+                  </option>
+                  <option value="7">First Year Engineering</option>
+                  <option value="8">MBA</option>
+                </select>
+                <div className="flex flex-col w-full items-center mt-4">
+                  <label htmlFor="enrollment" className="w-[60%]">
+                    Enrollment Year
+                  </label>
+                  <input
+                    required
+                    type="date"
+                    id="enrollment"
+                    value={data.enrollmentYear}
+                    placeholder="Enrollment Year"
+                    className="border-2 border-black w-[60%] p-1"
+                    onChange={(value) => {
+                      setData({ ...data, enrollmentYear: value.target.value });
+                    }}
+                  />
+                </div>
+                <div className="flex flex-col w-full items-center mt-4">
+                  <label htmlFor="passout" className="w-[60%]">
+                    Passing out Year
+                  </label>
+                  <input
+                    required
+                    type="date"
+                    id="passout"
+                    value={data.passingOutYear}
+                    placeholder="Pass out Year"
+                    className="border-2 border-black w-[60%] p-1"
+                    onChange={(value) => {
+                      setData({ ...data, passingOutYear: value.target.value });
+                    }}
+                  />
+                </div>
+                <div className="border-2 border-black w-[60%] p-1 mt-8 flex">
+                  <input
+                    type={isShowPassword ? "text" : "password"}
+                    placeholder="Password"
+                    className="w-full border-none outline-none"
+                    value={data.password}
+                    onChange={(value) => {
+                      setData({ ...data, password: value.target.value });
+                    }}
+                  />
+                  {isShowPassword ? (
+                    <EyeOpen onClick={handleShowPassword} />
+                  ) : (
+                    <EyeClose onClick={handleShowPassword} />
+                  )}
+                </div>
+                <div className="border-2 border-black w-[60%] p-1 mt-8 flex">
+                  <input
+                    type={isShowPassword ? "text" : "password"}
+                    placeholder="Confirm Password"
+                    className="w-full border-none outline-none"
+                    value={data.confirm_password}
+                    onChange={(value) => {
+                      setData({ ...data, confirm_password: value.target.value });
+                    }}
+                  />
+                  {isShowPassword ? (
+                    <EyeOpen onClick={handleShowPassword} />
+                  ) : (
+                    <EyeClose onClick={handleShowPassword} />
+                  )}
+                </div>
+                <button
+                  className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
+                  onClick={() => {
+                    register("alumni");
+                  }}
+                >
+                  Register
+                </button>
+              </div>
+            </>
+          ) : page == 1 && data.privilege == "Staff" ? (
+            <>
+              <div className="faculty-fields flex flex-col items-center justify-center w-full">
+                Enter details for faculty
+                <input
+                  required
+                  type="text"
+                  placeholder="College"
+                  className="border-2 border-black w-[60%] p-1 mt-8"
+                  value={data.college}
+                  onChange={(value) => {
+                    setData({ ...data, college: value.target.value });
+                  }}
+                />
+                <div className="border-2 border-black w-[60%] p-1 mt-8 flex items-center">
+                  <input
+                    type={isShowPassword ? "text" : "password"}
+                    placeholder="Password"
+                    className="w-full border-none outline-none"
+                    value={data.password}
+                    onChange={(value) => {
+                      setData({ ...data, password: value.target.value });
+                    }}
+                  />
+                  {isShowPassword ? (
+                    <EyeOpen onClick={handleShowPassword} />
+                  ) : (
+                    <EyeClose onClick={handleShowPassword} />
+                  )}
+                </div>
+                <div className="border-2 border-black w-[60%] p-1 mt-8 flex items-center">
+                  <input
+                    type={isShowPassword ? "text" : "password"}
+                    placeholder="Confirm Password"
+                    className="w-full border-none outline-none"
+                    value={data.confirm_password}
+                    onChange={(value) => {
+                      setData({ ...data, confirm_password: value.target.value });
+                    }}
+                  />
+                  {isShowPassword ? (
+                    <EyeOpen onClick={handleShowPassword} />
+                  ) : (
+                    <EyeClose onClick={handleShowPassword} />
+                  )}
+                </div>
+                <button
+                  className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
+                  onClick={() => {
+                    register("faculty");
+                  }}
+                >
+                  Register
+                </button>
+              </div>
+            </>
+          ) : page == 2 ? (
+            // OTP page
+            <div className="otp flex flex-col items-center justify-center w-full">
+              <input
+                type="text"
+                placeholder="OTP"
+                className="border-2 border-black w-[60%] p-1 mt-8"
+                value={data.otp}
+                onChange={(value) => {
+                  setData({ ...data, otp: value.target.value });
+                }}
+              />
               <button
                 className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
                 onClick={() => {
-                  register("alumni");
+                  verifyOTP();
                 }}
               >
                 Register
               </button>
             </div>
-          </>
-        ) : page == 4 ? (
-          <div className="alumni fields flex flex-col items-center justify-center w-full">
-            Enter details for faculty
-            <input
-              required
-              type="text"
-              placeholder="College"
-              className="border-2 border-black w-[60%] p-1 mt-8"
-              value={data.college}
-              onChange={(value) => {
-                setData({ ...data, college: value.target.value });
-              }}
-            />
-            <div className="border-2 border-black w-[60%] p-1 mt-8 flex items-center">
-              <input
-                type={isShowPassword ? "text" : "password"}
-                placeholder="Password"
-                className="w-full border-none outline-none"
-                value={data.password}
-                onChange={(value) => {
-                  setData({ ...data, password: value.target.value });
-                }}
-              />
-              {isShowPassword ? (
-                <EyeOpen onClick={handleShowPassword} />
-              ) : (
-                <EyeClose onClick={handleShowPassword} />
-              )}
-            </div>
-            <div className="border-2 border-black w-[60%] p-1 mt-8 flex items-center">
-              <input
-                type={isShowPassword ? "text" : "password"}
-                placeholder="Confirm Password"
-                className="w-full border-none outline-none"
-                value={data.confirm_password}
-                onChange={(value) => {
-                  setData({ ...data, confirm_password: value.target.value });
-                }}
-              />
-              {isShowPassword ? (
-                <EyeOpen onClick={handleShowPassword} />
-              ) : (
-                <EyeClose onClick={handleShowPassword} />
-              )}
-            </div>
-            <button
-              className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
-              onClick={() => {
-                register("faculty");
-              }}
-            >
-              Register
-            </button>
-          </div>
-        ) : page == 5 ? (
-          // OTP page
-          <div className="otp flex flex-col items-center justify-center w-full">
-            <input
-              type="text"
-              placeholder="OTP"
-              className="border-2 border-black w-[60%] p-1 mt-8"
-              value={data.otp}
-              onChange={(value) => {
-                setData({ ...data, otp: value.target.value });
-              }}
-            />
-            <button
-              className="bg-primary text-white px-4 py-2 rounded-lg mt-16 w-32 font-bold"
-              onClick={() => {
-                verifyOTP();
-              }}
-            >
-              Register
-            </button>
-          </div>
-        ) : (
-          <></>
-        )}
+          ) : (
+            <></>
+          )}
       </div>
       <ToastContainer />
+      <div className="w-1/2 p-5">
+        <img src={register_image} className="max-w-md" />
+      </div>
     </div>
   );
 }

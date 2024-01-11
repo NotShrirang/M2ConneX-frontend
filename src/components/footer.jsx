@@ -5,7 +5,7 @@ import GmailIcon from "../assets/gmail.png";
 const Footer = () => {
   return (
     <>
-      <div className="w-[100%] shadow-3xl flex items-center justify-center">
+      <footer className="w-full shadow-3xl flex items-center justify-center mt-auto">
         <div className="flex gap-x-4 w-full bg-black p-4 items-center">
           <img
             src="https://www.mmcoe.edu.in/images/logo.png"
@@ -40,7 +40,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-      </div>
+      </footer>
     </>
   );
 };

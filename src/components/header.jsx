@@ -86,7 +86,7 @@ const Head = () => {
                 <img src={aPlusPlus} alt="" />
               </div> */}
               {/* <h2 className="text-4xl pt-1">Alumni Network</h2> */}
-              <h1 className="md:text-4xl pt-1 px-2">
+              <h1 className="text-2xl pt-1">
                 Marathwada Mitra Mandal's College of Engineering
               </h1>
               <div className="flex justify-between items-center md:w-[26%] w-[80%] md:pr-2">
