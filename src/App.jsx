@@ -47,12 +47,12 @@ const noAuthRouter = createBrowserRouter([
         path: "/blogs",
         element: <Blogs />,
       },
+      {
+        path: "/*",
+        element: <Page_Not_Found />,
+      },
     ],
-  },
-  {
-    path: "/*",
-    element: <Page_Not_Found />,
-  },
+  }
 ]);
 
 const AuthRouter = createBrowserRouter([

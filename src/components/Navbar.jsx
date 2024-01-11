@@ -25,7 +25,7 @@ function Navbar({ login }) {
           htmlFor="navToggle"
           className={
             "md:hidden block text-xl  absolute right-4 " +
-            (login ? "top-7" : "top-[88px]")
+            (login ? "top-7" : "top-[70px]")
           }
         >
           <i className="fa-solid fa-bars"></i>

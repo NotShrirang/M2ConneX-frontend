@@ -9,6 +9,8 @@ import { ToastContainer, toast } from "react-toastify";
 import EyeOpen from "./EyeOpen";
 import EyeClose from "./EyeClose";
 
+import login_image from "../../assets/login.jpg";
+
 export default function Login() {
   const { setAuth } = useContext(AuthContext)
 
@@ -84,107 +86,110 @@ export default function Login() {
       });
   };
   return (
-    <div className="flex flex-col">
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-row items-center justify-center pt-4">
-          <div className="w-full lg:w-2/3 flex flex-col pt-12 items-center justify-center border-[#dedede] rounded-md">
-            <div className="w-full type-selector flex flex-col items-center ">
-              <p className="font-medium mb-2">Select login type</p>
-              <div className="w-full cards flex flex-row justify-evenly ">
-                <div
-                  className={
-                    "card w-36 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
-                    (role === "Student" ? "border-[2.2px] border-primary" : "")
-                  }
-                  onClick={() => {
-                    setRole("Student");
-                  }}
-                >
-                  <img
-                    className="w-32"
-                    src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                    alt="student"
-                  />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">Student</div>
-                  </div>
-                </div>
-
-                <div
-                  className={
-                    "card w-36 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
-                    (role === "Alumni" ? "border-[2.2px] border-primary" : "")
-                  }
-                  onClick={() => {
-                    setRole("Alumni");
-                  }}
-                >
-                  <img
-                    className="w-32"
-                    src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                    alt="alumni"
-                  />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">Alumni</div>
-                  </div>
-                </div>
-
-                <div
-                  className={
-                    "card w-36 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
-                    (role === "Staff" ? "border-[2.2px] border-primary" : "")
-                  }
-                  onClick={() => {
-                    setRole("Staff");
-                  }}
-                >
-                  <img
-                    className="w-32"
-                    src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                    alt="staff"
-                  />
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">Staff</div>
-                  </div>
-                </div>
+    <div className="flex flex-row w-full py-28">
+      <div className="w-1/2 p-5">
+        <img src={login_image} className="max-w-md" />
+      </div>
+      {/* <form onSubmit={handleSubmit} className="w-full"> */}
+      {/* <div className="flex flex-row items-center justify-center pt-4"> */}
+      <form className="w-full flex flex-col pt-12 items-center justify-center border-[#dedede] rounded-md" onSubmit={handleSubmit}>
+        <div className="w-full type-selector flex flex-col items-center ">
+          <p className="font-medium mb-2">Select login type</p>
+          <div className="w-full cards flex flex-row justify-evenly ">
+            <div
+              className={
+                "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                (role === "Student" ? "border-[2.2px] border-primary" : "")
+              }
+              onClick={() => {
+                setRole("Student");
+              }}
+            >
+              <img
+                className="w-32"
+                src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
+                alt="student"
+              />
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2">Student</div>
               </div>
             </div>
 
-            <div className="lg:w-2/3 w-full h-[15rem] mt-4 gap-y-6 flex flex-col justify-center items-center ">
-
-              <input
-                type="text"
-                placeholder="Email"
-                className="border-2 border-gray outline-none rounded w-[90%] px-2 py-2 "
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
+            <div
+              className={
+                "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                (role === "Alumni" ? "border-[2.2px] border-primary" : "")
+              }
+              onClick={() => {
+                setRole("Alumni");
+              }}
+            >
+              <img
+                className="w-32"
+                src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
+                alt="alumni"
               />
-              <div className="border-2 border-gray outline-none w-[90%] px-2 py-2 rounded flex items-center">
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2">Alumni</div>
+              </div>
+            </div>
 
-              <input
-                type={isShowPassword?"text" : "password"}
-                placeholder="Password"
-                className="w-full border-none outline-none"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                />
-                {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
-                </div>
-              <button
-                type="submit"
-                className="bg-primary text-white px-4 py-2 rounded-lg w-32 font-bold"
-                onClick={handleSubmit}
-              >
-                Login
-              </button>
+            <div
+              className={
+                "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                (role === "Staff" ? "border-[2.2px] border-primary" : "")
+              }
+              onClick={() => {
+                setRole("Staff");
+              }}
+            >
+              <img
+                className="w-32"
+                src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
+                alt="staff"
+              />
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2">Staff</div>
+              </div>
             </div>
           </div>
         </div>
+
+        <div className="lg:w-2/3 w-full h-[15rem] mt-4 gap-y-6 flex flex-col justify-center items-center ">
+
+          <input
+            type="text"
+            placeholder="Email"
+            className="border-2 border-gray outline-none rounded w-[90%] px-2 py-2 "
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <div className="border-2 border-gray outline-none w-[90%] px-2 py-2 rounded flex items-center">
+
+            <input
+              type={isShowPassword ? "text" : "password"}
+              placeholder="Password"
+              className="w-full border-none outline-none"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
+          </div>
+          <button
+            type="submit"
+            className="bg-primary text-white px-4 py-2 rounded-lg w-32 font-bold"
+            onClick={handleSubmit}
+          >
+            Login
+          </button>
+        </div>
       </form>
+      {/* </div> */}
+      {/* </form> */}
       <ToastContainer />
     </div>
   );
