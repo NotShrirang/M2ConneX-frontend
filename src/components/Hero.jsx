@@ -7,11 +7,11 @@ const Hero = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full relative h-[70vh] flex justify-center items-center mt-8">
+      <div className="w-full lg:w-[70%] self-center relative h-[70vh] flex justify-center items-center mt-8">
         <img
           src={College}
           alt=""
-          className="absolute max-w-[70%] h-[100%] lg:w-[100%] border border-gray rounded-3xl shadow-xl brightness-75"
+          className="absolute h-[100%] w-[100%] border border-gray rounded-3xl shadow-xl brightness-75"
         />
         <div className="z-10 text-center">
           {/* <h2 className="text-primary font-semibold text-[5rem] ">M2ConneX</h2> */}
@@ -41,7 +41,7 @@ const Hero = () => {
         {/* connections for lifetime */}
       </div>
 
-      <div className="bg-[#000000] w-[70%] mx-auto h-[11rem] flex items-center justify-center rounded my-24 gap-x-24">
+      <div className="bg-[#000000] w-full h-[11rem] flex items-center justify-center rounded my-24 gap-x-2 md:gap-x-16 lg:gap-x-24">
         <div className="flex flex-col items-center">
           <div className="bg-[#D9D9D9] w-[4rem] h-[4rem] rounded-[3rem] flex items-center justify-center ">
             <i className="fa-solid fa-book fa-xl"></i>
@@ -66,7 +66,7 @@ const Hero = () => {
           <div className="bg-[#D9D9D9] w-[4rem] h-[4rem] rounded-[3rem] flex items-center justify-center ">
             <i className="fa-solid fa-trophy fa-xl"></i>
           </div>
-          <p className="text-[#D9D9D9] mt-2">Oppurtunities</p>
+          <p className="text-[#D9D9D9] mt-2">Find Oppurtunities</p>
         </div>
         <div className="flex flex-col items-center">
           <div className="bg-[#D9D9D9] w-[4rem] h-[4rem] rounded-[3rem] flex items-center justify-center ">

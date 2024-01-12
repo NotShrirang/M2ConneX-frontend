@@ -5,6 +5,7 @@ import PostCarousel from "../feed/imageCarousel";
 import formatDate from "../../utils/date";
 
 export default function Event({ upcoming = false, event }) {
+
   return (
     <div
       className="w-full lg:w-[75%] lg:py-8 shadow-sm h-full flex lg:gap-4 lg:flex-row flex-col justify-center items-center border border-gray rounded-lg p-4"

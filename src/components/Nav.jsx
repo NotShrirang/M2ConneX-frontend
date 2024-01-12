@@ -25,9 +25,9 @@ const navItems = [
   { item: "Events", link: "/events", icon: "fa-solid fa-calendar" },
   { item: "Blogs", link: "/blogs", icon: "fa-solid fa-newspaper" },
   { item: "Batches", link: "/batches", icon: "fa-solid fa-users" },
-  { item: "Directory", link: "/directory", icon: "fa-solid fa-address-book" },
-  { item: "Donations", link: "/donations", icon: "fa-solid fa-donate" },
-  { item: "Feedback", link: "/feedback", icon: "fa-solid fa-comment-alt" },
+  // { item: "Directory", link: "/directory", icon: "fa-solid fa-address-book" },
+  // { item: "Donations", link: "/donations", icon: "fa-solid fa-donate" },
+  // { item: "Feedback", link: "/feedback", icon: "fa-solid fa-comment-alt" },
 ];
 
 
@@ -204,7 +204,7 @@ function Responsive({ isOpen, toggleMenu }) {
     <div
       id="mobile-item-list"
       className={`z-10 ${isOpen
-        ? "w-full hidden flex-col lg:gap-x-4 text-black text-lg fixed right-0 top-22 bg-[#f4f2ee] border-b pt-2 max-lg:flex"
+        ? "w-full hidden flex-col lg:gap-x-4 text-black text-lg fixed right-0 top-16 bg-[#f4f2ee] border-b pt-2 max-lg:flex"
         : "hidden"
         }`}
     >

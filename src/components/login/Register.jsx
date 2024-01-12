@@ -696,7 +696,7 @@ export default function Register() {
           )}
       </div>
       <ToastContainer />
-      <div className="w-1/2 p-5">
+      <div className="w-1/2 p-5 max-lg:hidden">
         <img src={register_image} className="max-w-md" />
       </div>
     </div>
