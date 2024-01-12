@@ -53,7 +53,7 @@ export default function Events_Hero({ isClubAdmin = false, clubsList }) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-fit">
+    <div className="flex flex-col items-center justify-center w-full min-h-fit h-full my-4">
       <ToastContainer />
       <div className="flex flex-row items-center justify-center w-full min-h-fit">
         <h1 className="text-5xl font-bold text-center text-black">Events</h1>

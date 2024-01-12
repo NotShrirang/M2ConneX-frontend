@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Login from "../components/login/Login";
 import Register from "../components/login/Register";
-export default function Auth() {
-  const [state, setState] = useState("login");
+export default function Auth({ stateVar = "login" }) {
+  const [state, setState] = useState(stateVar);
   return (
     <>
       <div className="flex flex-col mb-16 ">
@@ -15,7 +15,7 @@ export default function Auth() {
             className={
               "px-4 py-2 rounded-l-lg w-full " +
               (state === "login"
-                ? "bg-blue text-white shadow-xl drop-shadow-xl"
+                ? "bg-primary text-white shadow-xl drop-shadow-xl"
                 : "bg-white text-black shadow-sm")
             }
             onClick={() => {
@@ -28,7 +28,7 @@ export default function Auth() {
             className={
               "px-4 py-2 rounded-r-lg w-full " +
               (state === "register"
-                ? "bg-blue text-white shadow-xl drop-shadow-xl"
+                ? "bg-primary text-white shadow-xl drop-shadow-xl"
                 : "bg-white text-black shadow-sm")
             }
             onClick={() => {
@@ -43,7 +43,6 @@ export default function Auth() {
         </div>
       </div>
 
-
       {/* <div className="auth-full-page md:flex flex-row w-full justify-center m-auto items-center">
         <div className="login w-full">
           <Login />
@@ -53,6 +52,5 @@ export default function Auth() {
         </div>
       </div> */}
     </>
-
   );
 }

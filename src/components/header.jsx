@@ -43,7 +43,7 @@ const Head = () => {
     const userId = localStorage.getItem("userId");
 
     if (!accessToken) {
-      navigate("/auth");
+      navigate("/");
     }
 
     axios
@@ -81,31 +81,37 @@ const Head = () => {
             className="bg-[#1E1E1E] flex flex-col md:justify-between text-white w-full shadow-xl h-[8rem] md:h-fit"
           >
             <div className="flex flex-col md:flex-row justify-between w-full pt-2">
-              {/* <div className="flex">
-                <img src={NBA} alt="" />
-                <img src={aPlusPlus} alt="" />
-              </div> */}
-              {/* <h2 className="text-4xl pt-1">Alumni Network</h2> */}
-              <h1 className="text-2xl pt-1">
+              <h1 className="text-2xl pt-1 ml-4">
                 Marathwada Mitra Mandal's College of Engineering
               </h1>
-              <div className="flex justify-between items-center md:w-[26%] w-[80%] md:pr-2">
-                <Link to="/" className="hover:cursor-pointer">
-                  <img src={homeIcon} alt="home" className="w-[1.4rem] md:w-[2rem]" />
+              <div className="flex justify-end items-center md:w-[26%] w-[80%] md:pr-2 md:mr-4">
+                {/* <Link to="/" className="hover:cursor-pointer">
+                  <img
+                    src={homeIcon}
+                    alt="home"
+                    className="w-[1.4rem] md:w-[2rem]"
+                  />
+                </Link> */}
+
+                <Link
+                  className="flex gap-x-2 text-[0.8rem] md:text-[1rem]"
+                  to="/auth"
+                >
+                  <p
+                    className="rounded-lg p-2 hover:text-primary transition-all duration-300 hover:underline"
+                    href="/"
+                  >
+                    Log In
+                  </p>
                 </Link>
 
-                <Link className="flex gap-x-1 text-[0.8rem] md:text-[1rem]" to="/auth">
-                  <p className="border-white pr-2 border-r-2" href="/">Sign Up</p>
-                  <p className="pl-2" href="/">Log In</p>
-                </Link>
-
-                <div
+                {/* <div
                   id="searchBtn"
                   className="bg-primary bg-opacity-50 flex md:flex-grow ml-2 items-center gap-x-1 border-2 border-white px-2 py-[0.2rem] rounded-[4rem]"
                 >
                   <button>Search</button>
                   <i className="fa-solid fa-magnifying-glass fa-xs mt-1 text-white"></i>
-                </div>
+                </div> */}
               </div>
             </div>
             <Navbar />
