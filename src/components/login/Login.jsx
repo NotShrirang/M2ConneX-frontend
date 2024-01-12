@@ -208,6 +208,7 @@ export default function Login() {
               className="text-sm text-primary ml-4 hover:cursor-pointer"
               onClick={() => {
                 navigate("/register");
+                window.location.reload();
               }}
             >
               Register

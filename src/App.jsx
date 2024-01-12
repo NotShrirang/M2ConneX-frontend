@@ -48,11 +48,81 @@ const noAuthRouter = createBrowserRouter([
         element: <Blogs />,
       },
       {
+        path: "/login",
+        element: <Auth stateVar={"login"} />,
+      },
+      {
+        path: "/register",
+        element: <Auth stateVar={"register"} />,
+      },
+      {
+        path: "/feed/:postId",
+        element: <PostPage />,
+      },
+      {
+        path: "/blogs/:blogId",
+        element: <BlogPage />,
+      },
+      {
+        path: "/users/:userId",
+        element: <Profile />,
+      },
+      {
+        path: "/opportunities",
+        element: <OpportunityPage />,
+      },
+      {
+        path: "/connections",
+        element: <ConnectionPage />,
+      },
+      {
+        path: "/batches/:year",
+        element: <Batches />,
+      },
+      {
+        path: "/notifications",
+        element: <NotificationPage />,
+      },
+      {
+        path: "/write-blog",
+        element: <WriteBlog />,
+      },
+      {
+        path: "/batches",
+        element: <Auth />,
+      },
+      {
+        path: "/profile",
+        element: <UserProfile />,
+      },
+      {
+        path: "/events",
+        element: <Events />,
+      },
+      {
+        path: "/directory",
+        // element: redirect("/"),
+        // Redirect to /auth
+        element: <Auth />,
+      },
+      {
+        path: "/donations",
+        // element: redirect("/"),
+        // Redirect to /auth
+        element: <Auth />,
+      },
+      {
+        path: "/feedback",
+        // element: redirect("/"),
+        // Redirect to /auth
+        element: <Auth />,
+      },
+      {
         path: "/*",
         element: <Page_Not_Found />,
       },
     ],
-  }
+  },
 ]);
 
 const AuthRouter = createBrowserRouter([
@@ -112,7 +182,7 @@ const AuthRouter = createBrowserRouter([
         element: <NotificationPage />,
       },
       {
-        path: "connections",
+        path: "/connections",
         element: <ConnectionPage />,
       },
       {

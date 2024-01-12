@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Login from "../components/login/Login";
 import Register from "../components/login/Register";
-export default function Auth() {
-  const [state, setState] = useState("login");
+export default function Auth({ stateVar = "login" }) {
+  const [state, setState] = useState(stateVar);
   return (
     <>
       <div className="flex flex-col mb-16 ">

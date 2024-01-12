@@ -1,8 +1,19 @@
 import PeopleRecommendation from "../components/PeopleRecommendation";
 import ConnectionInvitation from "../components/connections/ConnectionInvitation";
 import NetworkPanel from "../components/connections/NetworkPanel";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ConnectionPage = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    document.title = "Connections | MMCOE Alumni Portal";
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) {
+      navigate("/auth");
+    }
+  }, []);
+
   return (
     <div className="w-full min-h-full flex justify-center items-start bg-[#f4f2ee]">
       <div className="w-full flex flex-row justify-center items-start gap-x-8 my-8 mx-8 lg:flex-row max-md:flex-col max-md:items-center max-md:gap-y-4">

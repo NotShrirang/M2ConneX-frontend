@@ -43,7 +43,7 @@ const Head = () => {
     const userId = localStorage.getItem("userId");
 
     if (!accessToken) {
-      navigate("/auth");
+      navigate("/");
     }
 
     axios
@@ -98,13 +98,7 @@ const Head = () => {
                   to="/auth"
                 >
                   <p
-                    className="rounded-lg border border-gray p-2 hover:bg-primary transition-all duration-300"
-                    href="/"
-                  >
-                    Sign Up
-                  </p>
-                  <p
-                    className="rounded-lg border border-gray p-2 hover:bg-primary transition-all duration-300"
+                    className="rounded-lg p-2 hover:text-primary transition-all duration-300 hover:underline"
                     href="/"
                   >
                     Log In
