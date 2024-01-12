@@ -8,11 +8,14 @@ import AuthContext from "../../authContext";
 import { ToastContainer, toast } from "react-toastify";
 import EyeOpen from "./EyeOpen";
 import EyeClose from "./EyeClose";
+import student from "../../assets/student.svg";
+import alumni from "../../assets/alumni.svg";
+import faculty from "../../assets/faculty.svg";
 
 import login_image from "../../assets/login.jpg";
 
 export default function Login() {
-  const { setAuth } = useContext(AuthContext)
+  const { setAuth } = useContext(AuthContext);
 
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -20,14 +23,24 @@ export default function Login() {
   const [role, setRole] = useState("Student");
   const navigate = useNavigate();
 
-
   const handleShowPassword = () => {
     setIsShowPassword(!isShowPassword);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("login");
+    if (email === "" || password === "") {
+      toast.error("Please fill all the fields", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+      return;
+    }
     const data = {
       email: email,
       password: password,
@@ -45,7 +58,13 @@ export default function Login() {
           localStorage.setItem("refreshToken", res.data.tokens.refresh);
           localStorage.setItem("role", role);
           localStorage.setItem("userId", userId);
-          setAuth({ login: true, role: role, userId: userId, email: res.data.email, tokens: res.data.tokens })
+          setAuth({
+            login: true,
+            role: role,
+            userId: userId,
+            email: res.data.email,
+            tokens: res.data.tokens,
+          });
           navigate("/");
           toast.success("Login Successful", {
             position: "bottom-center",
@@ -86,115 +105,117 @@ export default function Login() {
       });
   };
   return (
-    <div className="flex flex-row w-full py-28">
-      <div className="w-1/2 p-5">
+    <div className="flex flex-row w-full py-8">
+      <div className="w-1/2 p-5 flex flex-col items-center justify-center max-[950px]:hidden">
         <img src={login_image} className="max-w-md" />
       </div>
-      {/* <form onSubmit={handleSubmit} className="w-full"> */}
-      {/* <div className="flex flex-row items-center justify-center pt-4"> */}
-      <form className="w-full flex flex-col pt-12 items-center justify-center border-[#dedede] rounded-md" onSubmit={handleSubmit}>
-        <div className="w-full type-selector flex flex-col items-center ">
-          <p className="font-medium mb-2">Select login type</p>
-          <div className="w-full cards flex flex-row justify-evenly ">
-            <div
-              className={
-                "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
-                (role === "Student" ? "border-[2.2px] border-primary" : "")
-              }
-              onClick={() => {
-                setRole("Student");
-              }}
-            >
-              <img
-                className="w-32"
-                src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                alt="student"
-              />
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">Student</div>
+      <div className="w-[50%] flex flex-col items-start justify-center max-[950px]:items-center max-[950px]:w-full">
+        <form
+          className="w-[80%] flex flex-col items-center justify-center border-[#dedede] rounded-md border border-gray max-[950px]:w-[90%] max-[950px]:mt-8"
+          onSubmit={handleSubmit}
+        >
+          <h1 className="font-bold text-2xl mt-8">Login</h1>
+          {/* <div className="w-full type-selector flex flex-col items-center ">
+            <p className="font-medium text-sm text-[#30363D] mb-2">
+              Select login type
+            </p>
+            <div className="w-[90%] cards flex flex-row justify-between">
+              <div
+                className={
+                  "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex flex-col justify-center items-center hover:cursor-pointer " +
+                  (role === "Student" ? "border-[2.2px] border-primary" : "")
+                }
+                onClick={() => {
+                  setRole("Student");
+                }}
+              >
+                <img className="max-w-32" src={student} alt="student" />
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl">Student</div>
+                </div>
+              </div>
+
+              <div
+                className={
+                  "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                  (role === "Alumni" ? "border-[2.2px] border-primary" : "")
+                }
+                onClick={() => {
+                  setRole("Alumni");
+                }}
+              >
+                <img className="w-32" src={alumni} alt="alumni" />
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl">Alumni</div>
+                </div>
+              </div>
+
+              <div
+                className={
+                  "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
+                  (role === "Staff" ? "border-[2.2px] border-primary" : "")
+                }
+                onClick={() => {
+                  setRole("Staff");
+                }}
+              >
+                <img className="w-32" src={faculty} alt="alumni" />
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl">Staff</div>
+                </div>
               </div>
             </div>
+          </div> */}
 
-            <div
-              className={
-                "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
-                (role === "Alumni" ? "border-[2.2px] border-primary" : "")
-              }
-              onClick={() => {
-                setRole("Alumni");
-              }}
-            >
-              <img
-                className="w-32"
-                src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                alt="alumni"
-              />
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">Alumni</div>
-              </div>
-            </div>
-
-            <div
-              className={
-                "card w-32 h-40 px-8 rounded overflow-hidden border-gray border-[1px] flex justify-center items-center flex-col hover:cursor-pointer " +
-                (role === "Staff" ? "border-[2.2px] border-primary" : "")
-              }
-              onClick={() => {
-                setRole("Staff");
-              }}
-            >
-              <img
-                className="w-32"
-                src="https://static.vecteezy.com/system/resources/previews/000/505/524/original/vector-male-student-icon-design.jpg"
-                alt="staff"
-              />
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">Staff</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="lg:w-2/3 w-full h-[15rem] mt-4 gap-y-6 flex flex-col justify-center items-center ">
-
-          <input
-            type="text"
-            placeholder="Email"
-            className="border-2 border-gray outline-none rounded w-[90%] px-2 py-2 "
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <div className="border-2 border-gray outline-none w-[90%] px-2 py-2 rounded flex items-center">
-
+          <div className="lg:w-full w-full h-[15rem] mt-4 gap-y-6 flex flex-col justify-center items-center ">
             <input
-              type={isShowPassword ? "text" : "password"}
-              placeholder="Password"
-              className="w-full border-none outline-none"
-              value={password}
+              type="text"
+              placeholder="Email"
+              className="border-2 border-gray outline-none rounded w-[90%] px-2 py-2"
+              value={email}
               onChange={(e) => {
-                setPassword(e.target.value);
+                setEmail(e.target.value);
               }}
             />
-            {isShowPassword ? <EyeOpen onClick={handleShowPassword} /> : <EyeClose onClick={handleShowPassword} />}
+            <div className="border-2 border-gray outline-none w-[90%] px-2 py-2 rounded flex items-center">
+              <input
+                type={isShowPassword ? "text" : "password"}
+                placeholder="Password"
+                className="w-full border-none outline-none"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              {isShowPassword ? (
+                <EyeOpen onClick={handleShowPassword} />
+              ) : (
+                <EyeClose onClick={handleShowPassword} />
+              )}
+            </div>
+            <button
+              type="submit"
+              className="bg-white text-primary px-4 py-2 rounded-lg w-32 font-bold border border-gray hover:bg-primary hover:text-white transition-all duration-300"
+              onClick={handleSubmit}
+            >
+              Login
+            </button>
           </div>
-          <button
-            type="submit"
-            className="bg-primary text-white px-4 py-2 rounded-lg w-32 font-bold"
-            onClick={handleSubmit}
-          >
-            Login
-          </button>
-        </div>
-      </form>
-      {/* </div> */}
-      {/* </form> */}
+          <hr className="w-[90%] my-2" />
+          <div className="flex flex-row justify-center items-center my-8">
+            <p className="text-sm">Don't have an account?</p>
+            <p
+              className="text-sm text-primary ml-4 hover:cursor-pointer"
+              onClick={() => {
+                navigate("/register");
+              }}
+            >
+              Register
+            </p>
+          </div>
+        </form>
+      </div>
       <ToastContainer />
     </div>
   );
 }
-
-
-
-

@@ -30,7 +30,6 @@ const navItems = [
   { item: "Feedback", link: "/feedback", icon: "fa-solid fa-comment-alt" },
 ];
 
-
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
@@ -49,12 +48,15 @@ function Nav() {
       {
         target: ".userprofile",
         content: "Click here to view your profile and logout!",
-      }
+      },
     ],
   });
 
   useEffect(() => {
-    if (localStorage.getItem("visited") === "false" || localStorage.getItem("visited") === null) {
+    if (
+      localStorage.getItem("visited") === "false" ||
+      localStorage.getItem("visited") === null
+    ) {
       setState((state) => ({ ...state, run: true }));
       localStorage.setItem("visited", "true");
     }
@@ -171,14 +173,13 @@ function Nav() {
           />
           {/* <button onClick={handleLogout} className='px-3 py-2 rounded bg-primary text-white hover:bg-opacity-80'>LOGOUT</button> */}
           <div className="pl-4 max-lg:block hidden" id="menutoggle">
-            <button onClick={toggleMenu} >
+            <button onClick={toggleMenu}>
               <i className="fa-solid fa-bars text-black text-xl"></i>
             </button>
           </div>
         </div>
       </div>
       {isOpen ? <Responsive isOpen={isOpen} toggleMenu={toggleMenu} /> : null}
-
 
       <ReactJoyride
         continuous
@@ -194,7 +195,6 @@ function Nav() {
           },
         }}
       />
-
     </>
   );
 }
@@ -203,10 +203,11 @@ function Responsive({ isOpen, toggleMenu }) {
   return (
     <div
       id="mobile-item-list"
-      className={`z-10 ${isOpen
-        ? "w-full hidden flex-col lg:gap-x-4 text-black text-lg fixed right-0 top-22 bg-[#f4f2ee] border-b pt-2 max-lg:flex"
-        : "hidden"
-        }`}
+      className={`z-10 ${
+        isOpen
+          ? "w-full hidden flex-col lg:gap-x-4 text-black text-lg fixed right-0 top-22 bg-[#f4f2ee] border-b pt-2 max-lg:flex"
+          : "hidden"
+      }`}
     >
       {useLockBodyScroll()}
       {navItems.map((item, index) => (
@@ -256,7 +257,7 @@ function Profile({
 
   return (
     <div
-      className="userprofile hover:cursor-pointer w-[40px] h-12 pt-2 max-w-[40px] min-w-[52px] mb-1 rounded-[2rem] flex flex-col items-center transition-all duration-300"
+      className="userprofile hover:cursor-pointer w-[40px] h-12 max-w-[40px] min-w-[52px] mb-1 rounded-[2rem] flex flex-col items-center transition-all duration-300"
       ref={dropdownRef}
     >
       {user.profilePicture ? (

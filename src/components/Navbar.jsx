@@ -24,7 +24,7 @@ function Navbar({ login }) {
         <label
           htmlFor="navToggle"
           className={
-            "md:hidden block text-xl  absolute right-4 " +
+            "md:hidden block text-xl absolute right-4 " +
             (login ? "top-7" : "top-[70px]")
           }
         >
@@ -34,7 +34,7 @@ function Navbar({ login }) {
 
         <div
           id="item-list"
-          className="md:flex-row w-full md:flex md:gap-x-2 md:items-center bg-[#1E1E1E] z-10 mt-[1.2rem] md:mt-0 peer-checked:flex hidden flex-col gap-y-1"
+          className="md:ml-2 md:flex-row w-full md:flex md:gap-x-2 md:items-center bg-[#1E1E1E] z-10 mt-[1.2rem] md:mt-0 peer-checked:flex hidden flex-col gap-y-1"
         >
           {navItems.map((item, index) => (
             <NavLink
