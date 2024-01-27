@@ -77,7 +77,7 @@ export default function Register() {
             progress: undefined,
             theme: "light",
           });
-          setPage(3);
+          setPage(2);
         } else {
           console.log(res);
         }
